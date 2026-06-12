@@ -1,1 +1,10 @@
-node_modules/  
+node_modules/
+*.zip
+compiled/
+vendor/
+GrantLabs.html
+GrantLabs2.html
+zi6TRkhq
+api/
+package-lock.json
+logo-v2.png
