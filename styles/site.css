@@ -1,0 +1,104 @@
+/* GrantLabs site overrides — sits on top of shadcn/ui tokens */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
+:root {
+  --font-sans: "Pretendard Variable", Pretendard, "Geist", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-heading: "Pretendard Variable", Pretendard, "Geist", -apple-system, "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-display: "Instrument Serif", "Pretendard Variable", Pretendard, ui-serif, Georgia, serif;
+
+  --container: 1240px;
+  --gutter: 32px;
+  --section-y: 120px;
+
+  --ink: oklch(0.18 0.01 240);
+  --ink-soft: oklch(0.42 0.005 240);
+  --hairline: oklch(0.92 0 0);
+  --surface-2: oklch(0.965 0 0);
+  --accent-blue: oklch(0.42 0.12 250);
+}
+
+.dark {
+  --ink: oklch(0.97 0 0);
+  --ink-soft: oklch(0.72 0 0);
+  --hairline: oklch(1 0 0 / 10%);
+  --surface-2: oklch(0.22 0 0);
+  --accent-blue: oklch(0.72 0.14 250);
+}
+
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  color: var(--foreground);
+  background: var(--background);
+  background-image: radial-gradient(circle, oklch(0 0 0 / 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  font-feature-settings: "ss01", "ss02", "tnum";
+}
+.dark body, body.dark {
+  background-image: radial-gradient(circle, oklch(1 0 0 / 0.07) 1px, transparent 1px);
+}
+
+p, li { line-height: 1.75; }
+h1, h2, h3, h4 { letter-spacing: -0.025em; }
+.tnum { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+
+.display-serif {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+.rule { height: 1px; background: var(--border); border: 0; margin: 0; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+@media (max-width: 768px) {
+  a:active, button:active { opacity: 0.6; }
+  :root { --section-y: 80px; --gutter: 20px; }
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+html { scroll-behavior: smooth; }
+::selection { background: var(--foreground); color: var(--background); }

@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="그랜트 랩스는 정책자금, 기업인증(벤처·이노비즈·메인비즈), 특허출원, 기업부설연구소, 법인설립, 경영지원 전문 컨설팅 회사입니다. 작은 기업의 큰 도약을 함께합니다." />
+  <meta name="keywords" content="정책자금, 기업인증, 벤처기업, 이노비즈, 메인비즈, 특허출원, 기업부설연구소, 법인설립, 경영지원, 컨설팅, 그랜트랩스, Grant Labs" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grantlabs.co.kr/" />
+  <meta property="og:title" content="그랜트 랩스 — 정책자금·기업인증·경영지원 전문 컨설팅" />
+  <meta property="og:description" content="정책자금, 기업인증(벤처·이노비즈·메인비즈), 특허출원, 기업부설연구소, 법인설립, 경영지원 전문 컨설팅. 기업의 성장 단계마다 그랜트 랩스가 함께합니다." />
+  <meta property="og:site_name" content="그랜트 랩스" />
+  <meta name="naver-site-verification" content="3641f3914aacbeb192dec2d5821320b253b5ff02" />
+  <title>그랜트 랩스 | 정책자금·기업인증·기업부설연구소 컨설팅</title>
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/site.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E71KNFBRMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E71KNFBRMW');
+  </script>
+</head>
+<body>
+    <noscript>
+    <div>
+      <h1>그랜트 랩스 (Grant Labs)</h1>
+      <p>그랜트 랩스는 정책자금, 기업인증, 특허/기업부설연구소, 법인설립, 경영지원 전문 컨설팅 회사입니다.</p>
+      <h2>서비스</h2>
+      <ul>
+        <li>정책자금 컨설팅 — 운전자금, 시설자금, R&amp;D 자금</li>
+        <li>기업인증 — 벤처기업, 이노비즈, 메인비즈 인증</li>
+        <li>특허/연구소 — 특허출원, 기업부설연구소 설립</li>
+        <li>법인설립 — 법인 등기, 사업자 등록</li>
+        <li>경영지원 — 세무·회계, 노무·인사</li>
+      </ul>
+      <p>대표: 전희진 | 연락처: 010-5963-7624 | 이메일: jjun96750@gmail.com</p>
+      <p>주소: 서울특별시 파주시 초롱꽃로 109, 406호 871호</p>
+    </div>
+  </noscript>
+  <div id="root"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.441.0/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init({ publicKey: "UUfoZdh404On9fZbm" });</script>
+  <script>
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+/**
+ * GrantLabs — UI primitives
+ */
+
+const Icon = ({
+  name,
+  size = 16,
+  className = "",
+  style = {}
+}) => /*#__PURE__*/React.createElement("i", {
+  "data-lucide": name,
+  className: className,
+  style: {
+    width: size,
+    height: size,
+    display: "inline-flex",
+    flexShrink: 0,
+    ...style
+  }
+});
+const Button = ({
+  variant = "default",
+  size = "default",
+  children,
+  icon,
+  iconRight,
+  onClick,
+  href,
+  style = {},
+  ...rest
+}) => {
+  const base = {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    fontFamily: "var(--font-sans)",
+    fontWeight: 500,
+    borderRadius: 8,
+    border: "1px solid transparent",
+    cursor: "pointer",
+    whiteSpace: "nowrap",
+    transition: "all .15s ease",
+    userSelect: "none",
+    textDecoration: "none",
+    letterSpacing: "-0.005em"
+  };
+  const sizes = {
+    default: {
+      height: 40,
+      padding: "0 18px",
+      fontSize: 14
+    },
+    sm: {
+      height: 34,
+      padding: "0 14px",
+      fontSize: 13
+    },
+    lg: {
+      height: 48,
+      padding: "0 26px",
+      fontSize: 15
+    },
+    xl: {
+      height: 54,
+      padding: "0 30px",
+      fontSize: 15
+    },
+    icon: {
+      height: 40,
+      width: 40,
+      padding: 0
+    }
+  };
+  const variants = {
+    default: {
+      background: "var(--primary)",
+      color: "var(--primary-foreground)"
+    },
+    secondary: {
+      background: "var(--secondary)",
+      color: "var(--secondary-foreground)"
+    },
+    outline: {
+      background: "var(--background)",
+      borderColor: "var(--border)",
+      color: "var(--foreground)",
+      boxShadow: "var(--shadow-xs)"
+    },
+    ghost: {
+      background: "transparent",
+      color: "var(--foreground)"
+    },
+    link: {
+      background: "transparent",
+      color: "var(--foreground)",
+      padding: 0,
+      height: "auto"
+    }
+  };
+  const Tag = href ? "a" : "button";
+  return /*#__PURE__*/React.createElement(Tag, _extends({
+    href: href,
+    onClick: onClick,
+    style: {
+      ...base,
+      ...sizes[size],
+      ...variants[variant],
+      ...style
+    },
+    onMouseEnter: e => {
+      if (variant === "default") e.currentTarget.style.background = "oklch(0.30 0 0)";
+      if (variant === "outline" || variant === "ghost") e.currentTarget.style.background = "var(--accent)";
+      if (variant === "secondary") e.currentTarget.style.background = "oklch(0.94 0 0)";
+    },
+    onMouseLeave: e => {
+      Object.assign(e.currentTarget.style, variants[variant]);
+    }
+  }, rest), icon && /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    size: 15
+  }), children, iconRight && /*#__PURE__*/React.createElement(Icon, {
+    name: iconRight,
+    size: 15
+  }));
+};
+const Badge = ({
+  variant = "outline",
+  children,
+  style = {}
+}) => {
+  const variants = {
+    default: {
+      background: "var(--primary)",
+      color: "var(--primary-foreground)"
+    },
+    secondary: {
+      background: "var(--secondary)",
+      color: "var(--secondary-foreground)"
+    },
+    outline: {
+      background: "transparent",
+      border: "1px solid var(--border)",
+      color: "var(--foreground)"
+    }
+  };
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 6,
+      padding: "3px 10px",
+      borderRadius: 999,
+      fontSize: 12,
+      fontWeight: 500,
+      fontFamily: "var(--font-sans)",
+      letterSpacing: "-0.005em",
+      whiteSpace: "nowrap",
+      ...variants[variant],
+      ...style
+    }
+  }, children);
+};
+const Card = ({
+  children,
+  style = {},
+  ...rest
+}) => /*#__PURE__*/React.createElement("div", _extends({
+  style: {
+    background: "var(--card)",
+    color: "var(--card-foreground)",
+    border: "1px solid var(--border)",
+    borderRadius: 14,
+    boxShadow: "var(--shadow-sm)",
+    padding: 28,
+    display: "flex",
+    flexDirection: "column",
+    gap: 16,
+    ...style
+  }
+}, rest), children);
+const Input = ({
+  style = {},
+  ...rest
+}) => /*#__PURE__*/React.createElement("input", _extends({
+  style: {
+    height: 44,
+    width: "100%",
+    padding: "0 14px",
+    borderRadius: 8,
+    border: "1px solid var(--input)",
+    background: "var(--background)",
+    color: "var(--foreground)",
+    fontSize: 14,
+    fontFamily: "var(--font-sans)",
+    outline: "none",
+    boxShadow: "var(--shadow-xs)",
+    ...style
+  }
+}, rest));
+const Textarea = ({
+  style = {},
+  ...rest
+}) => /*#__PURE__*/React.createElement("textarea", _extends({
+  style: {
+    width: "100%",
+    minHeight: 120,
+    padding: "12px 14px",
+    borderRadius: 8,
+    border: "1px solid var(--input)",
+    background: "var(--background)",
+    color: "var(--foreground)",
+    fontSize: 14,
+    fontFamily: "var(--font-sans)",
+    outline: "none",
+    resize: "vertical",
+    boxShadow: "var(--shadow-xs)",
+    lineHeight: 1.6,
+    ...style
+  }
+}, rest));
+const Eyebrow = ({
+  children,
+  style = {}
+}) => /*#__PURE__*/React.createElement("div", {
+  className: "eyebrow",
+  style: style
+}, children);
+Object.assign(window, {
+  Icon,
+  Button,
+  Badge,
+  Card,
+  Input,
+  Textarea,
+  Eyebrow
+});
+
+/**
+ * GrantLabs — Header (sticky top nav)
+ */
+
+const Header = ({
+  theme,
+  onToggleTheme
+}) => {
+  const [scrolled, setScrolled] = React.useState(false);
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, {
+      passive: true
+    });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const navItems = [{
+    label: "서비스",
+    href: "#services"
+  }, {
+    label: "철학",
+    href: "#about"
+  }, {
+    label: "스토리",
+    href: "#story"
+  }, {
+    label: "프로세스",
+    href: "#process"
+  }, {
+    label: "문의",
+    href: "#contact"
+  }];
+  return /*#__PURE__*/React.createElement("header", {
+    style: {
+      position: "sticky",
+      top: 0,
+      zIndex: 50,
+      background: scrolled ? "color-mix(in oklch, var(--background) 88%, transparent)" : "var(--background)",
+      backdropFilter: scrolled ? "saturate(140%) blur(8px)" : "none",
+      WebkitBackdropFilter: scrolled ? "saturate(140%) blur(8px)" : "none",
+      borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+      transition: "border-color .2s, background .2s"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "container",
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: 68
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "#top",
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+      textDecoration: "none",
+      color: "inherit"
+    }
+  }, /*#__PURE__*/React.createElement(Logo, {
+    theme: theme
+  })), /*#__PURE__*/React.createElement("nav", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    },
+    className: "desktop-nav"
+  }, navItems.map(item => /*#__PURE__*/React.createElement("a", {
+    key: item.href,
+    href: item.href,
+    style: {
+      fontSize: 14,
+      fontWeight: 500,
+      color: "var(--muted-foreground)",
+      textDecoration: "none",
+      padding: "8px 14px",
+      borderRadius: 6,
+      transition: "color .15s, background .15s",
+      letterSpacing: "-0.005em",
+      whiteSpace: "nowrap"
+    },
+    onMouseEnter: e => {
+      e.currentTarget.style.color = "var(--foreground)";
+      e.currentTarget.style.background = "var(--accent)";
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.color = "var(--muted-foreground)";
+      e.currentTarget.style.background = "transparent";
+    }
+  }, item.label))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: onToggleTheme,
+    "aria-label": "Toggle theme",
+    style: {
+      height: 36,
+      width: 36,
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "transparent",
+      border: "1px solid var(--border)",
+      borderRadius: 8,
+      cursor: "pointer",
+      color: "var(--muted-foreground)"
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: theme === "dark" ? "sun" : "moon",
+    size: 15
+  })), /*#__PURE__*/React.createElement(Button, {
+    size: "sm",
+    href: "#contact",
+    iconRight: "arrow-right"
+  }, "\uBB34\uB8CC\uC0C1\uB2F4 \uC2E0\uCCAD"))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 880px) { .desktop-nav { display: none !important; } }
+      `));
+};
+const Logo = ({
+  theme
+}) => {
+  const [imgError, setImgError] = React.useState(false);
+  if (!imgError && theme !== "dark") {
+    return /*#__PURE__*/React.createElement("img", {
+      src: "logo.png",
+      alt: "Grant Labs",
+      onError: () => setImgError(true),
+      style: {
+        height: 48,
+        width: "auto",
+        display: "block",
+        mixBlendMode: "multiply"
+      }
+    });
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "inline-flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 0,
+      color: "var(--foreground)",
+      lineHeight: 1,
+      userSelect: "none",
+      minWidth: 196
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: "100%",
+      height: "0.75px",
+      background: "currentColor",
+      opacity: 0.28,
+      marginBottom: 5
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: "var(--font-mono)",
+      fontSize: 7,
+      letterSpacing: "0.24em",
+      color: "var(--muted-foreground)",
+      textTransform: "uppercase"
+    }
+  }, "Strategy \xB7 Funding \xB7 Growth"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: "'Cormorant Garamond', Georgia, serif",
+      fontSize: 22,
+      fontWeight: 600,
+      letterSpacing: "0.18em",
+      textTransform: "uppercase",
+      lineHeight: 1.1,
+      marginTop: 3,
+      color: "var(--foreground)"
+    }
+  }, "Grant Labs"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: "var(--font-mono)",
+      fontSize: 6,
+      letterSpacing: "0.2em",
+      color: "var(--muted-foreground)",
+      textTransform: "uppercase",
+      marginTop: 4
+    }
+  }, "Business Growth & Funding Partner"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: "100%",
+      height: "0.75px",
+      background: "currentColor",
+      opacity: 0.28,
+      marginTop: 5
+    }
+  }));
+};
+Object.assign(window, {
+  Header,
+  Logo
+});
+
+/**
+ * GrantLabs — Hero (fullscreen slider, Eugene-style)
+ */
+
+const SLIDES = [{
+  bg: "linear-gradient(135deg, oklch(0.14 0.03 250) 0%, oklch(0.10 0.02 260) 100%)",
+  eyebrow: "기업의 성장에 함께합니다",
+  headline: "작은 기업의 큰 도약,\n그랜트 랩스가\n함께합니다.",
+  sub: "정책자금, 기업인증, 특허/연구소, 법인설립, 경영지원까지\n기업의 성장 단계마다 그랜트 랩스가 함께합니다."
+}, {
+  bg: "linear-gradient(135deg, oklch(0.12 0.02 160) 0%, oklch(0.09 0.015 200) 100%)",
+  eyebrow: "기업인증 · 특허",
+  headline: "벤처·이노비즈·메인비즈,\n인증 하나로\n달라지는 기업의 위상.",
+  sub: "기업인증부터 특허출원, 기업부설연구소 설립까지\n체계적으로 지원합니다."
+}];
+const HeroSlider = () => {
+  const [idx, setIdx] = React.useState(0);
+  const [fade, setFade] = React.useState(true);
+  const go = next => {
+    setFade(false);
+    setTimeout(() => {
+      setIdx((next + SLIDES.length) % SLIDES.length);
+      setFade(true);
+    }, 320);
+  };
+  React.useEffect(() => {
+    const t = setInterval(() => go(idx + 1), 6000);
+    return () => clearInterval(t);
+  }, [idx]);
+  const slide = SLIDES[idx];
+  return /*#__PURE__*/React.createElement("section", {
+    id: "top",
+    style: {
+      position: "relative",
+      width: "100%",
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-end",
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "absolute",
+      inset: 0,
+      background: slide.bg,
+      transition: "background 0.6s ease",
+      zIndex: 0
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "absolute",
+      inset: 0,
+      backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+      backgroundSize: "32px 32px",
+      zIndex: 1
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: "40%",
+      background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
+      zIndex: 2
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "container",
+    style: {
+      position: "relative",
+      zIndex: 3,
+      paddingBottom: 80,
+      paddingTop: 120
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      opacity: fade ? 1 : 0,
+      transform: fade ? "translateY(0)" : "translateY(12px)",
+      transition: "opacity 0.4s ease, transform 0.4s ease"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      fontWeight: 500,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      color: "rgba(255,255,255,0.55)",
+      marginBottom: 20,
+      display: "flex",
+      alignItems: "center",
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 22,
+      height: 1,
+      background: "rgba(255,255,255,0.4)",
+      display: "inline-block"
+    }
+  }), slide.eyebrow), /*#__PURE__*/React.createElement("h1", {
+    style: {
+      margin: 0,
+      fontSize: "clamp(36px, 5.5vw, 68px)",
+      fontWeight: 700,
+      letterSpacing: "-0.03em",
+      lineHeight: 1.12,
+      color: "#ffffff",
+      whiteSpace: "pre-line",
+      maxWidth: 820
+    }
+  }, slide.headline), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: "24px 0 0",
+      fontSize: "clamp(15px, 1.4vw, 17px)",
+      lineHeight: 1.8,
+      color: "rgba(255,255,255,0.65)",
+      whiteSpace: "pre-line",
+      maxWidth: 500
+    }
+  }, slide.sub), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 10,
+      marginTop: 40,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "#contact",
+    style: {
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 8,
+      padding: "14px 28px",
+      background: "#ffffff",
+      color: "#111",
+      borderRadius: 8,
+      fontWeight: 600,
+      fontSize: 15,
+      textDecoration: "none",
+      letterSpacing: "-0.01em",
+      transition: "opacity 0.2s"
+    },
+    onMouseEnter: e => e.currentTarget.style.opacity = "0.9",
+    onMouseLeave: e => e.currentTarget.style.opacity = "1"
+  }, "1:1 \uBB34\uB8CC\uC0C1\uB2F4 \uC2E0\uCCAD\uD558\uAE30"), /*#__PURE__*/React.createElement("a", {
+    href: "#services",
+    style: {
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 8,
+      padding: "14px 28px",
+      background: "transparent",
+      color: "#ffffff",
+      border: "1.5px solid rgba(255,255,255,0.35)",
+      borderRadius: 8,
+      fontWeight: 500,
+      fontSize: 15,
+      textDecoration: "none",
+      letterSpacing: "-0.01em",
+      transition: "border-color 0.2s"
+    },
+    onMouseEnter: e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.7)",
+    onMouseLeave: e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"
+  }, "\uC11C\uBE44\uC2A4 \uC0B4\uD3B4\uBCF4\uAE30"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 16,
+      marginTop: 64
+    }
+  }, [{
+    dir: -1,
+    path: "M15 19l-7-7 7-7"
+  }, {
+    dir: 1,
+    path: "M9 5l7 7-7 7"
+  }].map(({
+    dir,
+    path
+  }) => /*#__PURE__*/React.createElement("button", {
+    key: dir,
+    onClick: () => go(idx + dir),
+    style: {
+      width: 48,
+      height: 48,
+      borderRadius: "50%",
+      border: "1.5px solid rgba(255,255,255,0.45)",
+      background: "transparent",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      transition: "border-color 0.2s, background 0.2s"
+    },
+    onMouseEnter: e => {
+      e.currentTarget.style.borderColor = "#fff";
+      e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
+      e.currentTarget.style.background = "transparent";
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "18",
+    height: "18",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "white",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: path
+  })))), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: "rgba(255,255,255,0.5)",
+      letterSpacing: "0.04em",
+      marginLeft: 4
+    }
+  }, String(idx + 1).padStart(2, "0"), " / ", String(SLIDES.length).padStart(2, "0")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginLeft: 8
+    }
+  }, SLIDES.map((_, i) => /*#__PURE__*/React.createElement("button", {
+    key: i,
+    onClick: () => go(i),
+    style: {
+      width: i === idx ? 24 : 6,
+      height: 6,
+      borderRadius: 3,
+      background: i === idx ? "#ffffff" : "rgba(255,255,255,0.3)",
+      border: "none",
+      cursor: "pointer",
+      padding: 0,
+      transition: "width 0.3s ease, background 0.3s ease"
+    }
+  }))))));
+};
+Object.assign(window, {
+  Hero: HeroSlider
+});
+
+/**
+ * GrantLabs — Story / CEO Profile section
+ */
+
+const Story = () => {
+  const [imgError, setImgError] = React.useState(false);
+  const [mobile, setMobile] = React.useState(typeof window !== "undefined" && window.innerWidth <= 780);
+  React.useEffect(() => {
+    const handler = () => setMobile(window.innerWidth <= 780);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  const career = [{
+    period: "2026 — 현재",
+    role: "그랜트 랩스 (Grant Labs)",
+    title: "대표"
+  }, {
+    period: "2025 — 2026",
+    role: "더베어앤컴퍼니",
+    title: "기업경영 부문장"
+  }, {
+    period: "2021 — 2024",
+    role: "부동산 투자사 및 디벨로퍼",
+    title: "본부장"
+  }, {
+    period: "2004 — 2020",
+    role: "대형그룹사",
+    title: "재무 전략 담당"
+  }];
+  const credentials = [{
+    label: "학력",
+    value: "고려대학교 정경대학 통계학과 졸업 (2004)"
+  }, {
+    label: "자격",
+    value: "투자자산운용사 · 펀드투자권유대행인"
+  }];
+  return /*#__PURE__*/React.createElement("section", {
+    id: "story",
+    style: {
+      padding: "var(--section-y) 0",
+      borderTop: "1px solid var(--border)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uC2A4\uD1A0\uB9AC"), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "16px 0 64px",
+      fontSize: "clamp(28px, 3.5vw, 42px)",
+      fontWeight: 600,
+      letterSpacing: "-0.03em",
+      lineHeight: 1.15
+    }
+  }, "\uB300\uD45C \uC18C\uAC1C"), /*#__PURE__*/React.createElement("div", {
+    className: "story-grid",
+    style: {
+      display: "grid",
+      gridTemplateColumns: mobile ? "1fr" : "320px 1fr",
+      gap: mobile ? 48 : 80,
+      alignItems: "flex-start"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: mobile ? "static" : "sticky",
+      top: mobile ? "auto" : 96
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderRadius: 12,
+      overflow: "hidden",
+      background: "var(--surface)",
+      aspectRatio: "3/4",
+      maxWidth: 320,
+      border: "1px solid var(--border)"
+    }
+  }, !imgError ? /*#__PURE__*/React.createElement("img", {
+    src: "ceo.jpg",
+    alt: "\uC804\uD76C\uC9C4 \uB300\uD45C",
+    onError: () => setImgError(true),
+    style: {
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      display: "block"
+    }
+  }) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "var(--surface)",
+      color: "var(--muted-foreground)"
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "user",
+    size: 64
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 16,
+      borderTop: "1px solid var(--border)",
+      paddingTop: 14
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontFamily: "var(--font-heading)",
+      fontWeight: 700,
+      fontSize: 22,
+      letterSpacing: "-0.02em",
+      margin: "0 0 3px"
+    }
+  }, "\uC804\uD76C\uC9C4"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 13,
+      color: "var(--muted-foreground)",
+      margin: "0 0 14px",
+      letterSpacing: "0.01em"
+    }
+  }, "Grant Labs \uB300\uD45C\uC774\uC0AC"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 6
+    }
+  }, credentials.map(c => /*#__PURE__*/React.createElement("div", {
+    key: c.label,
+    style: {
+      background: "var(--surface)",
+      border: "1px solid var(--border)",
+      borderRadius: 10,
+      padding: "10px 14px"
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontFamily: "var(--font-mono)",
+      fontSize: 10,
+      fontWeight: 600,
+      color: "var(--muted-foreground)",
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      margin: "0 0 4px"
+    }
+  }, c.label), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 13,
+      fontWeight: 500,
+      margin: 0,
+      lineHeight: 1.5,
+      letterSpacing: "-0.005em"
+    }
+  }, c.value)))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 17,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.85,
+      margin: "0 0 64px",
+      maxWidth: 520,
+      letterSpacing: "-0.005em"
+    }
+  }, "\uB300\uD615\uADF8\uB8F9\uC0AC\uC5D0\uC11C 20\uB144\uAC04 \uC804\uB7B5 \xB7 \uC790\uC0B0\uAC1C\uBC1C \uC2E4\uBB34\uB97C \uC313\uACE0, \uC815\uCC45\uC790\uAE08 \uCEE8\uC124\uD305 \uD604\uC7A5\uC5D0\uC11C \uACBD\uD5D8\uC744 \uB354\uD588\uC2B5\uB2C8\uB2E4. \uC9C0\uAE08\uC740 \uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uB97C \uD1B5\uD574 \uAE30\uC5C5\uC758 \uC131\uC7A5 \uACFC\uC815\uC744 \uCC98\uC74C\uBD80\uD130 \uB05D\uAE4C\uC9C0 \uD568\uAED8\uD569\uB2C8\uB2E4."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 0
+    }
+  }, career.map((item, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: "grid",
+      gridTemplateColumns: "160px 1fr",
+      gap: 32,
+      padding: "28px 0",
+      borderTop: "1px solid var(--border)",
+      alignItems: "flex-start"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: "var(--muted-foreground)",
+      fontFamily: "var(--font-mono)",
+      fontVariantNumeric: "tabular-nums",
+      paddingTop: 3,
+      letterSpacing: "0.02em"
+    }
+  }, item.period), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontWeight: 600,
+      fontSize: 16,
+      margin: "0 0 5px",
+      letterSpacing: "-0.02em"
+    }
+  }, item.role), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 13,
+      color: "var(--muted-foreground)",
+      margin: 0,
+      letterSpacing: "-0.005em"
+    }
+  }, item.title)))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderTop: "1px solid var(--border)"
+    }
+  }))))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 780px) {
+          .story-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+        }
+      `));
+};
+Object.assign(window, {
+  Story
+});
+
+/**
+ * GrantLabs — Services section
+ */
+
+const SERVICES = [{
+  n: "01",
+  icon: "landmark",
+  title: "정책자금",
+  en: "Government Funding",
+  desc: "기업의 성장 단계와 사업 목적에 맞는 최적의 정책자금을 발굴하고, 신청부터 실행까지 전 과정을 함께합니다.",
+  items: ["운전자금·시설자금 컨설팅", "신용보증기금·기술보증기금 연계", "중소벤처기업진흥공단 정책융자", "지자체 특화 자금 매칭"]
+}, {
+  n: "02",
+  icon: "badge-check",
+  title: "기업인증",
+  en: "Corporate Certification",
+  desc: "벤처·이노비즈·메인비즈 인증으로 기업 가치를 입증하고 세제·금융·판로 혜택을 확보합니다.",
+  items: ["벤처기업 확인 (혁신성장 유형)", "이노비즈 (기술혁신형 중소기업)", "메인비즈 (경영혁신형 중소기업)", "사후관리 및 갱신 컨설팅"]
+}, {
+  n: "03",
+  icon: "flask-conical",
+  title: "특허/연구소",
+  en: "Patent & R&D Center",
+  desc: "특허 출원과 기업부설연구소·전담부서 설립으로 R&D 세액공제와 정부지원사업 자격을 확보합니다.",
+  items: ["특허 출원 및 관리", "기업부설연구소 신고", "연구개발전담부서 설립", "R&D 세액공제 적용 지원"]
+}, {
+  n: "04",
+  icon: "building-2",
+  title: "법인설립",
+  en: "Corporation Setup",
+  desc: "법인 설립 등기부터 사업자 개설까지, 창업 초기의 복잡한 절차를 빠르고 정확하게 처리합니다.",
+  items: ["법인 설립 등기 대행", "사업자 등록 및 인허가 연계", "사업계획서 작성 지원", "창업 초기 세무·노무 연계"]
+}, {
+  n: "05",
+  icon: "briefcase",
+  title: "경영지원",
+  en: "Business Management",
+  desc: "투자 유치부터 정부지원사업 신청까지, 기업 운영 전반에 걸친 맞춤형 경영 전략을 함께 설계합니다.",
+  items: ["사업계획서·IR 자료 작성", "정부지원사업 신청 대행", "투자 유치 전략 수립", "세무·노무·법무 전문가 연계"]
+}];
+const Services = () => {
+  return /*#__PURE__*/React.createElement("section", {
+    id: "services",
+    style: {
+      padding: "var(--section-y) 0",
+      borderTop: "1px solid var(--border)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 760,
+      marginBottom: 64
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uC11C\uBE44\uC2A4"), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "16px 0 18px",
+      fontSize: "clamp(32px, 4.2vw, 48px)",
+      fontWeight: 600,
+      letterSpacing: "-0.03em",
+      lineHeight: 1.15
+    }
+  }, "\uAE30\uC5C5\uC131\uC7A5\uC758 \uD575\uC2EC\uC601\uC5ED", /*#__PURE__*/React.createElement("br", null), "\uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uC640 \uD568\uAED8\uB77C\uBA74, \uB2E4\uB985\uB2C8\uB2E4."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 17,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.7,
+      maxWidth: 620
+    }
+  }, "\uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uB294 \uB2E8\uBC1C\uC131 \uC790\uBB38\uC774 \uC544\uB2CC, \uAE30\uC5C5\uC758 \uC131\uC7A5 \uB85C\uB4DC\uB9F5\uC744 \uD568\uAED8 \uC124\uACC4\uD569\uB2C8\uB2E4.", /*#__PURE__*/React.createElement("br", null), "\uC815\uCC45\uC790\uAE08, \uAE30\uC5C5\uC778\uC99D, \uD2B9\uD5C8/\uC5F0\uAD6C\uC18C, \uBC95\uC778\uC124\uB9BD, \uACBD\uC601\uC9C0\uC6D0\uAE4C\uC9C0 \uC720\uAE30\uC801\uC73C\uB85C \uC5F0\uACB0\uD569\uB2C8\uB2E4.")), /*#__PURE__*/React.createElement("div", {
+    className: "services-grid-top",
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gap: 0,
+      border: "1px solid var(--border)",
+      borderRadius: "14px 14px 0 0",
+      overflow: "hidden",
+      background: "var(--card)"
+    }
+  }, SERVICES.slice(0, 3).map((s, i) => /*#__PURE__*/React.createElement(ServiceCell, {
+    key: s.n,
+    svc: s,
+    total: 5,
+    borderLeft: i > 0
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "services-grid-bottom",
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: 0,
+      border: "1px solid var(--border)",
+      borderTop: "none",
+      borderRadius: "0 0 14px 14px",
+      overflow: "hidden",
+      background: "var(--card)"
+    }
+  }, SERVICES.slice(3).map((s, i) => /*#__PURE__*/React.createElement(ServiceCell, {
+    key: s.n,
+    svc: s,
+    total: 5,
+    borderLeft: i > 0
+  })))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 880px) {
+          .services-grid-top, .services-grid-bottom { grid-template-columns: 1fr !important; }
+          .services-grid-top { border-radius: 14px 14px 0 0 !important; }
+          .services-grid-bottom { border-radius: 0 0 14px 14px !important; }
+          .svc-cell { border-left: none !important; border-top: 1px solid var(--border) !important; }
+          .svc-cell:first-child { border-top: none !important; }
+        }
+      `));
+};
+const ServiceCell = ({
+  svc,
+  total,
+  borderLeft
+}) => /*#__PURE__*/React.createElement("div", {
+  className: "svc-cell",
+  style: {
+    padding: "40px 32px",
+    borderLeft: borderLeft ? "1px solid var(--border)" : "none",
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
+    minHeight: 400,
+    background: "var(--card)",
+    transition: "background .2s"
+  },
+  onMouseEnter: e => {
+    e.currentTarget.style.background = "var(--surface)";
+  },
+  onMouseLeave: e => {
+    e.currentTarget.style.background = "var(--card)";
+  }
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start"
+  }
+}, /*#__PURE__*/React.createElement("span", {
+  style: {
+    fontFamily: "var(--font-mono)",
+    fontSize: 12,
+    color: "var(--muted-foreground)",
+    letterSpacing: "0.04em"
+  }
+}, svc.n, " / ", String(total).padStart(2, "0"))), /*#__PURE__*/React.createElement("div", {
+  style: {
+    marginTop: 8
+  }
+}, /*#__PURE__*/React.createElement("h3", {
+  style: {
+    margin: "0 0 4px",
+    fontSize: 26,
+    fontWeight: 600,
+    letterSpacing: "-0.025em"
+  }
+}, svc.title), /*#__PURE__*/React.createElement("div", {
+  className: "display-serif",
+  style: {
+    fontSize: 17,
+    color: "var(--muted-foreground)"
+  }
+}, svc.en)), /*#__PURE__*/React.createElement("p", {
+  style: {
+    margin: 0,
+    fontSize: 14.5,
+    color: "var(--muted-foreground)",
+    lineHeight: 1.7
+  }
+}, svc.desc), /*#__PURE__*/React.createElement("ul", {
+  style: {
+    listStyle: "none",
+    padding: 0,
+    margin: "auto 0 0",
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+    borderTop: "1px solid var(--border)",
+    paddingTop: 20
+  }
+}, svc.items.map(it => /*#__PURE__*/React.createElement("li", {
+  key: it,
+  style: {
+    fontSize: 13.5,
+    color: "var(--foreground)",
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 10,
+    lineHeight: 1.5
+  }
+}, /*#__PURE__*/React.createElement(Icon, {
+  name: "check",
+  size: 14,
+  style: {
+    marginTop: 3,
+    color: "var(--muted-foreground)"
+  }
+}), it))));
+Object.assign(window, {
+  Services,
+  SERVICES
+});
+
+/**
+ * GrantLabs — Process section
+ */
+
+const PROCESS_STEPS = [{
+  n: "01",
+  t: "무료 진단",
+  d: "현황 분석 및 사업 매핑",
+  days: "1~2일",
+  icon: "search"
+}, {
+  n: "02",
+  t: "전략 설계",
+  d: "성장 로드맵 설계",
+  days: "5~7일",
+  icon: "compass"
+}, {
+  n: "03",
+  t: "서류 준비",
+  d: "신청 서류 공동 작성",
+  days: "2~4주",
+  icon: "file-text"
+}, {
+  n: "04",
+  t: "신청·대응",
+  d: "심사 전 과정 지원",
+  days: "심사 종료까지",
+  icon: "send"
+}, {
+  n: "05",
+  t: "사후관리",
+  d: "집행·갱신 장기 동행",
+  days: "지속",
+  icon: "infinity"
+}];
+const Process = () => {
+  return /*#__PURE__*/React.createElement("section", {
+    id: "process",
+    style: {
+      padding: "var(--section-y) 0",
+      borderTop: "1px solid var(--border)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 760,
+      marginBottom: 80
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uD504\uB85C\uC138\uC2A4"), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "16px 0 18px",
+      fontSize: "clamp(32px, 4.2vw, 48px)",
+      fontWeight: 600,
+      letterSpacing: "-0.03em",
+      lineHeight: 1.15
+    }
+  }, "\uC9C4\uB2E8\uBD80\uD130 \uC0AC\uD6C4\uAD00\uB9AC\uAE4C\uC9C0", /*#__PURE__*/React.createElement("br", null), "5\uB2E8\uACC4 \uD504\uB85C\uC138\uC2A4"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 17,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.7,
+      maxWidth: 620
+    }
+  }, "\uBAA8\uB4E0 \uB2E8\uACC4\uB294 \uC804\uB2F4 \uCEE8\uC124\uD134\uD2B8\uAC00 \uC9C1\uC811 \uC9C4\uD589\uD558\uBA70, \uBA85\uD655\uD55C \uC77C\uC815\uACFC \uACB0\uACFC\uBB3C \uC548\uC5D0\uC11C \uC6C0\uC9C1\uC785\uB2C8\uB2E4.")), /*#__PURE__*/React.createElement("div", {
+    className: "flow-container",
+    style: {
+      position: "relative",
+      marginBottom: 80
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flow-line",
+    style: {
+      position: "absolute",
+      top: 32,
+      left: "10%",
+      right: "10%",
+      height: 1,
+      background: "var(--border)",
+      zIndex: 0
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "flow-progress",
+    style: {
+      position: "absolute",
+      top: 32,
+      left: "10%",
+      width: "80%",
+      height: 1,
+      background: "var(--foreground)",
+      opacity: 0.15,
+      zIndex: 1
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "flow-grid",
+    style: {
+      position: "relative",
+      display: "grid",
+      gridTemplateColumns: "repeat(5, 1fr)",
+      gap: 16,
+      zIndex: 2
+    }
+  }, PROCESS_STEPS.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: s.n,
+    className: "flow-node",
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      textAlign: "center",
+      position: "relative"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 68,
+      height: 68,
+      borderRadius: 999,
+      background: "var(--background)",
+      border: "1.5px solid oklch(0.65 0.08 60)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      position: "relative",
+      boxShadow: "0 0 0 4px oklch(0.65 0.08 60 / 0.08)"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: "var(--font-display)",
+      fontStyle: "italic",
+      fontSize: 22,
+      color: "oklch(0.45 0.08 60)",
+      letterSpacing: "-0.02em",
+      lineHeight: 1
+    }
+  }, ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"][i])), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 6,
+      fontFamily: "var(--font-mono)",
+      fontSize: 11,
+      letterSpacing: "0.08em",
+      color: "var(--muted-foreground)"
+    }
+  }, "STEP ", s.n), /*#__PURE__*/React.createElement("h3", {
+    style: {
+      margin: "10px 0 8px",
+      fontSize: 18,
+      fontWeight: 600,
+      letterSpacing: "-0.02em"
+    }
+  }, s.t), /*#__PURE__*/React.createElement(Badge, {
+    style: {
+      fontSize: 11,
+      marginBottom: 12
+    }
+  }, s.days), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 13,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.5,
+      whiteSpace: "nowrap"
+    }
+  }, s.d))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      border: "1px solid var(--border)",
+      borderRadius: 14,
+      background: "var(--card)",
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "20px 28px",
+      borderBottom: "1px solid var(--border)",
+      background: "var(--surface)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      flexWrap: "wrap",
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "var(--font-mono)",
+      fontSize: 12,
+      letterSpacing: "0.06em",
+      textTransform: "uppercase",
+      color: "var(--muted-foreground)"
+    }
+  }, "Deliverables \xB7 \uB2E8\uACC4\uBCC4 \uC0B0\uCD9C\uBB3C"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "var(--muted-foreground)"
+    }
+  }, "\uBAA8\uB4E0 \uB2E8\uACC4\uB294 \uBB38\uC11C\uB85C \uAE30\uB85D\uB418\uACE0 \uACF5\uC720\uB429\uB2C8\uB2E4")), /*#__PURE__*/React.createElement("div", {
+    className: "deliv-grid",
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(5, 1fr)"
+    }
+  }, [{
+    n: "01",
+    items: ["기업 진단 리포트", "활용 가능 사업 리스트"]
+  }, {
+    n: "02",
+    items: ["성장 로드맵", "분기별 액션 플랜"]
+  }, {
+    n: "03",
+    items: ["사업계획서", "재무·기술 증빙 패키지"]
+  }, {
+    n: "04",
+    items: ["기관 제출 일체", "심사 대응 노트"]
+  }, {
+    n: "05",
+    items: ["집행 가이드", "갱신·연장 알림"]
+  }].map((d, i) => /*#__PURE__*/React.createElement("div", {
+    key: d.n,
+    className: "deliv-cell",
+    style: {
+      padding: "24px 20px",
+      borderLeft: i === 0 ? "none" : "1px solid var(--border)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "var(--font-mono)",
+      fontSize: 11,
+      letterSpacing: "0.06em",
+      color: "var(--muted-foreground)",
+      marginBottom: 12
+    }
+  }, "STEP ", d.n), /*#__PURE__*/React.createElement("ul", {
+    style: {
+      listStyle: "none",
+      padding: 0,
+      margin: 0,
+      display: "flex",
+      flexDirection: "column",
+      gap: 8
+    }
+  }, d.items.map(it => /*#__PURE__*/React.createElement("li", {
+    key: it,
+    style: {
+      fontSize: 13,
+      color: "var(--foreground)",
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 8,
+      lineHeight: 1.5
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 13,
+    style: {
+      marginTop: 3,
+      color: "var(--muted-foreground)"
+    }
+  }), it)))))))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 980px) {
+          .flow-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 32px 20px !important; }
+          .flow-line, .flow-progress { display: none !important; }
+          .deliv-grid { grid-template-columns: 1fr 1fr !important; }
+          .deliv-cell:nth-child(2) { border-left: 1px solid var(--border) !important; }
+          .deliv-cell:nth-child(3), .deliv-cell:nth-child(4), .deliv-cell:nth-child(5) { border-top: 1px solid var(--border); }
+          .deliv-cell:nth-child(3) { border-left: none !important; }
+          .deliv-cell:nth-child(5) { border-left: none !important; grid-column: 1 / -1; }
+        }
+        @media (max-width: 560px) {
+          .flow-grid { grid-template-columns: 1fr !important; }
+          .deliv-grid { grid-template-columns: 1fr !important; }
+          .deliv-cell { border-left: none !important; border-top: 1px solid var(--border); }
+          .deliv-cell:first-child { border-top: none; }
+        }
+      `));
+};
+Object.assign(window, {
+  Process
+});
+
+/**
+ * GrantLabs — Contact / CTA + Footer
+ */
+
+const Contact = () => {
+  const [form, setForm] = React.useState({
+    company: "",
+    name: "",
+    phone: "",
+    interest: "정책자금",
+    message: ""
+  });
+  const [sent, setSent] = React.useState(false);
+  const [sending, setSending] = React.useState(false);
+  const successRef = React.useRef(null);
+  React.useEffect(() => {
+    if (sent && successRef.current) {
+      successRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+  }, [sent]);
+  return /*#__PURE__*/React.createElement("section", {
+    id: "contact",
+    style: {
+      padding: "var(--section-y) 0",
+      borderTop: "1px solid var(--border)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "contact-grid",
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 80,
+      alignItems: "flex-start"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      order: 2
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uBB38\uC758"), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "16px 0 24px",
+      fontSize: "clamp(36px, 4.6vw, 52px)",
+      fontWeight: 600,
+      letterSpacing: "-0.03em",
+      lineHeight: 1.12
+    }
+  }, "\uC9C0\uAE08,", /*#__PURE__*/React.createElement("br", null), "\uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uC640 \uC2DC\uC791\uD558\uC138\uC694."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 16,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.75,
+      maxWidth: 460
+    }
+  }, "\uC0C1\uB2F4\uC744 \uC2E0\uCCAD\uD574 \uC8FC\uC2DC\uBA74 \uC804\uB2F4 \uCEE8\uC124\uD134\uD2B8\uAC00 \uC9C1\uC811 \uC5F0\uB77D\uB4DC\uB9BD\uB2C8\uB2E4.", /*#__PURE__*/React.createElement("br", null), "\uBAA8\uB4E0 \uC0C1\uB2F4\uC740 1:1 \uC0C1\uB2F4\uC744 \uD1B5\uD574 \uC9C4\uD589\uB429\uB2C8\uB2E4."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 48,
+      display: "flex",
+      flexDirection: "column",
+      gap: 24
+    }
+  }, [{
+    i: "phone",
+    l: "대표 전화",
+    v: "010-5963-7624"
+  }, {
+    i: "mail",
+    l: "이메일",
+    v: "jjun96750@gmail.com"
+  }, {
+    i: "map-pin",
+    l: "오피스",
+    v: "경기도 파주시 초롱꽃로 109, 406호 9057 (동패동, 팜스타워)"
+  }, {
+    i: "clock",
+    l: "운영 시간",
+    v: "평일 09:00 – 18:00"
+  }].map(c => /*#__PURE__*/React.createElement("div", {
+    key: c.l,
+    style: {
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 6,
+      height: 6,
+      borderRadius: "50%",
+      background: "var(--muted-foreground)",
+      flexShrink: 0,
+      marginTop: 8,
+      opacity: 0.5
+    }
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "var(--muted-foreground)",
+      fontFamily: "var(--font-mono)",
+      letterSpacing: "0.04em",
+      textTransform: "uppercase"
+    }
+  }, c.l), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 15,
+      fontWeight: 500,
+      marginTop: 4,
+      letterSpacing: "-0.005em"
+    }
+  }, c.v)))))), /*#__PURE__*/React.createElement(Card, {
+    style: {
+      padding: 36,
+      gap: 18,
+      order: 1
+    }
+  }, sent ? /*#__PURE__*/React.createElement("div", {
+    ref: successRef,
+    style: {
+      padding: "60px 20px",
+      textAlign: "center",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 64,
+      height: 64,
+      borderRadius: 99,
+      background: "oklch(0.62 0.18 145 / 0.12)",
+      border: "2px solid oklch(0.62 0.18 145)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 28,
+    style: {
+      color: "oklch(0.62 0.18 145)"
+    }
+  })), /*#__PURE__*/React.createElement("h3", {
+    style: {
+      margin: "4px 0 0",
+      fontSize: 22,
+      fontWeight: 600,
+      letterSpacing: "-0.02em"
+    }
+  }, "\uC0C1\uB2F4\uC2E0\uCCAD \uC644\uB8CC\uB418\uC5C8\uC2B5\uB2C8\uB2E4"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 15,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.7
+    }
+  }, "\uC21C\uCC28\uC801\uC73C\uB85C \uC5F0\uB77D\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4.")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    style: {
+      margin: "0 0 4px",
+      fontSize: 20,
+      fontWeight: 600,
+      letterSpacing: "-0.02em"
+    }
+  }, "1:1 \uBB34\uB8CC\uC0C1\uB2F4 \uC2E0\uCCAD"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 13,
+      color: "var(--muted-foreground)"
+    }
+  }, "\uC544\uB798 \uC815\uBCF4\uB97C \uB0A8\uACA8\uC8FC\uC2DC\uBA74 \uBE60\uB974\uAC8C \uC5F0\uB77D\uB4DC\uB9BD\uB2C8\uB2E4.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(Field, {
+    label: "\uD68C\uC0AC\uBA85"
+  }, /*#__PURE__*/React.createElement(Input, {
+    placeholder: "\u321C\uADF8\uB79C\uD2B8 \uB7A9\uC2A4",
+    value: form.company,
+    onChange: e => setForm({
+      ...form,
+      company: e.target.value
+    })
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "\uB2F4\uB2F9\uC790\uBA85"
+  }, /*#__PURE__*/React.createElement(Input, {
+    placeholder: "\uD64D\uAE38\uB3D9",
+    value: form.name,
+    onChange: e => setForm({
+      ...form,
+      name: e.target.value
+    })
+  }))), /*#__PURE__*/React.createElement(Field, {
+    label: "\uC5F0\uB77D\uCC98"
+  }, /*#__PURE__*/React.createElement(Input, {
+    placeholder: "010-0000-0000",
+    value: form.phone,
+    onChange: e => setForm({
+      ...form,
+      phone: e.target.value
+    })
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "\uAD00\uC2EC \uC11C\uBE44\uC2A4"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 8
+    }
+  }, ["정책자금", "기업인증", "특허/연구소", "법인설립", "경영지원", "전체 상담"].map(opt => /*#__PURE__*/React.createElement("button", {
+    key: opt,
+    type: "button",
+    onClick: () => setForm({
+      ...form,
+      interest: opt
+    }),
+    style: {
+      padding: "8px 14px",
+      borderRadius: 8,
+      border: "1px solid var(--border)",
+      background: form.interest === opt ? "var(--primary)" : "var(--background)",
+      color: form.interest === opt ? "var(--primary-foreground)" : "var(--foreground)",
+      fontSize: 13,
+      fontWeight: 500,
+      cursor: "pointer",
+      fontFamily: "var(--font-sans)",
+      transition: "all .15s"
+    }
+  }, opt)))), /*#__PURE__*/React.createElement(Field, {
+    label: "\uBB38\uC758 \uB0B4\uC6A9 (\uC120\uD0DD)"
+  }, /*#__PURE__*/React.createElement(Textarea, {
+    placeholder: "\uD68C\uC0AC \uD604\uD669 \uB610\uB294 \uAD81\uAE08\uD55C \uC810\uC744 \uC790\uC720\uB86D\uAC8C \uC801\uC5B4\uC8FC\uC138\uC694.",
+    value: form.message,
+    onChange: e => setForm({
+      ...form,
+      message: e.target.value
+    }),
+    style: {
+      minHeight: 100
+    }
+  })), /*#__PURE__*/React.createElement(Button, {
+    size: "lg",
+    style: {
+      width: "100%",
+      opacity: sending ? 0.6 : 1
+    },
+    iconRight: sending ? null : "arrow-right",
+    onClick: async () => {
+      if (sending) return;
+      if (!form.name || !form.phone) {
+        alert("담당자명과 연락처를 입력해주세요.");
+        return;
+      }
+      setSending(true);
+      try {
+        await emailjs.send("service_tcj8otx", "template_8ne6kj3", {
+          company: form.company,
+          name: form.name,
+          phone: form.phone,
+          interest: form.interest,
+          message: form.message
+        });
+      } catch (e) {
+        console.warn("이메일 발송 오류:", e);
+        alert("발송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        setSending(false);
+        return;
+      }
+      setSending(false);
+      setSent(true);
+    }
+  }, sending ? "전송 중..." : "1:1 무료상담 신청하기"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 11.5,
+      color: "var(--muted-foreground)",
+      textAlign: "center",
+      lineHeight: 1.6
+    }
+  }, "\uC81C\uCD9C\uD558\uC2DC\uBA74 \uAC1C\uC778\uC815\uBCF4 \uCC98\uB9AC\uBC29\uCE68\uC5D0 \uB3D9\uC758\uD558\uB294 \uAC83\uC73C\uB85C \uAC04\uC8FC\uB429\uB2C8\uB2E4."))))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 880px) { .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .contact-grid > *:first-child { order: 2 !important; }
+          .contact-grid > *:last-child { order: 1 !important; } }
+      `));
+};
+const Field = ({
+  label,
+  children
+}) => /*#__PURE__*/React.createElement("label", {
+  style: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 6
+  }
+}, /*#__PURE__*/React.createElement("span", {
+  style: {
+    fontSize: 12.5,
+    fontWeight: 500,
+    color: "var(--foreground)",
+    letterSpacing: "-0.005em"
+  }
+}, label), children);
+const Footer = () => /*#__PURE__*/React.createElement("footer", {
+  style: {
+    borderTop: "1px solid var(--border)",
+    padding: "56px 0 40px",
+    background: "var(--surface)"
+  }
+}, /*#__PURE__*/React.createElement("div", {
+  className: "container"
+}, /*#__PURE__*/React.createElement("div", {
+  className: "footer-grid",
+  style: {
+    display: "grid",
+    gridTemplateColumns: "1.4fr 1fr 1fr 1fr",
+    gap: 48
+  }
+}, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Logo, null), /*#__PURE__*/React.createElement("p", {
+  style: {
+    margin: "20px 0 0",
+    fontSize: 13,
+    color: "var(--muted-foreground)",
+    lineHeight: 1.7,
+    maxWidth: 280
+  }
+}, "\uAE30\uC5C5\uC758 \uC131\uC7A5\uC5D0 \uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uAC00 \uD568\uAED8\uD569\uB2C8\uB2E4.")), [{
+  t: "서비스",
+  items: ["정책자금", "기업인증", "특허/연구소", "법인설립", "경영지원"]
+}, {
+  t: "회사",
+  items: ["철학", "스토리", "프로세스"]
+}, {
+  t: "문의",
+  items: ["jjun96750@gmail.com", "파주시 초롱꽃로 109, 406호"]
+}].map(col => /*#__PURE__*/React.createElement("div", {
+  key: col.t
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    fontSize: 12,
+    fontWeight: 600,
+    fontFamily: "var(--font-mono)",
+    letterSpacing: "0.05em",
+    textTransform: "uppercase",
+    marginBottom: 16
+  }
+}, col.t), /*#__PURE__*/React.createElement("ul", {
+  style: {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: 10
+  }
+}, col.items.map(it => /*#__PURE__*/React.createElement("li", {
+  key: it
+}, /*#__PURE__*/React.createElement("a", {
+  href: "#",
+  style: {
+    fontSize: 13.5,
+    color: "var(--muted-foreground)",
+    textDecoration: "none"
+  }
+}, it))))))), /*#__PURE__*/React.createElement("div", {
+  style: {
+    marginTop: 64,
+    paddingTop: 24,
+    borderTop: "1px solid var(--border)",
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: 16
+  }
+}, /*#__PURE__*/React.createElement("span", {
+  style: {
+    fontSize: 12,
+    color: "var(--muted-foreground)",
+    lineHeight: 1.7
+  }
+}, "\xA9 2026 \uADF8\uB79C\uD2B8 \uB7A9\uC2A4 (Grant Labs)  \xB7  \uB300\uD45C \uC804\uD76C\uC9C4  \xB7  \uC0AC\uC5C5\uC790\uB4F1\uB85D\uBC88\uD638 132-29-15723"), /*#__PURE__*/React.createElement("div", {
+  style: {
+    display: "flex",
+    gap: 20
+  }
+}, /*#__PURE__*/React.createElement("a", {
+  href: "#",
+  style: {
+    fontSize: 12,
+    color: "var(--muted-foreground)",
+    textDecoration: "none",
+    whiteSpace: "nowrap"
+  }
+}, "\uC774\uC6A9\uC57D\uAD00"), /*#__PURE__*/React.createElement("a", {
+  href: "#",
+  style: {
+    fontSize: 12,
+    color: "var(--muted-foreground)",
+    textDecoration: "none",
+    whiteSpace: "nowrap"
+  }
+}, "\uAC1C\uC778\uC815\uBCF4 \uCC98\uB9AC\uBC29\uCE68")))), /*#__PURE__*/React.createElement("style", null, `
+      @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; } }
+    `));
+Object.assign(window, {
+  Contact,
+  Footer,
+  Field
+});
+
+/**
+ * GrantLabs — About / Philosophy section
+ */
+
+const About = () => {
+  return /*#__PURE__*/React.createElement("section", {
+    id: "about",
+    style: {
+      padding: "var(--section-y) 0",
+      background: "var(--surface)",
+      borderTop: "1px solid var(--border)",
+      borderBottom: "1px solid var(--border)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "about-grid",
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1.2fr",
+      gap: 80,
+      alignItems: "flex-start"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "sticky",
+      top: 96
+    }
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uCCA0\uD559"), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "16px 0 24px",
+      fontSize: "clamp(32px, 4vw, 44px)",
+      fontWeight: 600,
+      letterSpacing: "-0.03em",
+      lineHeight: 1.15
+    }
+  }, "\uC2E4\uD589\uB825\uC73C\uB85C", /*#__PURE__*/React.createElement("br", null), "\uC99D\uBA85\uD569\uB2C8\uB2E4"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 16,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.75,
+      margin: 0,
+      maxWidth: 380
+    }
+  }, "\uCEE8\uC124\uD305\uC758 \uAC00\uCE58\uB294 \uACB0\uACFC\uB85C \uB4DC\uB7EC\uB0A9\uB2C8\uB2E4.", /*#__PURE__*/React.createElement("br", null), "\uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uB294 \uBCF4\uACE0\uC11C\uAC00 \uC544\uB2CC, \uAE30\uC5C5\uC758 \uC2E4\uC9C8\uC801 \uBCC0\uD654\uB97C \uB9CC\uB4ED\uB2C8\uB2E4.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 0
+    }
+  }, /*#__PURE__*/React.createElement("blockquote", {
+    style: {
+      margin: 0,
+      padding: 0,
+      fontFamily: "var(--font-display)",
+      fontSize: "clamp(24px, 2.6vw, 32px)",
+      fontWeight: 400,
+      fontStyle: "italic",
+      lineHeight: 1.4,
+      color: "var(--foreground)",
+      letterSpacing: "-0.01em",
+      borderLeft: "2px solid var(--foreground)",
+      paddingLeft: 24
+    }
+  }, "\"We don't write reports. ", /*#__PURE__*/React.createElement("br", null), "We build companies.\""), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 56,
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 0,
+      borderTop: "1px solid var(--border)"
+    },
+    className: "principles"
+  }, [{
+    k: "01",
+    t: "데이터 기반 진단",
+    d: "재무·기술·시장 데이터를 종합해 객관적인 현재 위치와 가능성을 도출합니다."
+  }, {
+    k: "02",
+    t: "맞춤형 설계",
+    d: "기업의 업종·규모·성장단계에 맞는 솔루션을 1:1로 설계합니다. 정형 보고서는 없습니다."
+  }, {
+    k: "03",
+    t: "End-to-End 실행",
+    d: "신청서 작성·서류 준비·기관 대응까지 끝까지 함께합니다. 자문에서 멈추지 않습니다."
+  }, {
+    k: "04",
+    t: "장기 파트너십",
+    d: "한 번의 프로젝트가 아닌, 기업의 성장 사이클 전체를 함께하는 파트너가 됩니다."
+  }].map((p, i) => /*#__PURE__*/React.createElement("div", {
+    key: p.k,
+    style: {
+      padding: "32px 28px 32px 0",
+      paddingLeft: i % 2 === 1 ? 28 : 0,
+      borderLeft: i % 2 === 1 ? "1px solid var(--border)" : "none",
+      borderBottom: i < 2 ? "1px solid var(--border)" : "none"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: "var(--font-mono)",
+      fontSize: 12,
+      color: "var(--muted-foreground)",
+      letterSpacing: "0.04em"
+    }
+  }, p.k), /*#__PURE__*/React.createElement("h4", {
+    style: {
+      margin: "10px 0 8px",
+      fontSize: 18,
+      fontWeight: 600,
+      letterSpacing: "-0.02em"
+    }
+  }, p.t), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 14,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.7
+    }
+  }, p.d))))))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 880px) {
+          .about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .about-grid > div:first-child { position: static !important; }
+          .principles { grid-template-columns: 1fr !important; }
+          .principles > div { padding-left: 0 !important; border-left: none !important; border-bottom: 1px solid var(--border) !important; }
+          .principles > div:last-child { border-bottom: none !important; }
+        }
+      `));
+};
+Object.assign(window, {
+  About
+});
+
+
+</script>
+<script>
+    const App = () => {
+      const [theme, setTheme] = React.useState("light");
+      React.useEffect(() => { document.body.className = theme === "dark" ? "dark" : ""; }, [theme]);
+      React.useEffect(() => { if (typeof lucide !== "undefined") lucide.createIcons(); });
+      return React.createElement(React.Fragment, null,
+        React.createElement(Header, { theme, onToggleTheme: () => setTheme(t => t === "light" ? "dark" : "light") }),
+        React.createElement("main", null,
+          React.createElement(Hero, null),
+          React.createElement(Services, null),
+          React.createElement(About, null),
+          React.createElement(Story, null),
+          React.createElement(Process, null),
+          React.createElement(Contact, null)
+        ),
+        React.createElement(Footer, null)
+      );
+    };
+    ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App, null));
+  </script>
+</body>
+</html>
