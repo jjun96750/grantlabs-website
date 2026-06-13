@@ -1,4 +1,5 @@
 const SHEET_NAME = "Leads";
+const SPREADSHEET_ID = "1KCIwResl3vrUdgfIgThNSaPBN0kr_yI_18AsUYgEFHo";
 
 const HEADERS = [
   "id",
@@ -69,7 +70,7 @@ function jsonResponse(data) {
 }
 
 function getSheet() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
 
