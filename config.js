@@ -1,0 +1,1 @@
+window.GRANTLABS_CRM_API_URL = "";

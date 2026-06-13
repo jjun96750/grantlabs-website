@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles/tokens.css" />
   <link rel="stylesheet" href="styles/site.css" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="config.js"></script>
   <style>
     :root {
       --crm-gold: #d5a51d;
@@ -448,6 +449,7 @@
           </div>
         </div>
         <div class="toolbar-right">
+          <span class="count" id="syncStatus">로컬 모드</span>
           <span class="count" id="leadCount">0건</span>
           <button class="btn gold" id="filterBtn"><i data-lucide="funnel" class="icon"></i>필터</button>
         </div>
@@ -534,8 +536,10 @@
     const START_NO = 1192;
     const fields = ["receivedAt", "source", "name", "company", "phone", "email", "business", "credit", "revenue", "founded", "tax", "owner", "tmStatus", "meeting", "memo"];
     const $ = (id) => document.getElementById(id);
+    const CRM_API_URL = (window.GRANTLABS_CRM_API_URL || "").trim();
     let leads = loadLeads();
     let selectedId = null;
+    let remoteEnabled = Boolean(CRM_API_URL);
 
     function loadLeads() {
       try { return JSON.parse(localStorage.getItem(STORE_KEY) || "[]"); }
@@ -544,6 +548,42 @@
 
     function saveLeads() {
       localStorage.setItem(STORE_KEY, JSON.stringify(leads));
+    }
+
+    async function crmRequest(action, payload = {}) {
+      if (!remoteEnabled) return null;
+      const method = action === "list" ? "GET" : "POST";
+      const url = action === "list" ? `${CRM_API_URL}?action=list` : CRM_API_URL;
+      const response = await fetch(url, {
+        method,
+        body: method === "POST" ? JSON.stringify({ action, ...payload }) : undefined,
+      });
+      const result = await response.json();
+      if (!result.ok) throw new Error(result.error || "CRM API 오류");
+      return result;
+    }
+
+    async function loadRemoteLeads() {
+      if (!remoteEnabled) {
+        $("syncStatus").textContent = "로컬 모드";
+        if (!leads.length) addSamples();
+        render();
+        return;
+      }
+
+      $("syncStatus").textContent = "동기화 중";
+      try {
+        const result = await crmRequest("list");
+        leads = Array.isArray(result.leads) ? result.leads : [];
+        saveLeads();
+        $("syncStatus").textContent = "시트 동기화";
+      } catch (error) {
+        console.warn("CRM 동기화 오류:", error);
+        remoteEnabled = false;
+        $("syncStatus").textContent = "로컬 fallback";
+      }
+      if (!leads.length) addSamples();
+      render();
     }
 
     function nowLocal() {
@@ -620,6 +660,7 @@
           const lead = leads.find((item) => item.id === id);
           if (!lead) return;
           lead.owner = event.target.value;
+          if (remoteEnabled) crmRequest("updateLead", { lead }).catch((error) => console.warn("담당자 저장 오류:", error));
           saveLeads();
           render();
         });
@@ -667,7 +708,7 @@
       return defaults[field] || "";
     }
 
-    function saveLead() {
+    async function saveLead() {
       const data = fields.reduce((acc, field) => {
         acc[field] = $(field).value.trim();
         return acc;
@@ -676,20 +717,31 @@
         alert("연락처를 입력해주세요.");
         return;
       }
+      const now = new Date().toISOString();
       if (selectedId) {
-        leads = leads.map((lead) => lead.id === selectedId ? { ...lead, ...data, updatedAt: new Date().toISOString() } : lead);
+        const lead = { ...leads.find((item) => item.id === selectedId), ...data, id: selectedId, updatedAt: now };
+        if (remoteEnabled) await crmRequest("updateLead", { lead });
+        leads = leads.map((item) => item.id === selectedId ? lead : item);
       } else {
         selectedId = crypto.randomUUID();
-        leads.unshift({ id: selectedId, ...data, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() });
+        const lead = { id: selectedId, ...data, createdAt: now, updatedAt: now };
+        if (remoteEnabled) {
+          const result = await crmRequest("createLead", { lead });
+          selectedId = result.lead?.id || selectedId;
+          leads.unshift(result.lead || lead);
+        } else {
+          leads.unshift(lead);
+        }
       }
       saveLeads();
       closeDrawer();
       render();
     }
 
-    function deleteLead() {
+    async function deleteLead() {
       if (!selectedId) return closeDrawer();
       if (!confirm("선택한 LEAD를 삭제할까요?")) return;
+      if (remoteEnabled) await crmRequest("deleteLead", { id: selectedId });
       leads = leads.filter((lead) => lead.id !== selectedId);
       selectedId = null;
       saveLeads();
@@ -793,8 +845,7 @@
       $(id).addEventListener("change", render);
     });
 
-    if (!leads.length) addSamples();
-    render();
+    loadRemoteLeads();
   </script>
 </body>
 </html>

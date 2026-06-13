@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>정책자금 가능 여부 간단 확인 | 그랜트 랩스 Grant Labs</title>
+  <meta name="description" content="그랜트 랩스 정책자금 가능 여부 간단 확인. 업종, 지역, 매출액, 신용점수 구간을 객관식으로 선택하고 전화번호만 남겨주세요." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <link rel="canonical" href="https://grantlabs.co.kr/lead-check" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/site.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init({ publicKey: "UUfoZdh404On9fZbm" });</script>
+  <style>
+    :root {
+      --lead-navy: #07111f;
+      --lead-ink: #111827;
+      --lead-muted: #687083;
+      --lead-line: #e5e2da;
+      --lead-cream: #fbfaf7;
+      --lead-gold: #c79a4b;
+      --lead-gold-soft: #f1dfba;
+      --lead-card: #ffffff;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(7, 17, 31, .94), rgba(7, 17, 31, .78)),
+        radial-gradient(circle at 82% 14%, rgba(199, 154, 75, .22), transparent 30%),
+        var(--lead-navy);
+      color: var(--lead-ink);
+      font-family: var(--font-sans);
+      letter-spacing: 0;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1fr);
+      align-items: stretch;
+    }
+
+    .brand-panel {
+      padding: 54px 56px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid rgba(255,255,255,.12);
+    }
+
+    .brandmark {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 48px);
+      letter-spacing: .1em;
+      font-weight: 700;
+    }
+
+    .brand-sub {
+      margin-top: 10px;
+      color: rgba(255,255,255,.68);
+      font-size: 12px;
+      letter-spacing: .22em;
+    }
+
+    .hero-copy {
+      max-width: 520px;
+    }
+
+    .eyebrow-lite {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--lead-gold-soft);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .1em;
+    }
+
+    .eyebrow-lite::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1 {
+      margin: 22px 0 20px;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      color: rgba(255,255,255,.72);
+      font-size: 17px;
+      line-height: 1.75;
+      max-width: 460px;
+    }
+
+    .notice {
+      margin-top: 34px;
+      padding: 18px 20px;
+      max-width: 520px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.7);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .brand-foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+    }
+
+    .form-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,247,244,.98));
+    }
+
+    .form-card {
+      width: min(100%, 620px);
+      background: var(--lead-card);
+      border: 1px solid var(--lead-line);
+      box-shadow: 0 24px 70px rgba(7, 17, 31, .12);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .form-head {
+      padding: 26px 28px 22px;
+      border-bottom: 1px solid var(--lead-line);
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      color: var(--lead-muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .progress {
+      height: 6px;
+      background: #f0eee9;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--lead-gold);
+      transition: width .24s ease;
+    }
+
+    .step {
+      padding: 34px 28px 30px;
+      min-height: 390px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .question-kicker {
+      color: var(--lead-gold);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 10px 0 12px;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.16;
+      letter-spacing: -0.035em;
+      color: var(--lead-ink);
+    }
+
+    .hint {
+      margin: 0;
+      color: var(--lead-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      width: 100%;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 18px 0 20px;
+      border: 1px solid var(--lead-line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--lead-ink);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .16s, background .16s, transform .16s;
+    }
+
+    .option:hover,
+    .option.selected {
+      border-color: var(--lead-gold);
+      background: #fffaf0;
+      transform: translateY(-1px);
+    }
+
+    .option small {
+      color: var(--lead-muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .phone-input {
+      width: 100%;
+      height: 68px;
+      border: 1px solid var(--lead-line);
+      border-radius: 8px;
+      padding: 0 18px;
+      color: var(--lead-ink);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      outline: none;
+      font-family: var(--font-sans);
+    }
+
+    .phone-input:focus {
+      border-color: var(--lead-gold);
+      box-shadow: 0 0 0 4px rgba(199,154,75,.12);
+    }
+
+    .agree-box {
+      margin-top: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--lead-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .agree-box input {
+      margin-top: 3px;
+      width: 17px;
+      height: 17px;
+      accent-color: var(--lead-gold);
+      flex: 0 0 auto;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      min-height: 52px;
+      border: 1px solid var(--lead-line);
+      border-radius: 8px;
+      padding: 0 20px;
+      background: #fff;
+      color: var(--lead-ink);
+      font-size: 15px;
+      font-weight: 800;
+      font-family: var(--font-sans);
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      min-width: 168px;
+      border-color: var(--lead-navy);
+      background: var(--lead-navy);
+      color: #fff;
+    }
+
+    .btn.primary:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .summary {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--lead-line);
+      font-size: 14px;
+    }
+
+    .summary-row strong {
+      color: var(--lead-muted);
+    }
+
+    .done {
+      text-align: center;
+      padding: 52px 28px;
+    }
+
+    .done-mark {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      background: #fff7e8;
+      border: 1px solid var(--lead-gold);
+      border-radius: 999px;
+      color: var(--lead-gold);
+      font-size: 32px;
+      font-weight: 900;
+    }
+
+    .done h2 {
+      margin-top: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-panel {
+        min-height: auto;
+        padding: 34px 24px;
+        gap: 40px;
+      }
+
+      .brand-foot {
+        display: none;
+      }
+
+      .form-panel {
+        padding: 22px;
+      }
+
+      .step {
+        min-height: 430px;
+        padding: 28px 22px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="brand-panel" aria-label="그랜트 랩스 소개">
+      <div>
+        <div class="brandmark">GRANT LABS</div>
+        <div class="brand-sub">STRATEGY · FUNDING · GROWTH</div>
+      </div>
+
+      <div class="hero-copy">
+        <div class="eyebrow-lite">30초 간단 확인</div>
+        <h1>정책자금 가능 여부를 먼저 확인하세요.</h1>
+        <p>
+          업종, 지역, 매출액, 신용점수 구간을 객관식으로 선택하고 전화번호만 남겨주세요.
+          남겨주신 조건을 기준으로 상담 안내를 드립니다.
+        </p>
+        <div class="notice">
+          그랜트 랩스는 정책자금을 직접 지급하거나 승인하는 기관이 아닙니다.
+          상담 내용은 참고 안내이며, 최종 승인 및 조건은 각 심사 기관 기준에 따라 달라질 수 있습니다.
+        </div>
+      </div>
+
+      <div class="brand-foot">
+        <span>Grant Labs</span>
+        <span>grantlabs.co.kr</span>
+      </div>
+    </section>
+
+    <section class="form-panel">
+      <div class="form-card" id="formCard">
+        <div class="form-head">
+          <div class="progress-row">
+            <span id="progressLabel">1 / 6</span>
+            <span>정책자금 상담 신청</span>
+          </div>
+          <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+        </div>
+
+        <form id="leadForm" class="step" autocomplete="on">
+          <div>
+            <div class="question-kicker" id="stepKicker">Question 01</div>
+            <h2 id="stepTitle">업종을 선택해 주세요.</h2>
+            <p class="hint" id="stepHint">현재 사업장의 주된 업종 기준으로 선택해 주세요.</p>
+            <div id="stepBody" class="options"></div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn" id="backBtn">이전</button>
+            <button type="button" class="btn primary" id="nextBtn">다음</button>
+          </div>
+        </form>
+
+        <div id="doneView" class="done hidden">
+          <div class="done-mark">✓</div>
+          <h2>상담 신청이 접수되었습니다.</h2>
+          <p class="hint">남겨주신 내용을 확인한 뒤 순차적으로 연락드리겠습니다.</p>
+          <div class="summary" id="doneSummary"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const steps = [
+      {
+        key: "industry",
+        title: "업종을 선택해 주세요.",
+        hint: "현재 사업장의 주된 업종 기준으로 선택해 주세요.",
+        options: [
+          { label: "제조업", note: "공장, 생산, 가공, 설비 기반" },
+          { label: "제조업 외", note: "서비스, 유통, 기타 업종" },
+        ],
+      },
+      {
+        key: "region",
+        title: "사업장 지역을 선택해 주세요.",
+        hint: "사업자등록증상 사업장 소재지 기준입니다.",
+        options: [
+          { label: "수도권", note: "서울, 경기, 인천" },
+          { label: "수도권 이외", note: "그 외 지역" },
+        ],
+      },
+      {
+        key: "revenue",
+        title: "최근 매출액 구간을 선택해 주세요.",
+        hint: "정확한 금액이 아니어도 가까운 구간을 선택해 주세요.",
+        options: [
+          { label: "1억 미만", note: "연 매출 기준" },
+          { label: "1억 이상", note: "연 매출 기준" },
+        ],
+      },
+      {
+        key: "creditScore",
+        title: "현재 신용점수 구간을 선택해 주세요.",
+        hint: "대표자 또는 사업 관련 신용 상황을 기준으로 선택해 주세요.",
+        options: [
+          { label: "800점 미만", note: "대략적인 구간" },
+          { label: "800점 이상", note: "대략적인 구간" },
+        ],
+      },
+      {
+        key: "phone",
+        title: "상담 안내를 받을 전화번호를 입력해 주세요.",
+        hint: "전화번호는 상담 안내 및 문의 응대 목적으로만 사용됩니다.",
+        input: true,
+      },
+      {
+        key: "confirm",
+        title: "입력 내용을 확인해 주세요.",
+        hint: "제출 후 담당자가 조건을 확인하고 순차적으로 연락드립니다.",
+        confirm: true,
+      },
+    ];
+
+    const state = {
+      step: 0,
+      answers: {
+        industry: "",
+        region: "",
+        revenue: "",
+        creditScore: "",
+        phone: "",
+      },
+      sending: false,
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const leadForm = $("leadForm");
+    const body = $("stepBody");
+
+    function render() {
+      const step = steps[state.step];
+      $("progressLabel").textContent = `${state.step + 1} / ${steps.length}`;
+      $("progressBar").style.width = `${((state.step + 1) / steps.length) * 100}%`;
+      $("stepKicker").textContent = `Question ${String(state.step + 1).padStart(2, "0")}`;
+      $("stepTitle").textContent = step.title;
+      $("stepHint").textContent = step.hint;
+      $("backBtn").style.visibility = state.step === 0 ? "hidden" : "visible";
+      $("nextBtn").textContent = step.confirm ? (state.sending ? "전송 중..." : "신청하기") : "다음";
+      $("nextBtn").disabled = state.sending;
+
+      if (step.options) {
+        body.className = "options";
+        body.innerHTML = step.options.map((option) => `
+          <button type="button" class="option ${state.answers[step.key] === option.label ? "selected" : ""}" data-value="${option.label}">
+            <span>${option.label}</span>
+            <small>${option.note}</small>
+          </button>
+        `).join("");
+        body.querySelectorAll(".option").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.answers[step.key] = button.dataset.value;
+            if (state.step < steps.length - 1) {
+              state.step += 1;
+              render();
+            }
+          });
+        });
+        return;
+      }
+
+      if (step.input) {
+        body.className = "";
+        body.innerHTML = `
+          <input class="phone-input" id="phoneInput" inputmode="tel" name="phone" placeholder="010-0000-0000" value="${escapeHtml(state.answers.phone)}" />
+          <label class="agree-box">
+            <input type="checkbox" id="privacyAgree" checked />
+            <span>입력하신 전화번호와 응답 내용은 상담 안내 및 문의 응대 목적으로만 사용되며, 상담 목적 달성 후 관련 법령에 따라 보관 또는 파기됩니다.</span>
+          </label>
+        `;
+        const phoneInput = $("phoneInput");
+        phoneInput.focus();
+        phoneInput.addEventListener("input", (event) => {
+          state.answers.phone = event.target.value;
+        });
+        phoneInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            goNext();
+          }
+        });
+        return;
+      }
+
+      if (step.confirm) {
+        body.className = "summary";
+        body.innerHTML = summaryRows();
+      }
+    }
+
+    function summaryRows() {
+      return [
+        ["업종", state.answers.industry],
+        ["지역", state.answers.region],
+        ["매출액", state.answers.revenue],
+        ["신용점수", state.answers.creditScore],
+        ["전화번호", state.answers.phone],
+      ].map(([label, value]) => `
+        <div class="summary-row"><strong>${label}</strong><span>${escapeHtml(value || "-")}</span></div>
+      `).join("");
+    }
+
+    function validateCurrent() {
+      const step = steps[state.step];
+      if (step.options && !state.answers[step.key]) return false;
+      if (step.input) {
+        const agreed = $("privacyAgree")?.checked;
+        return agreed && state.answers.phone.trim().length >= 8;
+      }
+      return true;
+    }
+
+    async function goNext() {
+      if (!validateCurrent()) {
+        alert("현재 항목을 입력 또는 선택해 주세요.");
+        return;
+      }
+
+      if (steps[state.step].confirm) {
+        await submitLead();
+        return;
+      }
+
+      state.step = Math.min(state.step + 1, steps.length - 1);
+      render();
+    }
+
+    function goBack() {
+      if (state.sending) return;
+      state.step = Math.max(state.step - 1, 0);
+      render();
+    }
+
+    async function submitLead() {
+      if (state.sending) return;
+      state.sending = true;
+      render();
+
+      const params = new URLSearchParams(location.search);
+      const leadDetails = [
+        `업종: ${state.answers.industry}`,
+        `지역: ${state.answers.region}`,
+        `매출액: ${state.answers.revenue}`,
+        `신용점수: ${state.answers.creditScore}`,
+        `전화번호: ${state.answers.phone}`,
+        `유입경로: ${params.get("utm_source") || "lead-check"}`,
+        `캠페인: ${params.get("utm_campaign") || "instagram_policy_fund"}`,
+        `페이지: ${location.href}`,
+      ].join("\\n");
+
+      try {
+        await emailjs.send("service_tcj8otx", "template_8ne6kj3", {
+          company: "Instagram DB 상담 신청",
+          name: "미입력",
+          phone: state.answers.phone,
+          industry: state.answers.industry,
+          region: state.answers.region,
+          revenue: state.answers.revenue,
+          credit_score: state.answers.creditScore,
+          interest: "정책자금",
+          message: leadDetails,
+          lead_details: leadDetails,
+        });
+      } catch (error) {
+        state.sending = false;
+        render();
+        alert("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+        console.warn(error);
+        return;
+      }
+
+      leadForm.classList.add("hidden");
+      $("doneView").classList.remove("hidden");
+      $("doneSummary").innerHTML = summaryRows();
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    $("nextBtn").addEventListener("click", goNext);
+    $("backBtn").addEventListener("click", goBack);
+    render();
+  </script>
+</body>
+</html>

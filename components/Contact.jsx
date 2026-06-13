@@ -18,6 +18,7 @@ const Contact = () => {
   const [sending, setSending] = React.useState(false);
 
   const updateForm = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
+  const crmApiUrl = (window.GRANTLABS_CRM_API_URL || "").trim();
 
   const leadDetails = [
     `업종: ${form.industry || "미선택"}`,
@@ -30,6 +31,39 @@ const Contact = () => {
     `전화번호: ${form.phone || "미입력"}`,
     `추가 문의: ${form.message || "없음"}`,
   ].join("\n");
+
+  const submitLeadToCrm = async () => {
+    if (!crmApiUrl) return { skipped: true };
+    const lead = {
+      receivedAt: new Date().toISOString().slice(0, 16),
+      source: "홈페이지",
+      name: form.name,
+      company: form.company,
+      phone: form.phone,
+      email: "",
+      business: form.industry,
+      industry: form.industry,
+      region: form.region,
+      credit: form.creditScore === "800점 이상" ? "≥800" : "<800",
+      revenue: form.revenue === "1억 미만" ? "<1억" : "1억~4억",
+      founded: "",
+      tax: "확인필요",
+      owner: "담당자 선택",
+      tmStatus: "대기중",
+      meeting: "—",
+      interest: form.interest,
+      message: leadDetails,
+      memo: form.message,
+    };
+
+    const response = await fetch(crmApiUrl, {
+      method: "POST",
+      body: JSON.stringify({ action: "createLead", lead }),
+    });
+    const result = await response.json();
+    if (!result.ok) throw new Error(result.error || "CRM 저장 실패");
+    return result;
+  };
 
   return (
     <section id="contact" style={{ padding: "var(--section-y) 0", borderTop: "1px solid var(--border)" }}>
@@ -151,6 +185,7 @@ const Contact = () => {
                   }
                   setSending(true);
                   try {
+                    await submitLeadToCrm();
                     await emailjs.send(
                       "service_tcj8otx",
                       "template_8ne6kj3",
