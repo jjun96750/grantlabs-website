@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Grant Labs CRM | LEAD</title>
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/site.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      --crm-gold: #d5a51d;
+      --crm-black: #141313;
+      --crm-line: #e6e2da;
+      --crm-soft: #f8f7f4;
+      --crm-ink: #101828;
+      --crm-muted: #7d8497;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #fbfaf8;
+      color: var(--crm-ink);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    .app {
+      padding: 24px 26px 40px;
+      min-width: 1180px;
+    }
+
+    .page-title {
+      margin: 0 0 18px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #070707;
+    }
+
+    .lead-card {
+      background: #fff;
+      border: 1px solid #e4e0d8;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgb(16 24 40 / 4%);
+    }
+
+    .card-head {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--crm-line);
+    }
+
+    .card-head h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .head-actions,
+    .toolbar,
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar {
+      min-height: 60px;
+      padding: 12px 14px;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--crm-line);
+      background: #fff;
+    }
+
+    .searchbox {
+      width: min(860px, 60vw);
+      height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #dedede;
+      border-radius: 4px;
+      padding: 0 10px;
+      background: #fff;
+      color: #99a0b3;
+    }
+
+    .searchbox input {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      outline: 0;
+      font-size: 13px;
+      color: #27364a;
+      background: transparent;
+    }
+
+    .searchbox input::placeholder {
+      color: #9aa2b8;
+    }
+
+    .count {
+      color: #9aa2b8;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .btn {
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 0 13px;
+      border: 1px solid #d9dde6;
+      border-radius: 5px;
+      background: #fff;
+      color: #172033;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn.gold {
+      border-color: var(--crm-gold);
+      color: #111;
+      background: #fffdf8;
+    }
+
+    .btn.black {
+      border-color: var(--crm-black);
+      background: var(--crm-black);
+      color: #fff;
+    }
+
+    .btn.ghost {
+      border-color: transparent;
+      background: transparent;
+      color: #697386;
+    }
+
+    .icon {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      max-height: calc(100vh - 204px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #fff;
+    }
+
+    thead th {
+      height: 40px;
+      padding: 0 12px;
+      background: var(--crm-black);
+      color: #e0b922;
+      font-size: 12px;
+      font-weight: 800;
+      text-align: left;
+      white-space: nowrap;
+      border-bottom: 1px solid #070707;
+    }
+
+    tbody td {
+      height: 50px;
+      padding: 0 12px;
+      border-bottom: 1px solid #e5e0d7;
+      color: #526071;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+    }
+
+    tbody tr {
+      cursor: pointer;
+      transition: background .12s;
+    }
+
+    tbody tr:hover td {
+      background: #fffaf0;
+    }
+
+    tbody tr.selected td {
+      background: #fff6d9;
+      border-top: 2px solid #e0aa1e;
+      border-bottom: 2px solid #e0aa1e;
+    }
+
+    .no { width: 50px; color: #8a93a7; }
+    .date { width: 128px; color: #8a93a7; font-variant-numeric: tabular-nums; }
+    .source { width: 95px; }
+    .name { width: 180px; color: #000; font-weight: 800; }
+    .company { width: 92px; }
+    .phone { width: 126px; font-family: var(--font-mono); font-size: 12px; }
+    .email { width: 160px; }
+    .business { width: 125px; }
+    .short { width: 80px; }
+    .owner { width: 145px; }
+    .status { width: 95px; }
+    .meeting { width: 72px; }
+
+    .source-pill,
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 22px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .source-pill {
+      border: 1px solid #dedede;
+      color: #586174;
+      background: #fff;
+    }
+
+    .status-pill {
+      background: #f1f2f4;
+      color: #6d7789;
+    }
+
+    .status-pill.waiting {
+      background: #f1f2f4;
+      color: #667085;
+    }
+
+    .status-pill.recall {
+      background: #e8f1ff;
+      color: #3478f6;
+    }
+
+    .status-pill.done {
+      background: #dff8ea;
+      color: #12a66a;
+    }
+
+    .status-pill.missed {
+      background: #fff0cf;
+      color: #f09616;
+    }
+
+    .owner-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-right: 7px;
+      background: #f3efe2;
+      border: 1px solid #e4dcc8;
+      vertical-align: -1px;
+    }
+
+    .owner-select {
+      width: 120px;
+      height: 28px;
+      border: 1px solid #d9dde6;
+      border-radius: 5px;
+      background: #fff;
+      color: #8790a3;
+      padding: 0 8px;
+      font-size: 12px;
+    }
+
+    .filter-panel {
+      display: none;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border-bottom: 1px solid var(--crm-line);
+      background: #fcfbf9;
+    }
+
+    .filter-panel.open {
+      display: grid;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      color: #717b8e;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #d9dde6;
+      border-radius: 5px;
+      background: #fff;
+      color: #1d2738;
+      outline: none;
+      font: inherit;
+    }
+
+    .field input,
+    .field select {
+      height: 36px;
+      padding: 0 10px;
+    }
+
+    .field textarea {
+      min-height: 92px;
+      resize: vertical;
+      padding: 10px;
+      line-height: 1.55;
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgb(15 23 42 / 24%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s;
+      z-index: 90;
+    }
+
+    .drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      width: 520px;
+      max-width: calc(100vw - 28px);
+      height: 100vh;
+      background: #fff;
+      border-left: 1px solid #ddd8cf;
+      box-shadow: -18px 0 40px rgb(15 23 42 / 14%);
+      transform: translateX(100%);
+      transition: transform .18s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-head {
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--crm-line);
+    }
+
+    .drawer-head strong {
+      font-size: 17px;
+    }
+
+    .drawer-body {
+      padding: 18px 20px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
+    }
+
+    .drawer-foot {
+      margin-top: auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      border-top: 1px solid var(--crm-line);
+      background: #fcfbf9;
+    }
+
+    .empty {
+      padding: 70px 20px;
+      text-align: center;
+      color: #8a93a7;
+      border-bottom: 1px solid var(--crm-line);
+    }
+
+    @media (max-width: 900px) {
+      .app { padding: 16px; min-width: 0; }
+      .toolbar { align-items: stretch; flex-direction: column; }
+      .toolbar-left, .toolbar-right { width: 100%; }
+      .searchbox { width: 100%; }
+      .filter-panel { grid-template-columns: 1fr 1fr; }
+      .table-wrap { max-height: none; }
+      table { min-width: 1320px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1 class="page-title">LEAD</h1>
+
+    <section class="lead-card">
+      <div class="card-head">
+        <h2>전체 LEAD</h2>
+        <div class="head-actions">
+          <button class="btn" id="sampleBtn"><i data-lucide="database" class="icon"></i>샘플</button>
+          <button class="btn" id="exportBtn"><i data-lucide="download" class="icon"></i>CSV</button>
+          <button class="btn black" id="newBtn"><i data-lucide="plus" class="icon"></i>LEAD 추가</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <div class="searchbox">
+            <i data-lucide="search" class="icon"></i>
+            <input id="searchInput" placeholder="이름/전화/회사 검색" />
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <span class="count" id="leadCount">0건</span>
+          <button class="btn gold" id="filterBtn"><i data-lucide="funnel" class="icon"></i>필터</button>
+        </div>
+      </div>
+
+      <div class="filter-panel" id="filterPanel">
+        <div class="field"><label>소스</label><select id="filterSource"><option value="">전체</option><option>Meta 광고</option><option>TikTok</option><option>Reels</option><option>Shorts</option><option>홈페이지</option></select></div>
+        <div class="field"><label>사업분야</label><select id="filterBusiness"><option value="">전체</option><option>제조업</option><option>제조업 외</option><option>콘텐츠업</option><option>광고대행업</option><option>디자인</option></select></div>
+        <div class="field"><label>신용</label><select id="filterCredit"><option value="">전체</option><option>≥800</option><option>&lt;800</option><option>&lt;700</option></select></div>
+        <div class="field"><label>매출</label><select id="filterRevenue"><option value="">전체</option><option>&lt;1억</option><option>1억~4억</option><option>4억 이상</option></select></div>
+        <div class="field"><label>담당자</label><select id="filterOwner"><option value="">전체</option><option>전희진</option><option>담당자 선택</option></select></div>
+        <div class="field"><label>TM 상태</label><select id="filterTm"><option value="">전체</option><option>대기중</option><option>재통화예정</option><option>통화완료</option><option>부재중</option></select></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="no">NO.</th>
+              <th class="date">접수일시</th>
+              <th class="source">소스</th>
+              <th class="name">이름</th>
+              <th class="company">회사</th>
+              <th class="phone">연락처</th>
+              <th class="email">이메일</th>
+              <th class="business">사업분야</th>
+              <th class="short">신용</th>
+              <th class="short">매출</th>
+              <th class="short">설립</th>
+              <th class="short">세금</th>
+              <th class="owner">담당자</th>
+              <th class="status">TM 상태</th>
+              <th class="meeting">미팅</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="emptyState">표시할 LEAD가 없습니다.</div>
+      </div>
+    </section>
+  </main>
+
+  <div class="drawer-backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-head">
+      <strong id="drawerTitle">LEAD 추가</strong>
+      <button class="btn ghost" id="closeDrawer"><i data-lucide="x" class="icon"></i></button>
+    </div>
+    <div class="drawer-body">
+      <div class="form-grid">
+        <div class="field"><label>접수일시</label><input id="receivedAt" type="datetime-local" /></div>
+        <div class="field"><label>소스</label><select id="source"><option>Meta 광고</option><option>TikTok</option><option>Reels</option><option>Shorts</option><option>홈페이지</option></select></div>
+        <div class="field"><label>이름</label><input id="name" /></div>
+        <div class="field"><label>회사</label><input id="company" /></div>
+        <div class="field"><label>연락처</label><input id="phone" /></div>
+        <div class="field"><label>이메일</label><input id="email" /></div>
+        <div class="field"><label>사업분야</label><input id="business" placeholder="제조업, 광고대행업 등" /></div>
+        <div class="field"><label>신용</label><select id="credit"><option>≥800</option><option>&lt;800</option><option>&lt;700</option></select></div>
+        <div class="field"><label>매출</label><select id="revenue"><option>&lt;1억</option><option>1억~4억</option><option>4억 이상</option></select></div>
+        <div class="field"><label>설립</label><select id="founded"><option>&lt;3년</option><option>≥3년</option></select></div>
+        <div class="field"><label>세금</label><select id="tax"><option>정상</option><option>연체</option><option>확인필요</option></select></div>
+        <div class="field"><label>담당자</label><select id="owner"><option>담당자 선택</option><option>전희진</option></select></div>
+        <div class="field"><label>TM 상태</label><select id="tmStatus"><option>대기중</option><option>재통화예정</option><option>통화완료</option><option>부재중</option></select></div>
+        <div class="field"><label>미팅</label><select id="meeting"><option>—</option><option>예정</option><option>완료</option><option>취소</option></select></div>
+      </div>
+      <div class="field"><label>메모</label><textarea id="memo" placeholder="상담 내용, 다음 액션, 필요 서류"></textarea></div>
+      <div class="field">
+        <label>홈페이지 DB 내용 붙여넣기</label>
+        <textarea id="pasteBox" placeholder="업종: 제조업&#10;지역: 수도권&#10;매출액: 1억 이상&#10;신용점수: 800점 이상&#10;전화번호: 010-0000-0000"></textarea>
+        <button class="btn" id="parseBtn"><i data-lucide="clipboard-check" class="icon"></i>내용 반영</button>
+      </div>
+    </div>
+    <div class="drawer-foot">
+      <button class="btn" id="deleteBtn"><i data-lucide="trash-2" class="icon"></i>삭제</button>
+      <div class="head-actions">
+        <button class="btn" id="cancelBtn">취소</button>
+        <button class="btn black" id="saveBtn"><i data-lucide="save" class="icon"></i>저장</button>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    const STORE_KEY = "grantlabs_lead_crm_v2";
+    const START_NO = 1192;
+    const fields = ["receivedAt", "source", "name", "company", "phone", "email", "business", "credit", "revenue", "founded", "tax", "owner", "tmStatus", "meeting", "memo"];
+    const $ = (id) => document.getElementById(id);
+    let leads = loadLeads();
+    let selectedId = null;
+
+    function loadLeads() {
+      try { return JSON.parse(localStorage.getItem(STORE_KEY) || "[]"); }
+      catch { return []; }
+    }
+
+    function saveLeads() {
+      localStorage.setItem(STORE_KEY, JSON.stringify(leads));
+    }
+
+    function nowLocal() {
+      const d = new Date();
+      d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+      return d.toISOString().slice(0, 16);
+    }
+
+    function formatDate(value) {
+      if (!value) return "";
+      return value.replace("T", " ");
+    }
+
+    function filteredLeads() {
+      const q = $("searchInput").value.trim().toLowerCase();
+      const filters = {
+        source: $("filterSource").value,
+        business: $("filterBusiness").value,
+        credit: $("filterCredit").value,
+        revenue: $("filterRevenue").value,
+        owner: $("filterOwner").value,
+        tmStatus: $("filterTm").value,
+      };
+      return leads
+        .filter((lead) => !q || [lead.name, lead.phone, lead.company, lead.email].some((v) => String(v || "").toLowerCase().includes(q)))
+        .filter((lead) => !filters.source || lead.source === filters.source)
+        .filter((lead) => !filters.business || String(lead.business || "").includes(filters.business))
+        .filter((lead) => !filters.credit || lead.credit === filters.credit)
+        .filter((lead) => !filters.revenue || lead.revenue === filters.revenue)
+        .filter((lead) => !filters.owner || lead.owner === filters.owner)
+        .filter((lead) => !filters.tmStatus || lead.tmStatus === filters.tmStatus)
+        .sort((a, b) => String(b.receivedAt || "").localeCompare(String(a.receivedAt || "")));
+    }
+
+    function render() {
+      const data = filteredLeads();
+      $("leadCount").textContent = `${data.length}건`;
+      $("emptyState").style.display = data.length ? "none" : "block";
+      $("rows").innerHTML = data.map((lead, index) => {
+        const no = START_NO - index;
+        const ownerCell = lead.owner === "담당자 선택"
+          ? `<select class="owner-select" data-owner="${lead.id}"><option>담당자 선택</option><option>전희진</option></select>`
+          : `<span class="owner-dot"></span><strong style="color:#111">${escapeHtml(lead.owner || "전희진")}</strong>`;
+        const tmClass = statusClass(lead.tmStatus);
+        return `
+          <tr data-id="${lead.id}" class="${lead.id === selectedId ? "selected" : ""}">
+            <td class="no">${no}</td>
+            <td class="date">${escapeHtml(formatDate(lead.receivedAt))}</td>
+            <td class="source"><span class="source-pill">${escapeHtml(lead.source || "홈페이지")}</span></td>
+            <td class="name">${escapeHtml(lead.name || "이름 미입력")}</td>
+            <td class="company">${escapeHtml(lead.company || "—")}</td>
+            <td class="phone">${escapeHtml(lead.phone || "")}</td>
+            <td class="email">${escapeHtml(lead.email || "—")}</td>
+            <td class="business">${escapeHtml(lead.business || "—")}</td>
+            <td class="short">${escapeHtml(lead.credit || "—")}</td>
+            <td class="short">${escapeHtml(lead.revenue || "—")}</td>
+            <td class="short">${escapeHtml(lead.founded || "—")}</td>
+            <td class="short">${escapeHtml(lead.tax || "정상")}</td>
+            <td class="owner">${ownerCell}</td>
+            <td class="status"><span class="status-pill ${tmClass}">${escapeHtml(lead.tmStatus || "대기중")}</span></td>
+            <td class="meeting">${escapeHtml(lead.meeting || "—")}</td>
+          </tr>`;
+      }).join("");
+
+      document.querySelectorAll("tr[data-id]").forEach((row) => {
+        row.addEventListener("click", (event) => {
+          if (event.target.matches("select")) return;
+          openDrawer(row.dataset.id);
+        });
+      });
+      document.querySelectorAll("select[data-owner]").forEach((select) => {
+        select.addEventListener("change", (event) => {
+          const id = event.target.dataset.owner;
+          const lead = leads.find((item) => item.id === id);
+          if (!lead) return;
+          lead.owner = event.target.value;
+          saveLeads();
+          render();
+        });
+      });
+      lucide.createIcons();
+    }
+
+    function statusClass(status) {
+      if (status === "재통화예정") return "recall";
+      if (status === "통화완료") return "done";
+      if (status === "부재중") return "missed";
+      return "waiting";
+    }
+
+    function openDrawer(id) {
+      selectedId = id || null;
+      const lead = leads.find((item) => item.id === selectedId);
+      $("drawerTitle").textContent = lead ? "LEAD 상세" : "LEAD 추가";
+      fields.forEach((field) => {
+        $(field).value = lead?.[field] || defaultValue(field);
+      });
+      $("pasteBox").value = "";
+      $("drawer").classList.add("open");
+      $("backdrop").classList.add("open");
+      render();
+    }
+
+    function closeDrawer() {
+      $("drawer").classList.remove("open");
+      $("backdrop").classList.remove("open");
+    }
+
+    function defaultValue(field) {
+      const defaults = {
+        receivedAt: nowLocal(),
+        source: "홈페이지",
+        credit: "≥800",
+        revenue: "1억~4억",
+        founded: "≥3년",
+        tax: "정상",
+        owner: "담당자 선택",
+        tmStatus: "대기중",
+        meeting: "—",
+      };
+      return defaults[field] || "";
+    }
+
+    function saveLead() {
+      const data = fields.reduce((acc, field) => {
+        acc[field] = $(field).value.trim();
+        return acc;
+      }, {});
+      if (!data.phone) {
+        alert("연락처를 입력해주세요.");
+        return;
+      }
+      if (selectedId) {
+        leads = leads.map((lead) => lead.id === selectedId ? { ...lead, ...data, updatedAt: new Date().toISOString() } : lead);
+      } else {
+        selectedId = crypto.randomUUID();
+        leads.unshift({ id: selectedId, ...data, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() });
+      }
+      saveLeads();
+      closeDrawer();
+      render();
+    }
+
+    function deleteLead() {
+      if (!selectedId) return closeDrawer();
+      if (!confirm("선택한 LEAD를 삭제할까요?")) return;
+      leads = leads.filter((lead) => lead.id !== selectedId);
+      selectedId = null;
+      saveLeads();
+      closeDrawer();
+      render();
+    }
+
+    function parsePaste() {
+      const text = $("pasteBox").value;
+      const pick = (label) => {
+        const match = text.match(new RegExp(label + "\\s*:\\s*([^\\n\\r]+)", "i"));
+        return match ? match[1].trim() : "";
+      };
+      const industry = pick("업종");
+      const region = pick("지역");
+      const revenue = pick("매출액");
+      const credit = pick("신용점수");
+      $("business").value = industry || $("business").value;
+      $("phone").value = pick("전화번호") || $("phone").value;
+      $("company").value = pick("회사명").replace("미입력", "") || $("company").value;
+      $("name").value = pick("담당자명").replace("미입력", "") || $("name").value;
+      $("memo").value = [region && `지역: ${region}`, pick("추가 문의")].filter(Boolean).join("\n");
+      if (revenue.includes("1억 미만")) $("revenue").value = "<1억";
+      if (revenue.includes("1억 이상")) $("revenue").value = "1억~4억";
+      if (credit.includes("800점 이상")) $("credit").value = "≥800";
+      if (credit.includes("800점 미만")) $("credit").value = "<800";
+    }
+
+    function addSamples() {
+      const sampleRows = [
+        ["2026-06-13T12:46", "Meta 광고", "MTG : Make Together ...", "—", "p:+821099142994", "jmirerica@naver.com", "콘텐츠업", "≥800", "1억~4억", "≥3년", "정상", "전희진", "대기중", "—"],
+        ["2026-06-13T12:01", "Meta 광고", "플레이을 여행로그", "—", "p:+821043932915", "guardtop@naver.com", "미디어콘텐츠", "<700", "<1억", "<3년", "정상", "전희진", "대기중", "—"],
+        ["2026-06-13T09:44", "Meta 광고", "(주)해연디자인", "—", "031-548-0204", "y7penny@gmail.com", "디자인", "≥800", "1억~4억", "<3년", "정상", "전희진", "대기중", "—"],
+        ["2026-06-13T09:13", "Meta 광고", "Jang seung hoon", "—", "010-6501-0127", "daljar80@naver.com", "인테리어", "<700", "<1억", "<3년", "정상", "전희진", "재통화예정", "—"],
+        ["2026-06-13T09:08", "Meta 광고", "이규민", "—", "p:+821091440325", "2ocarina2@gmail.com", "광고대행업", "≥800", "<1억", "≥3년", "정상", "전희진", "대기중", "—"],
+        ["2026-06-13T06:03", "Meta 광고", "최성문", "—", "p:+821041068924", "mun740123@gmail.com", "콘텐츠", "<700", "<1억", "≥3년", "연체", "담당자 선택", "통화완료", "2026-06-16 13:00"],
+        ["2026-06-13T04:15", "Meta 광고", "고영감", "—", "p:+821020637471", "kyk6182@naver.com", "제조 서비스", "<700", "<1억", "≥3년", "연체", "담당자 선택", "부재중", "—"],
+        ["2026-06-12T22:32", "Meta 광고", "LIFE FACTORY design", "—", "010-3430-5560", "lifekey.lee@gmail.com", "건설업(실내인테리어)", "≥800", "<1억", "≥3년", "정상", "담당자 선택", "대기중", "—"],
+      ];
+      leads = sampleRows.map((row) => ({
+        id: crypto.randomUUID(),
+        receivedAt: row[0],
+        source: row[1],
+        name: row[2],
+        company: row[3],
+        phone: row[4],
+        email: row[5],
+        business: row[6],
+        credit: row[7],
+        revenue: row[8],
+        founded: row[9],
+        tax: row[10],
+        owner: row[11],
+        tmStatus: row[12],
+        meeting: row[13],
+        memo: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }));
+      saveLeads();
+      selectedId = leads[4]?.id || null;
+      render();
+    }
+
+    function exportCsv() {
+      const headers = ["NO", "접수일시", "소스", "이름", "회사", "연락처", "이메일", "사업분야", "신용", "매출", "설립", "세금", "담당자", "TM 상태", "미팅", "메모"];
+      const data = filteredLeads().map((lead, index) => [
+        START_NO - index, formatDate(lead.receivedAt), lead.source, lead.name, lead.company, lead.phone, lead.email,
+        lead.business, lead.credit, lead.revenue, lead.founded, lead.tax, lead.owner, lead.tmStatus, lead.meeting, lead.memo
+      ]);
+      const csv = [headers, ...data].map((row) => row.map((value) => `"${String(value || "").replaceAll('"', '""')}"`).join(",")).join("\n");
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `grantlabs-lead-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    $("filterBtn").addEventListener("click", () => $("filterPanel").classList.toggle("open"));
+    $("newBtn").addEventListener("click", () => openDrawer());
+    $("closeDrawer").addEventListener("click", closeDrawer);
+    $("cancelBtn").addEventListener("click", closeDrawer);
+    $("backdrop").addEventListener("click", closeDrawer);
+    $("saveBtn").addEventListener("click", saveLead);
+    $("deleteBtn").addEventListener("click", deleteLead);
+    $("parseBtn").addEventListener("click", parsePaste);
+    $("sampleBtn").addEventListener("click", addSamples);
+    $("exportBtn").addEventListener("click", exportCsv);
+    ["searchInput", "filterSource", "filterBusiness", "filterCredit", "filterRevenue", "filterOwner", "filterTm"].forEach((id) => {
+      $(id).addEventListener("input", render);
+      $(id).addEventListener("change", render);
+    });
+
+    if (!leads.length) addSamples();
+    render();
+  </script>
+</body>
+</html>
