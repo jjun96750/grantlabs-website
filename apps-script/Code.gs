@@ -34,6 +34,10 @@ function doGet(e) {
   if (["createlead", "submit", "addlead"].indexOf(action) !== -1) {
     return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(e.parameter || {})) });
   }
+  if (["deletelead", "delete", "removelead"].indexOf(action) !== -1) {
+    deleteLead(e.parameter.id);
+    return jsonResponse({ ok: true, id: e.parameter.id || "" });
+  }
   return jsonResponse({ ok: false, error: "Unknown action" });
 }
 
@@ -49,9 +53,9 @@ function doPost(e) {
     return jsonResponse({ ok: true, lead: updateLead(payload.lead || {}) });
   }
 
-  if (action === "deletelead") {
+  if (["deletelead", "delete", "removelead"].indexOf(action) !== -1) {
     deleteLead(payload.id);
-    return jsonResponse({ ok: true });
+    return jsonResponse({ ok: true, id: payload.id || "" });
   }
 
   if (looksLikeLead(payload)) {
