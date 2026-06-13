@@ -200,6 +200,7 @@ const Contact = () => {
                         interest: form.interest,
                         message:  leadDetails,
                         lead_details: leadDetails,
+                        __crm_saved: "true",
                       }
                     );
                   } catch (e) {

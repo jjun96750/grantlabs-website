@@ -45,6 +45,7 @@ window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycby5XkNC7
 
     window.emailjs.send = async function mirroredEmailSend(serviceId, templateId, params, options) {
       const result = await originalSend(serviceId, templateId, params, options);
+      if (params?.__crm_saved === "true" || params?.__crm_saved === true) return result;
       window.grantLabsCrmRequest("createLead", { lead: normalizeLeadFromEmailParams(params) })
         .catch((error) => console.warn("CRM mirror failed:", error));
       return result;

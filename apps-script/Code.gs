@@ -31,6 +31,9 @@ function doGet(e) {
   if (action === "list") {
     return jsonResponse({ ok: true, leads: getLeads() });
   }
+  if (["createlead", "submit", "addlead"].indexOf(action) !== -1) {
+    return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(e.parameter || {})) });
+  }
   return jsonResponse({ ok: false, error: "Unknown action" });
 }
 
@@ -39,7 +42,7 @@ function doPost(e) {
   const action = (payload.action || "").toLowerCase();
 
   if (action === "createlead") {
-    return jsonResponse({ ok: true, lead: createLead(payload.lead || {}) });
+    return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(payload.lead || payload)) });
   }
 
   if (action === "updatelead") {
@@ -51,15 +54,21 @@ function doPost(e) {
     return jsonResponse({ ok: true });
   }
 
+  if (looksLikeLead(payload)) {
+    return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(payload.lead || payload)) });
+  }
+
   return jsonResponse({ ok: false, error: "Unknown action" });
 }
 
 function parsePayload(e) {
-  if (!e || !e.postData || !e.postData.contents) return {};
+  if (!e) return {};
+  const params = e.parameter || {};
+  if (!e.postData || !e.postData.contents) return params;
   try {
-    return JSON.parse(e.postData.contents);
+    return { ...params, ...JSON.parse(e.postData.contents) };
   } catch (error) {
-    return {};
+    return params;
   }
 }
 
@@ -152,4 +161,78 @@ function normalizeLead(input) {
     lead[header] = input[header] == null ? "" : String(input[header]);
   });
   return lead;
+}
+
+function looksLikeLead(input) {
+  if (!input) return false;
+  const lead = input.lead || input;
+  return Boolean(
+    lead.phone ||
+    lead.tel ||
+    lead.mobile ||
+    lead["전화번호"] ||
+    lead.name ||
+    lead["이름"] ||
+    lead.company ||
+    lead["회사명"]
+  );
+}
+
+function normalizeIncomingLead(input) {
+  const source = pick(input, ["source", "utm_source", "채널", "소스"]) || "외부 입력";
+  const name = pick(input, ["name", "담당자명", "이름", "성함", "customer_name", "full_name"]);
+  const company = pick(input, ["company", "회사명", "업체명", "상호", "business_name"]);
+  const phone = pick(input, ["phone", "tel", "mobile", "연락처", "전화번호", "휴대폰", "휴대폰번호"]);
+  const email = pick(input, ["email", "이메일", "mail"]);
+  const industry = pick(input, ["industry", "업종", "business", "사업분야"]);
+  const region = pick(input, ["region", "지역"]);
+  const revenueRaw = pick(input, ["revenue", "매출", "매출액"]);
+  const creditRaw = pick(input, ["credit", "credit_score", "신용", "신용점수"]);
+  const message = pick(input, ["message", "lead_details", "문의내용", "문의 내용", "메모", "memo"]);
+
+  return normalizeLead({
+    ...input,
+    source,
+    name,
+    company,
+    phone,
+    email,
+    business: pick(input, ["business", "사업분야"]) || industry,
+    industry,
+    region,
+    credit: normalizeCredit(creditRaw),
+    revenue: normalizeRevenue(revenueRaw),
+    founded: pick(input, ["founded", "설립", "업력"]),
+    tax: pick(input, ["tax", "세금"]) || "확인필요",
+    owner: pick(input, ["owner", "담당자"]) || "담당자 선택",
+    tmStatus: pick(input, ["tmStatus", "TM 상태", "상태"]) || "대기중",
+    meeting: pick(input, ["meeting", "미팅"]) || "—",
+    interest: pick(input, ["interest", "관심 서비스", "관심서비스"]) || "정책자금",
+    message,
+    memo: pick(input, ["memo", "메모"]) || message,
+  });
+}
+
+function pick(input, keys) {
+  for (const key of keys) {
+    if (input[key] != null && String(input[key]).trim() !== "") return String(input[key]).trim();
+  }
+  return "";
+}
+
+function normalizeCredit(value) {
+  if (!value) return "";
+  const text = String(value);
+  if (text.indexOf("800점 이상") !== -1 || text.indexOf("≥800") !== -1 || text.indexOf(">=800") !== -1) return "≥800";
+  if (text.indexOf("700") !== -1 && text.indexOf("미만") !== -1) return "<700";
+  if (text.indexOf("800점 미만") !== -1 || text.indexOf("<800") !== -1) return "<800";
+  return text;
+}
+
+function normalizeRevenue(value) {
+  if (!value) return "";
+  const text = String(value);
+  if (text.indexOf("1억 미만") !== -1 || text.indexOf("<1억") !== -1) return "<1억";
+  if (text.indexOf("1억 이상") !== -1 || text.indexOf("1억~4억") !== -1) return "1억~4억";
+  return text;
 }
