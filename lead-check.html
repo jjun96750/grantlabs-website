@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles/tokens.css" />
   <link rel="stylesheet" href="styles/site.css" />
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="config.js"></script>
   <script>emailjs.init({ publicKey: "UUfoZdh404On9fZbm" });</script>
   <style>
     :root {
@@ -100,6 +101,62 @@
       font-size: 17px;
       line-height: 1.75;
       max-width: 460px;
+    }
+
+    .quick-lead {
+      margin-top: 28px;
+      padding: 16px;
+      max-width: 520px;
+      border: 1px solid rgba(241, 223, 186, .34);
+      background: rgba(255,255,255,.1);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+    }
+
+    .quick-lead input {
+      min-width: 0;
+      height: 52px;
+      border: 1px solid rgba(255,255,255,.24);
+      background: rgba(255,255,255,.95);
+      color: var(--lead-ink);
+      border-radius: 6px;
+      padding: 0 14px;
+      font-size: 16px;
+      font-family: var(--font-sans);
+      outline: none;
+    }
+
+    .quick-lead button {
+      height: 52px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0 18px;
+      background: var(--lead-gold);
+      color: #111827;
+      font-size: 15px;
+      font-weight: 900;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .quick-lead small,
+    .quick-message {
+      grid-column: 1 / -1;
+    }
+
+    .quick-lead small {
+      color: rgba(255,255,255,.7);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .quick-message {
+      min-height: 18px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .notice {
@@ -373,6 +430,10 @@
         gap: 40px;
       }
 
+      .quick-lead {
+        grid-template-columns: 1fr;
+      }
+
       .brand-foot {
         display: none;
       }
@@ -403,6 +464,12 @@
           업종, 지역, 매출액, 신용점수 구간을 객관식으로 선택하고 전화번호만 남겨주세요.
           남겨주신 조건을 기준으로 상담 안내를 드립니다.
         </p>
+        <form class="quick-lead" id="quickLeadForm" autocomplete="on">
+          <input id="quickPhone" name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" aria-label="전화번호" />
+          <button type="submit" id="quickLeadBtn">무료 진단 받기</button>
+          <small>바쁘면 전화번호만 남겨도 됩니다. 세부 조건은 상담 때 확인합니다.</small>
+          <div class="quick-message" id="quickMessage" aria-live="polite"></div>
+        </form>
         <div class="notice">
           그랜트 랩스는 정책자금을 직접 지급하거나 승인하는 기관이 아닙니다.
           상담 내용은 참고 안내이며, 최종 승인 및 조건은 각 심사 기관 기준에 따라 달라질 수 있습니다.
@@ -535,6 +602,74 @@
     const $ = (id) => document.getElementById(id);
     const leadForm = $("leadForm");
     const body = $("stepBody");
+    const CRM_API_URL = (window.GRANTLABS_CRM_API_URL || "").trim();
+
+    function getTrackingParams() {
+      const params = new URLSearchParams(location.search);
+      return {
+        source: params.get("utm_source") || "lead-check",
+        campaign: params.get("utm_campaign") || "website_lead_check",
+      };
+    }
+
+    function buildLeadDetails(answers, tracking) {
+      return [
+        `업종: ${answers.business || "-"}`,
+        `지역: ${answers.region || "-"}`,
+        `매출액: ${answers.revenue || "-"}`,
+        `신용점수: ${answers.credit || "-"}`,
+        `이메일: ${answers.email || "-"}`,
+        `전화번호: ${answers.phone || "-"}`,
+        `유입경로: ${tracking.source}`,
+        `캠페인: ${tracking.campaign}`,
+        `페이지: ${location.href}`,
+      ].join("\n");
+    }
+
+    function buildCrmLead(answers, tracking, mode) {
+      const message = buildLeadDetails(answers, tracking);
+      return {
+        receivedAt: new Date().toISOString().slice(0, 16),
+        source: tracking.source,
+        name: mode === "quick" ? "빠른 진단 신청" : "미입력",
+        company: mode === "quick" ? "전화번호 우선 신청" : "정책자금 상담 신청",
+        phone: answers.phone || "",
+        email: answers.email || "",
+        business: answers.business || "",
+        industry: answers.business || "",
+        region: answers.region || "",
+        credit: answers.credit || "",
+        revenue: answers.revenue || "",
+        founded: "",
+        tax: "확인필요",
+        owner: "담당자 선택",
+        tmStatus: "대기중",
+        meeting: "",
+        interest: "정책자금",
+        message,
+        memo: mode === "quick" ? "전화번호만 먼저 남긴 빠른 진단 신청" : message,
+      };
+    }
+
+    async function sendLeadToCrm(lead) {
+      if (!CRM_API_URL) return;
+      const payload = { action: "createLead", ...lead };
+      const query = new URLSearchParams(payload).toString();
+      const url = `${CRM_API_URL}?${query}`;
+      try {
+        await fetch(url, { method: "GET", mode: "no-cors", keepalive: true });
+      } catch (error) {
+        await new Promise((resolve) => {
+          const img = new Image();
+          const timer = setTimeout(resolve, 1200);
+          img.onload = img.onerror = () => {
+            clearTimeout(timer);
+            resolve();
+          };
+          img.src = url;
+        });
+      }
+    }
 
     function render() {
       const step = steps[state.step];
@@ -654,41 +789,34 @@
       state.sending = true;
       render();
 
-      const params = new URLSearchParams(location.search);
-      const leadDetails = [
-        `업종: ${state.answers.business}`,
-        `지역: ${state.answers.region}`,
-        `매출액: ${state.answers.revenue}`,
-        `신용점수: ${state.answers.credit}`,
-        `이메일: ${state.answers.email}`,
-        `전화번호: ${state.answers.phone}`,
-        `유입경로: ${params.get("utm_source") || "lead-check"}`,
-        `캠페인: ${params.get("utm_campaign") || "instagram_policy_fund"}`,
-        `페이지: ${location.href}`,
-      ].join("\\n");
+      const tracking = getTrackingParams();
+      const lead = buildCrmLead(state.answers, tracking, "full");
+
+      try {
+        await sendLeadToCrm(lead);
+      } catch (error) {
+        console.warn("CRM 저장 오류:", error);
+      }
 
       try {
         await emailjs.send("service_tcj8otx", "template_8ne6kj3", {
-          company: "Instagram DB 상담 신청",
-          name: "미입력",
-          phone: state.answers.phone,
-          email: state.answers.email,
-          business: state.answers.business,
-          industry: state.answers.business,
-          region: state.answers.region,
-          revenue: state.answers.revenue,
-          credit: state.answers.credit,
-          credit_score: state.answers.credit,
-          interest: "정책자금",
-          message: leadDetails,
-          lead_details: leadDetails,
+          company: lead.company,
+          name: lead.name,
+          phone: lead.phone,
+          email: lead.email,
+          business: lead.business,
+          industry: lead.industry,
+          region: lead.region,
+          revenue: lead.revenue,
+          credit: lead.credit,
+          credit_score: lead.credit,
+          interest: lead.interest,
+          message: lead.message,
+          lead_details: lead.message,
+          __crm_saved: "true",
         });
       } catch (error) {
-        state.sending = false;
-        render();
-        alert("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
-        console.warn(error);
-        return;
+        console.warn("이메일 알림 오류:", error);
       }
 
       leadForm.classList.add("hidden");
@@ -707,6 +835,51 @@
 
     $("nextBtn").addEventListener("click", goNext);
     $("backBtn").addEventListener("click", goBack);
+    $("quickLeadForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const phone = $("quickPhone").value.trim();
+      const message = $("quickMessage");
+      const button = $("quickLeadBtn");
+      if (phone.length < 8) {
+        message.textContent = "전화번호를 입력해 주세요.";
+        $("quickPhone").focus();
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "접수 중...";
+      message.textContent = "";
+      const tracking = getTrackingParams();
+      const lead = buildCrmLead({ ...state.answers, phone }, tracking, "quick");
+
+      try {
+        await sendLeadToCrm(lead);
+        emailjs.send("service_tcj8otx", "template_8ne6kj3", {
+          company: lead.company,
+          name: lead.name,
+          phone: lead.phone,
+          email: lead.email,
+          business: lead.business,
+          industry: lead.industry,
+          region: lead.region,
+          revenue: lead.revenue,
+          credit: lead.credit,
+          credit_score: lead.credit,
+          interest: lead.interest,
+          message: lead.message,
+          lead_details: lead.message,
+          __crm_saved: "true",
+        }).catch((error) => console.warn("빠른 신청 이메일 알림 오류:", error));
+        message.textContent = "접수되었습니다. 담당자가 순차적으로 연락드립니다.";
+        $("quickPhone").value = "";
+      } catch (error) {
+        console.warn("빠른 신청 저장 오류:", error);
+        message.textContent = "접수 중 오류가 발생했습니다. 아래 객관식 폼으로 다시 신청해 주세요.";
+      } finally {
+        button.disabled = false;
+        button.textContent = "무료 진단 받기";
+      }
+    });
     render();
   </script>
 </body>
