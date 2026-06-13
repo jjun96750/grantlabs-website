@@ -1,4 +1,4 @@
-﻿window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycbx9Kl79LSbGX4S9LrDbjzKbn1nKvIMzdnAkbu6CxthrFq6GYZYtVf04w4qGzWrd8iZIjw/exec";
+window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycbx9Kl79LSbGX4S9LrDbjzKbn1nKvIMzdnAkbu6CxthrFq6GYZYtVf04w4qGzWrd8iZIjw/exec";
 
 (function () {
   const getApiUrl = () => (window.GRANTLABS_CRM_API_URL || "").trim();
@@ -23,10 +23,10 @@
     company: params.company || "",
     phone: params.phone || "",
     email: params.email || "",
-    business: params.industry || params.interest || "",
+    business: params.business || params.industry || params.interest || "",
     industry: params.industry || "",
     region: params.region || "",
-    credit: params.credit_score || "",
+    credit: params.credit || params.credit_score || "",
     revenue: params.revenue || "",
     founded: "",
     tax: "확인필요",

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>정책자금 가능 여부 간단 확인 | 그랜트 랩스 Grant Labs</title>
-  <meta name="description" content="그랜트 랩스 정책자금 가능 여부 간단 확인. 업종, 지역, 매출액, 신용점수 구간을 객관식으로 선택하고 전화번호만 남겨주세요." />
+  <meta name="description" content="그랜트 랩스 정책자금 가능 여부 간단 확인. 업종, 지역, 매출액, 신용점수 구간을 객관식으로 선택하고 연락처를 남겨주세요." />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://grantlabs.co.kr/lead-check" />
   <link rel="stylesheet" href="styles/tokens.css" />
@@ -283,6 +283,14 @@
       gap: 12px;
     }
 
+    .form-disclaimer {
+      margin: 12px 0 0;
+      color: var(--lead-muted);
+      font-size: 12px;
+      line-height: 1.55;
+      text-align: right;
+    }
+
     .btn {
       min-height: 52px;
       border: 1px solid var(--lead-line);
@@ -429,6 +437,7 @@
             <button type="button" class="btn" id="backBtn">이전</button>
             <button type="button" class="btn primary" id="nextBtn">다음</button>
           </div>
+          <p class="form-disclaimer">본 상담은 참고 안내이며, 최종 승인 및 조건은 심사 기관 기준에 따라 달라질 수 있습니다.</p>
         </form>
 
         <div id="doneView" class="done hidden">
@@ -444,12 +453,16 @@
   <script>
     const steps = [
       {
-        key: "industry",
+        key: "business",
         title: "업종을 선택해 주세요.",
         hint: "현재 사업장의 주된 업종 기준으로 선택해 주세요.",
         options: [
           { label: "제조업", note: "공장, 생산, 가공, 설비 기반" },
-          { label: "제조업 외", note: "서비스, 유통, 기타 업종" },
+          { label: "제조업 외", note: "서비스, 유통, 도소매 등" },
+          { label: "콘텐츠업", note: "콘텐츠 제작, 미디어, IP" },
+          { label: "광고대행업", note: "마케팅, 광고, 캠페인 운영" },
+          { label: "디자인", note: "브랜딩, 제품, 시각 디자인" },
+          { label: "기타", note: "위 항목 외 업종" },
         ],
       },
       {
@@ -458,7 +471,12 @@
         hint: "사업자등록증상 사업장 소재지 기준입니다.",
         options: [
           { label: "수도권", note: "서울, 경기, 인천" },
-          { label: "수도권 이외", note: "그 외 지역" },
+          { label: "경상도", note: "부산, 대구, 울산 포함" },
+          { label: "전라도", note: "광주 포함" },
+          { label: "충청도", note: "대전, 세종 포함" },
+          { label: "강원도", note: "강원권" },
+          { label: "제주도", note: "제주권" },
+          { label: "기타", note: "별도 확인 필요" },
         ],
       },
       {
@@ -467,23 +485,31 @@
         hint: "정확한 금액이 아니어도 가까운 구간을 선택해 주세요.",
         options: [
           { label: "1억 미만", note: "연 매출 기준" },
-          { label: "1억 이상", note: "연 매출 기준" },
+          { label: "1억~4억", note: "연 매출 기준" },
+          { label: "4억 이상", note: "연 매출 기준" },
         ],
       },
       {
-        key: "creditScore",
+        key: "credit",
         title: "현재 신용점수 구간을 선택해 주세요.",
         hint: "대표자 또는 사업 관련 신용 상황을 기준으로 선택해 주세요.",
         options: [
-          { label: "800점 미만", note: "대략적인 구간" },
           { label: "800점 이상", note: "대략적인 구간" },
+          { label: "800점 미만", note: "대략적인 구간" },
+          { label: "700점 미만", note: "대략적인 구간" },
         ],
+      },
+      {
+        key: "email",
+        title: "안내 받을 이메일을 입력해 주세요.",
+        hint: "상담 안내와 자료 전달에 사용할 이메일입니다.",
+        input: "email",
       },
       {
         key: "phone",
         title: "상담 안내를 받을 전화번호를 입력해 주세요.",
         hint: "전화번호는 상담 안내 및 문의 응대 목적으로만 사용됩니다.",
-        input: true,
+        input: "phone",
       },
       {
         key: "confirm",
@@ -496,10 +522,11 @@
     const state = {
       step: 0,
       answers: {
-        industry: "",
+        business: "",
         region: "",
         revenue: "",
-        creditScore: "",
+        credit: "",
+        email: "",
         phone: "",
       },
       sending: false,
@@ -541,20 +568,26 @@
       }
 
       if (step.input) {
+        const isEmail = step.input === "email";
+        const inputId = isEmail ? "emailInput" : "phoneInput";
+        const value = isEmail ? state.answers.email : state.answers.phone;
+        const placeholder = isEmail ? "name@example.com" : "010-0000-0000";
+        const inputMode = isEmail ? "email" : "tel";
+        const inputType = isEmail ? "email" : "tel";
         body.className = "";
         body.innerHTML = `
-          <input class="phone-input" id="phoneInput" inputmode="tel" name="phone" placeholder="010-0000-0000" value="${escapeHtml(state.answers.phone)}" />
+          <input class="phone-input" id="${inputId}" inputmode="${inputMode}" type="${inputType}" name="${step.key}" placeholder="${placeholder}" value="${escapeHtml(value)}" />
           <label class="agree-box">
             <input type="checkbox" id="privacyAgree" checked />
-            <span>입력하신 전화번호와 응답 내용은 상담 안내 및 문의 응대 목적으로만 사용되며, 상담 목적 달성 후 관련 법령에 따라 보관 또는 파기됩니다.</span>
+            <span>입력하신 연락처와 응답 내용은 상담 안내 및 문의 응대 목적으로만 사용되며, 상담 목적 달성 후 관련 법령에 따라 보관 또는 파기됩니다.</span>
           </label>
         `;
-        const phoneInput = $("phoneInput");
-        phoneInput.focus();
-        phoneInput.addEventListener("input", (event) => {
-          state.answers.phone = event.target.value;
+        const field = $(inputId);
+        field.focus();
+        field.addEventListener("input", (event) => {
+          state.answers[step.key] = event.target.value;
         });
-        phoneInput.addEventListener("keydown", (event) => {
+        field.addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
             event.preventDefault();
             goNext();
@@ -571,10 +604,11 @@
 
     function summaryRows() {
       return [
-        ["업종", state.answers.industry],
+        ["업종", state.answers.business],
         ["지역", state.answers.region],
         ["매출액", state.answers.revenue],
-        ["신용점수", state.answers.creditScore],
+        ["신용점수", state.answers.credit],
+        ["이메일", state.answers.email],
         ["전화번호", state.answers.phone],
       ].map(([label, value]) => `
         <div class="summary-row"><strong>${label}</strong><span>${escapeHtml(value || "-")}</span></div>
@@ -586,7 +620,10 @@
       if (step.options && !state.answers[step.key]) return false;
       if (step.input) {
         const agreed = $("privacyAgree")?.checked;
-        return agreed && state.answers.phone.trim().length >= 8;
+        const value = state.answers[step.key].trim();
+        if (!agreed) return false;
+        if (step.input === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        return value.length >= 8;
       }
       return true;
     }
@@ -619,10 +656,11 @@
 
       const params = new URLSearchParams(location.search);
       const leadDetails = [
-        `업종: ${state.answers.industry}`,
+        `업종: ${state.answers.business}`,
         `지역: ${state.answers.region}`,
         `매출액: ${state.answers.revenue}`,
-        `신용점수: ${state.answers.creditScore}`,
+        `신용점수: ${state.answers.credit}`,
+        `이메일: ${state.answers.email}`,
         `전화번호: ${state.answers.phone}`,
         `유입경로: ${params.get("utm_source") || "lead-check"}`,
         `캠페인: ${params.get("utm_campaign") || "instagram_policy_fund"}`,
@@ -634,10 +672,13 @@
           company: "Instagram DB 상담 신청",
           name: "미입력",
           phone: state.answers.phone,
-          industry: state.answers.industry,
+          email: state.answers.email,
+          business: state.answers.business,
+          industry: state.answers.business,
           region: state.answers.region,
           revenue: state.answers.revenue,
-          credit_score: state.answers.creditScore,
+          credit: state.answers.credit,
+          credit_score: state.answers.credit,
           interest: "정책자금",
           message: leadDetails,
           lead_details: leadDetails,

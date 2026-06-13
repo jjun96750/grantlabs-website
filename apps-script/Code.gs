@@ -222,17 +222,10 @@ function pick(input, keys) {
 
 function normalizeCredit(value) {
   if (!value) return "";
-  const text = String(value);
-  if (text.indexOf("800점 이상") !== -1 || text.indexOf("≥800") !== -1 || text.indexOf(">=800") !== -1) return "≥800";
-  if (text.indexOf("700") !== -1 && text.indexOf("미만") !== -1) return "<700";
-  if (text.indexOf("800점 미만") !== -1 || text.indexOf("<800") !== -1) return "<800";
-  return text;
+  return String(value).trim();
 }
 
 function normalizeRevenue(value) {
   if (!value) return "";
-  const text = String(value);
-  if (text.indexOf("1억 미만") !== -1 || text.indexOf("<1억") !== -1) return "<1억";
-  if (text.indexOf("1억 이상") !== -1 || text.indexOf("1억~4억") !== -1) return "1억~4억";
-  return text;
+  return String(value).trim();
 }
