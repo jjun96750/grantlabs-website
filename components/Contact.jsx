@@ -117,7 +117,7 @@ const Contact = () => {
                       { publicKey: "UUfoZdh404On9fZbm" }
                     );
                   } catch (e) {
-                    console.warn("이메일 발송 오류:", e); alert("발송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."); setSending(false); return;
+                    console.warn("이메일 발송 오류:", e); alert("EmailJS 오류: " + (e?.text || e?.message || JSON.stringify(e))); setSending(false); return;
                   }
                   setSending(false);
                   setSent(true);
