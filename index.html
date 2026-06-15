@@ -301,7 +301,6 @@ Object.assign(window, {
   Textarea,
   Eyebrow
 });
-
 /**
  * GrantLabs — Header (sticky top nav)
  */
@@ -504,7 +503,6 @@ Object.assign(window, {
   Header,
   Logo
 });
-
 /**
  * GrantLabs — Hero (fullscreen slider, Eugene-style)
  */
@@ -750,219 +748,137 @@ const HeroSlider = () => {
 Object.assign(window, {
   Hero: HeroSlider
 });
-
 /**
- * GrantLabs — Story / CEO Profile section
+ * GrantLabs — About / Philosophy section
  */
 
-const Story = () => {
-  const [imgError, setImgError] = React.useState(false);
-  const [mobile, setMobile] = React.useState(typeof window !== "undefined" && window.innerWidth <= 780);
-  React.useEffect(() => {
-    const handler = () => setMobile(window.innerWidth <= 780);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-  const career = [{
-    period: "2026 — 현재",
-    role: "그랜트 랩스 (Grant Labs)",
-    title: "대표"
-  }, {
-    period: "2025 — 2026",
-    role: "더베어앤컴퍼니",
-    title: "기업경영 부문장"
-  }, {
-    period: "2021 — 2024",
-    role: "부동산 투자사 및 디벨로퍼",
-    title: "본부장"
-  }, {
-    period: "2004 — 2020",
-    role: "대형그룹사",
-    title: "재무 전략 담당"
-  }];
-  const credentials = [{
-    label: "학력",
-    value: "고려대학교 정경대학 통계학과 졸업 (2004)"
-  }, {
-    label: "자격",
-    value: "투자자산운용사 · 펀드투자권유대행인"
-  }];
+const About = () => {
   return /*#__PURE__*/React.createElement("section", {
-    id: "story",
+    id: "about",
     style: {
       padding: "var(--section-y) 0",
-      borderTop: "1px solid var(--border)"
+      background: "var(--surface)",
+      borderTop: "1px solid var(--border)",
+      borderBottom: "1px solid var(--border)"
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "container"
-  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uC2A4\uD1A0\uB9AC"), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      margin: "16px 0 64px",
-      fontSize: "clamp(28px, 3.5vw, 42px)",
-      fontWeight: 600,
-      letterSpacing: "-0.03em",
-      lineHeight: 1.15
-    }
-  }, "\uB300\uD45C \uC18C\uAC1C"), /*#__PURE__*/React.createElement("div", {
-    className: "story-grid",
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "about-grid",
     style: {
       display: "grid",
-      gridTemplateColumns: mobile ? "1fr" : "320px 1fr",
-      gap: mobile ? 48 : 80,
+      gridTemplateColumns: "1fr 1.2fr",
+      gap: 80,
       alignItems: "flex-start"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      position: mobile ? "static" : "sticky",
-      top: mobile ? "auto" : 96
+      position: "sticky",
+      top: 96
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uCCA0\uD559"), /*#__PURE__*/React.createElement("h2", {
     style: {
-      borderRadius: 12,
-      overflow: "hidden",
-      background: "var(--surface)",
-      aspectRatio: "3/4",
-      maxWidth: 320,
-      border: "1px solid var(--border)"
-    }
-  }, !imgError ? /*#__PURE__*/React.createElement("img", {
-    src: "ceo.jpg",
-    alt: "\uC804\uD76C\uC9C4 \uB300\uD45C",
-    onError: () => setImgError(true),
-    style: {
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      display: "block"
-    }
-  }) : /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      background: "var(--surface)",
-      color: "var(--muted-foreground)"
-    }
-  }, /*#__PURE__*/React.createElement(Icon, {
-    name: "user",
-    size: 64
-  }))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 16,
-      borderTop: "1px solid var(--border)",
-      paddingTop: 14
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontFamily: "var(--font-heading)",
-      fontWeight: 700,
-      fontSize: 22,
-      letterSpacing: "-0.02em",
-      margin: "0 0 3px"
-    }
-  }, "\uC804\uD76C\uC9C4"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 13,
-      color: "var(--muted-foreground)",
-      margin: "0 0 14px",
-      letterSpacing: "0.01em"
-    }
-  }, "Grant Labs \uB300\uD45C\uC774\uC0AC"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      flexDirection: "column",
-      gap: 6
-    }
-  }, credentials.map(c => /*#__PURE__*/React.createElement("div", {
-    key: c.label,
-    style: {
-      background: "var(--surface)",
-      border: "1px solid var(--border)",
-      borderRadius: 10,
-      padding: "10px 14px"
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontFamily: "var(--font-mono)",
-      fontSize: 10,
+      margin: "16px 0 24px",
+      fontSize: "clamp(32px, 4vw, 44px)",
       fontWeight: 600,
-      color: "var(--muted-foreground)",
-      textTransform: "uppercase",
-      letterSpacing: "0.08em",
-      margin: "0 0 4px"
+      letterSpacing: "-0.03em",
+      lineHeight: 1.15
     }
-  }, c.label), /*#__PURE__*/React.createElement("p", {
+  }, "\uC2E4\uD589\uB825\uC73C\uB85C", /*#__PURE__*/React.createElement("br", null), "\uC99D\uBA85\uD569\uB2C8\uB2E4"), /*#__PURE__*/React.createElement("p", {
     style: {
-      fontSize: 13,
-      fontWeight: 500,
+      fontSize: 16,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.75,
       margin: 0,
-      lineHeight: 1.5,
-      letterSpacing: "-0.005em"
+      maxWidth: 380
     }
-  }, c.value)))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 17,
-      color: "var(--muted-foreground)",
-      lineHeight: 1.85,
-      margin: "0 0 64px",
-      maxWidth: 520,
-      letterSpacing: "-0.005em"
-    }
-  }, "\uB300\uD615\uADF8\uB8F9\uC0AC\uC5D0\uC11C 20\uB144\uAC04 \uC804\uB7B5 \xB7 \uC790\uC0B0\uAC1C\uBC1C \uC2E4\uBB34\uB97C \uC313\uACE0, \uC815\uCC45\uC790\uAE08 \uCEE8\uC124\uD305 \uD604\uC7A5\uC5D0\uC11C \uACBD\uD5D8\uC744 \uB354\uD588\uC2B5\uB2C8\uB2E4. \uC9C0\uAE08\uC740 \uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uB97C \uD1B5\uD574 \uAE30\uC5C5\uC758 \uC131\uC7A5 \uACFC\uC815\uC744 \uCC98\uC74C\uBD80\uD130 \uB05D\uAE4C\uC9C0 \uD568\uAED8\uD569\uB2C8\uB2E4."), /*#__PURE__*/React.createElement("div", {
+  }, "\uCEE8\uC124\uD305\uC758 \uAC00\uCE58\uB294 \uACB0\uACFC\uB85C \uB4DC\uB7EC\uB0A9\uB2C8\uB2E4.", /*#__PURE__*/React.createElement("br", null), "\uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uB294 \uBCF4\uACE0\uC11C\uAC00 \uC544\uB2CC, \uAE30\uC5C5\uC758 \uC2E4\uC9C8\uC801 \uBCC0\uD654\uB97C \uB9CC\uB4ED\uB2C8\uB2E4.")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       flexDirection: "column",
       gap: 0
     }
-  }, career.map((item, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
+  }, /*#__PURE__*/React.createElement("blockquote", {
     style: {
+      margin: 0,
+      padding: 0,
+      fontFamily: "var(--font-display)",
+      fontSize: "clamp(24px, 2.6vw, 32px)",
+      fontWeight: 400,
+      fontStyle: "italic",
+      lineHeight: 1.4,
+      color: "var(--foreground)",
+      letterSpacing: "-0.01em",
+      borderLeft: "2px solid var(--foreground)",
+      paddingLeft: 24
+    }
+  }, "\"We don't write reports. ", /*#__PURE__*/React.createElement("br", null), "We build companies.\""), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 56,
       display: "grid",
-      gridTemplateColumns: "160px 1fr",
-      gap: 32,
-      padding: "28px 0",
-      borderTop: "1px solid var(--border)",
-      alignItems: "flex-start"
+      gridTemplateColumns: "1fr 1fr",
+      gap: 0,
+      borderTop: "1px solid var(--border)"
+    },
+    className: "principles"
+  }, [{
+    k: "01",
+    t: "데이터 기반 진단",
+    d: "재무·기술·시장 데이터를 종합해 객관적인 현재 위치와 가능성을 도출합니다."
+  }, {
+    k: "02",
+    t: "맞춤형 설계",
+    d: "기업의 업종·규모·성장단계에 맞는 솔루션을 1:1로 설계합니다. 정형 보고서는 없습니다."
+  }, {
+    k: "03",
+    t: "End-to-End 실행",
+    d: "신청서 작성·서류 준비·기관 대응까지 끝까지 함께합니다. 자문에서 멈추지 않습니다."
+  }, {
+    k: "04",
+    t: "장기 파트너십",
+    d: "한 번의 프로젝트가 아닌, 기업의 성장 사이클 전체를 함께하는 파트너가 됩니다."
+  }].map((p, i) => /*#__PURE__*/React.createElement("div", {
+    key: p.k,
+    style: {
+      padding: "32px 28px 32px 0",
+      paddingLeft: i % 2 === 1 ? 28 : 0,
+      borderLeft: i % 2 === 1 ? "1px solid var(--border)" : "none",
+      borderBottom: i < 2 ? "1px solid var(--border)" : "none"
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 12.5,
-      color: "var(--muted-foreground)",
       fontFamily: "var(--font-mono)",
-      fontVariantNumeric: "tabular-nums",
-      paddingTop: 3,
-      letterSpacing: "0.02em"
+      fontSize: 12,
+      color: "var(--muted-foreground)",
+      letterSpacing: "0.04em"
     }
-  }, item.period), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+  }, p.k), /*#__PURE__*/React.createElement("h4", {
     style: {
+      margin: "10px 0 8px",
+      fontSize: 18,
       fontWeight: 600,
-      fontSize: 16,
-      margin: "0 0 5px",
       letterSpacing: "-0.02em"
     }
-  }, item.role), /*#__PURE__*/React.createElement("p", {
+  }, p.t), /*#__PURE__*/React.createElement("p", {
     style: {
-      fontSize: 13,
-      color: "var(--muted-foreground)",
       margin: 0,
-      letterSpacing: "-0.005em"
+      fontSize: 14,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.7
     }
-  }, item.title)))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      borderTop: "1px solid var(--border)"
-    }
-  }))))), /*#__PURE__*/React.createElement("style", null, `
-        @media (max-width: 780px) {
-          .story-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+  }, p.d))))))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 880px) {
+          .about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .about-grid > div:first-child { position: static !important; }
+          .principles { grid-template-columns: 1fr !important; }
+          .principles > div { padding-left: 0 !important; border-left: none !important; border-bottom: 1px solid var(--border) !important; }
+          .principles > div:last-child { border-bottom: none !important; }
         }
       `));
 };
 Object.assign(window, {
-  Story
+  About
 });
-
 /**
  * GrantLabs — Services section
  */
@@ -1168,7 +1084,6 @@ Object.assign(window, {
   Services,
   SERVICES
 });
-
 /**
  * GrantLabs — Process section
  */
@@ -1446,30 +1361,317 @@ const Process = () => {
 Object.assign(window, {
   Process
 });
-
 /**
- * GrantLabs — Contact / CTA + Footer
+ * GrantLabs — Story / CEO Profile section
  */
 
+const Story = () => {
+  const [imgError, setImgError] = React.useState(false);
+  const [mobile, setMobile] = React.useState(typeof window !== "undefined" && window.innerWidth <= 780);
+  React.useEffect(() => {
+    const handler = () => setMobile(window.innerWidth <= 780);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  const career = [{
+    period: "2026 — 현재",
+    role: "그랜트 랩스 (Grant Labs)",
+    title: "대표"
+  }, {
+    period: "2025 — 2026",
+    role: "더베어앤컴퍼니",
+    title: "기업경영 부문장"
+  }, {
+    period: "2021 — 2024",
+    role: "부동산 투자사 및 디벨로퍼",
+    title: "본부장"
+  }, {
+    period: "2004 — 2020",
+    role: "대형그룹사",
+    title: "재무 전략 담당"
+  }];
+  const credentials = [{
+    label: "학력",
+    value: "고려대학교 정경대학 통계학과 졸업 (2004)"
+  }, {
+    label: "자격",
+    value: "투자자산운용사 · 펀드투자권유대행인"
+  }];
+  return /*#__PURE__*/React.createElement("section", {
+    id: "story",
+    style: {
+      padding: "var(--section-y) 0",
+      borderTop: "1px solid var(--border)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uC2A4\uD1A0\uB9AC"), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "16px 0 64px",
+      fontSize: "clamp(28px, 3.5vw, 42px)",
+      fontWeight: 600,
+      letterSpacing: "-0.03em",
+      lineHeight: 1.15
+    }
+  }, "\uB300\uD45C \uC18C\uAC1C"), /*#__PURE__*/React.createElement("div", {
+    className: "story-grid",
+    style: {
+      display: "grid",
+      gridTemplateColumns: mobile ? "1fr" : "320px 1fr",
+      gap: mobile ? 48 : 80,
+      alignItems: "flex-start"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: mobile ? "static" : "sticky",
+      top: mobile ? "auto" : 96
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderRadius: 12,
+      overflow: "hidden",
+      background: "var(--surface)",
+      aspectRatio: "3/4",
+      maxWidth: 320,
+      border: "1px solid var(--border)"
+    }
+  }, !imgError ? /*#__PURE__*/React.createElement("img", {
+    src: "ceo.jpg",
+    alt: "\uC804\uD76C\uC9C4 \uB300\uD45C",
+    onError: () => setImgError(true),
+    style: {
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      display: "block"
+    }
+  }) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "var(--surface)",
+      color: "var(--muted-foreground)"
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "user",
+    size: 64
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 16,
+      borderTop: "1px solid var(--border)",
+      paddingTop: 14
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontFamily: "var(--font-heading)",
+      fontWeight: 700,
+      fontSize: 22,
+      letterSpacing: "-0.02em",
+      margin: "0 0 3px"
+    }
+  }, "\uC804\uD76C\uC9C4"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 13,
+      color: "var(--muted-foreground)",
+      margin: "0 0 14px",
+      letterSpacing: "0.01em"
+    }
+  }, "Grant Labs \uB300\uD45C\uC774\uC0AC"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 6
+    }
+  }, credentials.map(c => /*#__PURE__*/React.createElement("div", {
+    key: c.label,
+    style: {
+      background: "var(--surface)",
+      border: "1px solid var(--border)",
+      borderRadius: 10,
+      padding: "10px 14px"
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontFamily: "var(--font-mono)",
+      fontSize: 10,
+      fontWeight: 600,
+      color: "var(--muted-foreground)",
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      margin: "0 0 4px"
+    }
+  }, c.label), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 13,
+      fontWeight: 500,
+      margin: 0,
+      lineHeight: 1.5,
+      letterSpacing: "-0.005em"
+    }
+  }, c.value)))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 17,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.85,
+      margin: "0 0 64px",
+      maxWidth: 520,
+      letterSpacing: "-0.005em"
+    }
+  }, "\uB300\uD615\uADF8\uB8F9\uC0AC\uC5D0\uC11C 20\uB144\uAC04 \uC804\uB7B5 \xB7 \uC790\uC0B0\uAC1C\uBC1C \uC2E4\uBB34\uB97C \uC313\uACE0, \uC815\uCC45\uC790\uAE08 \uCEE8\uC124\uD305 \uD604\uC7A5\uC5D0\uC11C \uACBD\uD5D8\uC744 \uB354\uD588\uC2B5\uB2C8\uB2E4. \uC9C0\uAE08\uC740 \uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uB97C \uD1B5\uD574 \uAE30\uC5C5\uC758 \uC131\uC7A5 \uACFC\uC815\uC744 \uCC98\uC74C\uBD80\uD130 \uB05D\uAE4C\uC9C0 \uD568\uAED8\uD569\uB2C8\uB2E4."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 0
+    }
+  }, career.map((item, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: "grid",
+      gridTemplateColumns: "160px 1fr",
+      gap: 32,
+      padding: "28px 0",
+      borderTop: "1px solid var(--border)",
+      alignItems: "flex-start"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: "var(--muted-foreground)",
+      fontFamily: "var(--font-mono)",
+      fontVariantNumeric: "tabular-nums",
+      paddingTop: 3,
+      letterSpacing: "0.02em"
+    }
+  }, item.period), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontWeight: 600,
+      fontSize: 16,
+      margin: "0 0 5px",
+      letterSpacing: "-0.02em"
+    }
+  }, item.role), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 13,
+      color: "var(--muted-foreground)",
+      margin: 0,
+      letterSpacing: "-0.005em"
+    }
+  }, item.title)))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderTop: "1px solid var(--border)"
+    }
+  }))))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 780px) {
+          .story-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+        }
+      `));
+};
+Object.assign(window, {
+  Story
+});
+/**
+ * GrantLabs Contact / CTA + Footer
+ */
+
+const BUSINESS_OPTIONS = ["제조업", "제조업 외", "콘텐츠업", "광고대행업", "디자인", "기타"];
+const REGION_OPTIONS = ["수도권", "경상도", "전라도", "충청도", "강원도", "제주도", "기타"];
+const REVENUE_OPTIONS = ["1억 미만", "1억~4억", "4억 이상"];
+const CREDIT_OPTIONS = ["800점 이상", "800점 미만", "700점 미만"];
 const Contact = () => {
   const [form, setForm] = React.useState({
     company: "",
     name: "",
     phone: "",
+    email: "",
+    business: "",
+    region: "",
+    revenue: "",
+    credit: "",
     interest: "정책자금",
     message: ""
   });
   const [sent, setSent] = React.useState(false);
   const [sending, setSending] = React.useState(false);
-  const successRef = React.useRef(null);
-  React.useEffect(() => {
-    if (sent && successRef.current) {
-      successRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
+  const updateForm = (key, value) => setForm(prev => ({
+    ...prev,
+    [key]: value
+  }));
+  const crmApiUrl = (window.GRANTLABS_CRM_API_URL || "").trim();
+  const leadDetails = [`업종: ${form.business || "미선택"}`, `지역: ${form.region || "미선택"}`, `매출액: ${form.revenue || "미선택"}`, `신용점수: ${form.credit || "미선택"}`, `이메일: ${form.email || "미입력"}`, `관심 서비스: ${form.interest || "미선택"}`, `회사명: ${form.company || "미입력"}`, `담당자명: ${form.name || "미입력"}`, `전화번호: ${form.phone || "미입력"}`, `추가 문의: ${form.message || "없음"}`].join("\n");
+  const submitLeadToCrm = async () => {
+    if (!crmApiUrl) return {
+      skipped: true
+    };
+    const lead = {
+      receivedAt: new Date().toISOString().slice(0, 16),
+      source: "홈페이지",
+      name: form.name,
+      company: form.company,
+      phone: form.phone,
+      email: form.email,
+      business: form.business,
+      industry: form.business,
+      region: form.region,
+      credit: form.credit,
+      revenue: form.revenue,
+      founded: "",
+      tax: "확인필요",
+      owner: "담당자 선택",
+      tmStatus: "대기중",
+      meeting: "",
+      interest: form.interest,
+      message: leadDetails,
+      memo: form.message
+    };
+    const response = await fetch(crmApiUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "createLead",
+        lead
+      })
+    });
+    const result = await response.json();
+    if (!result.ok) throw new Error(result.error || "CRM 저장 실패");
+    return result;
+  };
+  const submitForm = async () => {
+    if (sending) return;
+    if (!form.business || !form.region || !form.revenue || !form.credit || !form.phone) {
+      alert("업종, 지역, 매출액, 신용점수, 전화번호를 모두 입력해주세요.");
+      return;
     }
-  }, [sent]);
+    setSending(true);
+    try {
+      await submitLeadToCrm();
+      await emailjs.send("service_tcj8otx", "template_8ne6kj3", {
+        company: form.company,
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        industry: form.business,
+        business: form.business,
+        region: form.region,
+        revenue: form.revenue,
+        credit_score: form.credit,
+        credit: form.credit,
+        interest: form.interest,
+        message: leadDetails,
+        lead_details: leadDetails,
+        __crm_saved: "true"
+      }, {
+        publicKey: "UUfoZdh404On9fZbm"
+      });
+      setSent(true);
+    } catch (e) {
+      console.warn("상담 신청 오류:", e);
+      alert("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요. " + (e?.text || e?.message || JSON.stringify(e)));
+    } finally {
+      setSending(false);
+    }
+  };
   return /*#__PURE__*/React.createElement("section", {
     id: "contact",
     style: {
@@ -1486,11 +1688,7 @@ const Contact = () => {
       gap: 80,
       alignItems: "flex-start"
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      order: 2
-    }
-  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uBB38\uC758"), /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Eyebrow, null, "\uBB34\uB8CC \uC9C4\uB2E8"), /*#__PURE__*/React.createElement("h2", {
     style: {
       margin: "16px 0 24px",
       fontSize: "clamp(36px, 4.6vw, 52px)",
@@ -1498,7 +1696,7 @@ const Contact = () => {
       letterSpacing: "-0.03em",
       lineHeight: 1.12
     }
-  }, "\uC9C0\uAE08,", /*#__PURE__*/React.createElement("br", null), "\uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uC640 \uC2DC\uC791\uD558\uC138\uC694."), /*#__PURE__*/React.createElement("p", {
+  }, "30\uCD08 \uC785\uB825\uC73C\uB85C", /*#__PURE__*/React.createElement("br", null), "\uAC00\uB2A5 \uC5EC\uBD80\uB97C \uBA3C\uC800 \uD655\uC778\uD558\uC138\uC694"), /*#__PURE__*/React.createElement("p", {
     style: {
       margin: 0,
       fontSize: 16,
@@ -1506,7 +1704,7 @@ const Contact = () => {
       lineHeight: 1.75,
       maxWidth: 460
     }
-  }, "\uC0C1\uB2F4\uC744 \uC2E0\uCCAD\uD574 \uC8FC\uC2DC\uBA74 \uC804\uB2F4 \uCEE8\uC124\uD134\uD2B8\uAC00 \uC9C1\uC811 \uC5F0\uB77D\uB4DC\uB9BD\uB2C8\uB2E4.", /*#__PURE__*/React.createElement("br", null), "\uBAA8\uB4E0 \uC0C1\uB2F4\uC740 1:1 \uC0C1\uB2F4\uC744 \uD1B5\uD574 \uC9C4\uD589\uB429\uB2C8\uB2E4."), /*#__PURE__*/React.createElement("div", {
+  }, "\uC5C5\uC885, \uC9C0\uC5ED, \uB9E4\uCD9C, \uC2E0\uC6A9\uC810\uC218\uC640 \uC5F0\uB77D\uCC98\uB97C \uB0A8\uACA8\uC8FC\uC2DC\uBA74", /*#__PURE__*/React.createElement("br", null), "Grant Labs\uAC00 \uD604\uC7AC \uC870\uAC74 \uAE30\uC900\uC73C\uB85C \uC0C1\uB2F4 \uBC29\uD5A5\uC744 \uC548\uB0B4\uB4DC\uB9BD\uB2C8\uB2E4."), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 48,
       display: "flex",
@@ -1524,11 +1722,11 @@ const Contact = () => {
   }, {
     i: "map-pin",
     l: "오피스",
-    v: "경기도 파주시 초롱꽃로 109, 406호 9057 (동패동, 팜스타워)"
+    v: "경기도 파주시 초롱꽃로 109, 406호 (동패동, 팜스타워)"
   }, {
     i: "clock",
     l: "운영 시간",
-    v: "평일 09:00 – 18:00"
+    v: "평일 09:00 - 18:00"
   }].map(c => /*#__PURE__*/React.createElement("div", {
     key: c.l,
     style: {
@@ -1538,15 +1736,20 @@ const Contact = () => {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 6,
-      height: 6,
-      borderRadius: "50%",
-      background: "var(--muted-foreground)",
-      flexShrink: 0,
-      marginTop: 8,
-      opacity: 0.5
+      width: 36,
+      height: 36,
+      borderRadius: 8,
+      border: "1px solid var(--border)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "var(--muted-foreground)",
+      flexShrink: 0
     }
-  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: c.i,
+    size: 15
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
       color: "var(--muted-foreground)",
@@ -1564,96 +1767,106 @@ const Contact = () => {
   }, c.v)))))), /*#__PURE__*/React.createElement(Card, {
     style: {
       padding: 36,
-      gap: 18,
-      order: 1
+      gap: 18
     }
   }, sent ? /*#__PURE__*/React.createElement("div", {
-    ref: successRef,
     style: {
-      padding: "60px 20px",
+      padding: "60px 0",
       textAlign: "center",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      gap: 16
+      gap: 12
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 64,
-      height: 64,
+      width: 56,
+      height: 56,
       borderRadius: 99,
-      background: "oklch(0.62 0.18 145 / 0.12)",
-      border: "2px solid oklch(0.62 0.18 145)",
+      background: "var(--secondary)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "check",
-    size: 28,
-    style: {
-      color: "oklch(0.62 0.18 145)"
-    }
+    size: 24
   })), /*#__PURE__*/React.createElement("h3", {
     style: {
-      margin: "4px 0 0",
+      margin: "8px 0 4px",
       fontSize: 22,
       fontWeight: 600,
       letterSpacing: "-0.02em"
     }
-  }, "\uC0C1\uB2F4\uC2E0\uCCAD \uC644\uB8CC\uB418\uC5C8\uC2B5\uB2C8\uB2E4"), /*#__PURE__*/React.createElement("p", {
+  }, "\uBB34\uB8CC \uC9C4\uB2E8 \uC2E0\uCCAD\uC774 \uC811\uC218\uB418\uC5C8\uC2B5\uB2C8\uB2E4"), /*#__PURE__*/React.createElement("p", {
     style: {
       margin: 0,
-      fontSize: 15,
-      color: "var(--muted-foreground)",
-      lineHeight: 1.7
+      fontSize: 14,
+      color: "var(--muted-foreground)"
     }
-  }, "\uC21C\uCC28\uC801\uC73C\uB85C \uC5F0\uB77D\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4.")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+  }, "\uB0A8\uACA8\uC8FC\uC2E0 \uC870\uAC74\uC744 \uD655\uC778\uD55C \uB4A4 \uBE60\uB974\uAC8C \uC5F0\uB77D\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4.")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     style: {
       margin: "0 0 4px",
       fontSize: 20,
       fontWeight: 600,
       letterSpacing: "-0.02em"
     }
-  }, "1:1 \uBB34\uB8CC\uC0C1\uB2F4 \uC2E0\uCCAD"), /*#__PURE__*/React.createElement("p", {
+  }, "\uC815\uCC45\uC790\uAE08 \uAC00\uB2A5 \uC5EC\uBD80 \uBB34\uB8CC \uC9C4\uB2E8"), /*#__PURE__*/React.createElement("p", {
     style: {
       margin: 0,
       fontSize: 13,
       color: "var(--muted-foreground)"
     }
-  }, "\uC544\uB798 \uC815\uBCF4\uB97C \uB0A8\uACA8\uC8FC\uC2DC\uBA74 \uBE60\uB974\uAC8C \uC5F0\uB77D\uB4DC\uB9BD\uB2C8\uB2E4.")), /*#__PURE__*/React.createElement("div", {
+  }, "\uAC1D\uAD00\uC2DD\uC73C\uB85C \uBE60\uB974\uAC8C \uC120\uD0DD\uD558\uACE0 \uC5F0\uB77D\uCC98\uB97C \uB0A8\uACA8\uC8FC\uC138\uC694.")), /*#__PURE__*/React.createElement(OptionGroup, {
+    label: "\uC5C5\uC885",
+    value: form.business,
+    options: BUSINESS_OPTIONS,
+    onChange: value => updateForm("business", value)
+  }), /*#__PURE__*/React.createElement(OptionGroup, {
+    label: "\uC9C0\uC5ED",
+    value: form.region,
+    options: REGION_OPTIONS,
+    onChange: value => updateForm("region", value)
+  }), /*#__PURE__*/React.createElement(OptionGroup, {
+    label: "\uB9E4\uCD9C\uC561",
+    value: form.revenue,
+    options: REVENUE_OPTIONS,
+    onChange: value => updateForm("revenue", value)
+  }), /*#__PURE__*/React.createElement(OptionGroup, {
+    label: "\uC2E0\uC6A9\uC810\uC218",
+    value: form.credit,
+    options: CREDIT_OPTIONS,
+    onChange: value => updateForm("credit", value)
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       gap: 12
     }
   }, /*#__PURE__*/React.createElement(Field, {
-    label: "\uD68C\uC0AC\uBA85"
+    label: "\uD68C\uC0AC\uBA85 (\uC120\uD0DD)"
   }, /*#__PURE__*/React.createElement(Input, {
-    placeholder: "\u321C\uADF8\uB79C\uD2B8 \uB7A9\uC2A4",
+    placeholder: "\u321C\uADF8\uB79C\uD2B8\uB7A9\uC2A4",
     value: form.company,
-    onChange: e => setForm({
-      ...form,
-      company: e.target.value
-    })
+    onChange: e => updateForm("company", e.target.value)
   })), /*#__PURE__*/React.createElement(Field, {
-    label: "\uB2F4\uB2F9\uC790\uBA85"
+    label: "\uB2F4\uB2F9\uC790\uBA85 (\uC120\uD0DD)"
   }, /*#__PURE__*/React.createElement(Input, {
     placeholder: "\uD64D\uAE38\uB3D9",
     value: form.name,
-    onChange: e => setForm({
-      ...form,
-      name: e.target.value
-    })
+    onChange: e => updateForm("name", e.target.value)
   }))), /*#__PURE__*/React.createElement(Field, {
-    label: "\uC5F0\uB77D\uCC98"
+    label: "\uC804\uD654\uBC88\uD638"
   }, /*#__PURE__*/React.createElement(Input, {
     placeholder: "010-0000-0000",
     value: form.phone,
-    onChange: e => setForm({
-      ...form,
-      phone: e.target.value
-    })
+    onChange: e => updateForm("phone", e.target.value)
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "\uC774\uBA54\uC77C"
+  }, /*#__PURE__*/React.createElement(Input, {
+    placeholder: "name@example.com",
+    value: form.email,
+    onChange: e => updateForm("email", e.target.value)
   })), /*#__PURE__*/React.createElement(Field, {
     label: "\uAD00\uC2EC \uC11C\uBE44\uC2A4"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1665,10 +1878,7 @@ const Contact = () => {
   }, ["정책자금", "기업인증", "특허/연구소", "법인설립", "경영지원", "전체 상담"].map(opt => /*#__PURE__*/React.createElement("button", {
     key: opt,
     type: "button",
-    onClick: () => setForm({
-      ...form,
-      interest: opt
-    }),
+    onClick: () => updateForm("interest", opt),
     style: {
       padding: "8px 14px",
       borderRadius: 8,
@@ -1686,10 +1896,7 @@ const Contact = () => {
   }, /*#__PURE__*/React.createElement(Textarea, {
     placeholder: "\uD68C\uC0AC \uD604\uD669 \uB610\uB294 \uAD81\uAE08\uD55C \uC810\uC744 \uC790\uC720\uB86D\uAC8C \uC801\uC5B4\uC8FC\uC138\uC694.",
     value: form.message,
-    onChange: e => setForm({
-      ...form,
-      message: e.target.value
-    }),
+    onChange: e => updateForm("message", e.target.value),
     style: {
       minHeight: 100
     }
@@ -1700,31 +1907,8 @@ const Contact = () => {
       opacity: sending ? 0.6 : 1
     },
     iconRight: sending ? null : "arrow-right",
-    onClick: async () => {
-      if (sending) return;
-      if (!form.name || !form.phone) {
-        alert("담당자명과 연락처를 입력해주세요.");
-        return;
-      }
-      setSending(true);
-      try {
-        await emailjs.send("service_tcj8otx", "template_8ne6kj3", {
-          company: form.company,
-          name: form.name,
-          phone: form.phone,
-          interest: form.interest,
-          message: form.message
-        });
-      } catch (e) {
-        console.warn("이메일 발송 오류:", e);
-        alert("발송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-        setSending(false);
-        return;
-      }
-      setSending(false);
-      setSent(true);
-    }
-  }, sending ? "전송 중..." : "1:1 무료상담 신청하기"), /*#__PURE__*/React.createElement("p", {
+    onClick: submitForm
+  }, sending ? "전송 중..." : "무료 진단 신청하기"), /*#__PURE__*/React.createElement("p", {
     style: {
       margin: 0,
       fontSize: 11.5,
@@ -1732,10 +1916,8 @@ const Contact = () => {
       textAlign: "center",
       lineHeight: 1.6
     }
-  }, "\uC81C\uCD9C\uD558\uC2DC\uBA74 \uAC1C\uC778\uC815\uBCF4 \uCC98\uB9AC\uBC29\uCE68\uC5D0 \uB3D9\uC758\uD558\uB294 \uAC83\uC73C\uB85C \uAC04\uC8FC\uB429\uB2C8\uB2E4."))))), /*#__PURE__*/React.createElement("style", null, `
-        @media (max-width: 880px) { .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .contact-grid > *:first-child { order: 2 !important; }
-          .contact-grid > *:last-child { order: 1 !important; } }
+  }, "\uBCF8 \uC0C1\uB2F4\uC740 \uCC38\uACE0 \uC548\uB0B4\uC774\uBA70, \uCD5C\uC885 \uC2B9\uC778 \uBC0F \uC870\uAC74\uC740 \uC2EC\uC0AC \uAE30\uAD00 \uAE30\uC900\uC5D0 \uB530\uB77C \uB2EC\uB77C\uC9C8 \uC218 \uC788\uC2B5\uB2C8\uB2E4."))))), /*#__PURE__*/React.createElement("style", null, `
+        @media (max-width: 880px) { .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; } }
       `));
 };
 const Field = ({
@@ -1755,6 +1937,36 @@ const Field = ({
     letterSpacing: "-0.005em"
   }
 }, label), children);
+const OptionGroup = ({
+  label,
+  options,
+  value,
+  onChange
+}) => /*#__PURE__*/React.createElement(Field, {
+  label: label
+}, /*#__PURE__*/React.createElement("select", {
+  value: value,
+  onChange: event => onChange(event.target.value),
+  style: {
+    minHeight: 46,
+    padding: "10px 12px",
+    borderRadius: 8,
+    border: "1px solid var(--border)",
+    background: "var(--background)",
+    color: "var(--foreground)",
+    boxShadow: "var(--shadow-xs)",
+    fontSize: 14,
+    fontWeight: 600,
+    cursor: "pointer",
+    fontFamily: "var(--font-sans)",
+    outline: "none"
+  }
+}, /*#__PURE__*/React.createElement("option", {
+  value: ""
+}, "\uC120\uD0DD\uD574\uC8FC\uC138\uC694"), options.map(opt => /*#__PURE__*/React.createElement("option", {
+  key: opt,
+  value: opt
+}, opt))));
 const Footer = () => /*#__PURE__*/React.createElement("footer", {
   style: {
     borderTop: "1px solid var(--border)",
@@ -1832,7 +2044,7 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
     color: "var(--muted-foreground)",
     lineHeight: 1.7
   }
-}, "\xA9 2026 \uADF8\uB79C\uD2B8 \uB7A9\uC2A4 (Grant Labs)  \xB7  \uB300\uD45C \uC804\uD76C\uC9C4  \xB7  \uC0AC\uC5C5\uC790\uB4F1\uB85D\uBC88\uD638 132-29-15723"), /*#__PURE__*/React.createElement("div", {
+}, "\xA9 2026 \uADF8\uB79C\uD2B8 \uB7A9\uC2A4 (Grant Labs) \xB7 \uB300\uD45C \uC804\uD76C\uC9C4 \xB7 \uC0AC\uC5C5\uC790\uB4F1\uB85D\uBC88\uD638 132-29-15723"), /*#__PURE__*/React.createElement("div", {
   style: {
     display: "flex",
     gap: 20
@@ -1859,141 +2071,9 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
 Object.assign(window, {
   Contact,
   Footer,
-  Field
+  Field,
+  OptionGroup
 });
-
-/**
- * GrantLabs — About / Philosophy section
- */
-
-const About = () => {
-  return /*#__PURE__*/React.createElement("section", {
-    id: "about",
-    style: {
-      padding: "var(--section-y) 0",
-      background: "var(--surface)",
-      borderTop: "1px solid var(--border)",
-      borderBottom: "1px solid var(--border)"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "about-grid",
-    style: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1.2fr",
-      gap: 80,
-      alignItems: "flex-start"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: "sticky",
-      top: 96
-    }
-  }, /*#__PURE__*/React.createElement(Eyebrow, null, "\uCCA0\uD559"), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      margin: "16px 0 24px",
-      fontSize: "clamp(32px, 4vw, 44px)",
-      fontWeight: 600,
-      letterSpacing: "-0.03em",
-      lineHeight: 1.15
-    }
-  }, "\uC2E4\uD589\uB825\uC73C\uB85C", /*#__PURE__*/React.createElement("br", null), "\uC99D\uBA85\uD569\uB2C8\uB2E4"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 16,
-      color: "var(--muted-foreground)",
-      lineHeight: 1.75,
-      margin: 0,
-      maxWidth: 380
-    }
-  }, "\uCEE8\uC124\uD305\uC758 \uAC00\uCE58\uB294 \uACB0\uACFC\uB85C \uB4DC\uB7EC\uB0A9\uB2C8\uB2E4.", /*#__PURE__*/React.createElement("br", null), "\uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uB294 \uBCF4\uACE0\uC11C\uAC00 \uC544\uB2CC, \uAE30\uC5C5\uC758 \uC2E4\uC9C8\uC801 \uBCC0\uD654\uB97C \uB9CC\uB4ED\uB2C8\uB2E4.")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      flexDirection: "column",
-      gap: 0
-    }
-  }, /*#__PURE__*/React.createElement("blockquote", {
-    style: {
-      margin: 0,
-      padding: 0,
-      fontFamily: "var(--font-display)",
-      fontSize: "clamp(24px, 2.6vw, 32px)",
-      fontWeight: 400,
-      fontStyle: "italic",
-      lineHeight: 1.4,
-      color: "var(--foreground)",
-      letterSpacing: "-0.01em",
-      borderLeft: "2px solid var(--foreground)",
-      paddingLeft: 24
-    }
-  }, "\"We don't write reports. ", /*#__PURE__*/React.createElement("br", null), "We build companies.\""), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 56,
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      gap: 0,
-      borderTop: "1px solid var(--border)"
-    },
-    className: "principles"
-  }, [{
-    k: "01",
-    t: "데이터 기반 진단",
-    d: "재무·기술·시장 데이터를 종합해 객관적인 현재 위치와 가능성을 도출합니다."
-  }, {
-    k: "02",
-    t: "맞춤형 설계",
-    d: "기업의 업종·규모·성장단계에 맞는 솔루션을 1:1로 설계합니다. 정형 보고서는 없습니다."
-  }, {
-    k: "03",
-    t: "End-to-End 실행",
-    d: "신청서 작성·서류 준비·기관 대응까지 끝까지 함께합니다. 자문에서 멈추지 않습니다."
-  }, {
-    k: "04",
-    t: "장기 파트너십",
-    d: "한 번의 프로젝트가 아닌, 기업의 성장 사이클 전체를 함께하는 파트너가 됩니다."
-  }].map((p, i) => /*#__PURE__*/React.createElement("div", {
-    key: p.k,
-    style: {
-      padding: "32px 28px 32px 0",
-      paddingLeft: i % 2 === 1 ? 28 : 0,
-      borderLeft: i % 2 === 1 ? "1px solid var(--border)" : "none",
-      borderBottom: i < 2 ? "1px solid var(--border)" : "none"
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "var(--font-mono)",
-      fontSize: 12,
-      color: "var(--muted-foreground)",
-      letterSpacing: "0.04em"
-    }
-  }, p.k), /*#__PURE__*/React.createElement("h4", {
-    style: {
-      margin: "10px 0 8px",
-      fontSize: 18,
-      fontWeight: 600,
-      letterSpacing: "-0.02em"
-    }
-  }, p.t), /*#__PURE__*/React.createElement("p", {
-    style: {
-      margin: 0,
-      fontSize: 14,
-      color: "var(--muted-foreground)",
-      lineHeight: 1.7
-    }
-  }, p.d))))))), /*#__PURE__*/React.createElement("style", null, `
-        @media (max-width: 880px) {
-          .about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .about-grid > div:first-child { position: static !important; }
-          .principles { grid-template-columns: 1fr !important; }
-          .principles > div { padding-left: 0 !important; border-left: none !important; border-bottom: 1px solid var(--border) !important; }
-          .principles > div:last-child { border-bottom: none !important; }
-        }
-      `));
-};
-Object.assign(window, {
-  About
-});
-
 
 </script>
 <script>

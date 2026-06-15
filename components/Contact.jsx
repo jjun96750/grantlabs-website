@@ -99,7 +99,8 @@ const Contact = () => {
           message: leadDetails,
           lead_details: leadDetails,
           __crm_saved: "true",
-        }
+        },
+        { publicKey: "UUfoZdh404On9fZbm" }
       );
       setSent(true);
     } catch (e) {
@@ -128,7 +129,7 @@ const Contact = () => {
               {[
                 { i: "phone", l: "대표 전화", v: "010-5963-7624" },
                 { i: "mail", l: "이메일", v: "jjun96750@gmail.com" },
-                { i: "map-pin", l: "오피스", v: "서울특별시 강남구 역삼로 512, 5층 871호 (대치동, 인테크빌딩)" },
+                { i: "map-pin", l: "오피스", v: "경기도 파주시 초롱꽃로 109, 406호 (동패동, 팜스타워)" },
                 { i: "clock", l: "운영 시간", v: "평일 09:00 - 18:00" },
               ].map((c) => (
                 <div key={c.l} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
@@ -266,7 +267,7 @@ const Footer = () => (
         {[
           { t: "서비스", items: ["정책자금", "기업인증", "특허/연구소", "법인설립", "경영지원"] },
           { t: "회사", items: ["철학", "스토리", "프로세스"] },
-          { t: "문의", items: ["jjun96750@gmail.com", "강남구 역삼로 512, 5층"] },
+          { t: "문의", items: ["jjun96750@gmail.com", "파주시 초롱꽃로 109, 406호"] },
         ].map((col) => (
           <div key={col.t}>
             <div style={{ fontSize: 12, fontWeight: 600, fontFamily: "var(--font-mono)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 16 }}>{col.t}</div>
@@ -281,7 +282,7 @@ const Footer = () => (
 
       <div style={{ marginTop: 64, paddingTop: 24, borderTop: "1px solid var(--border)", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
         <span style={{ fontSize: 12, color: "var(--muted-foreground)", lineHeight: 1.7 }}>
-          © 2026 그랜트 랩스 (Grant Labs) · 대표 전희진 · 사업자등록번호 203-15-67263
+          © 2026 그랜트 랩스 (Grant Labs) · 대표 전희진 · 사업자등록번호 132-29-15723
         </span>
         <div style={{ display: "flex", gap: 20 }}>
           <a href="#" style={{ fontSize: 12, color: "var(--muted-foreground)", textDecoration: "none", whiteSpace: "nowrap" }}>이용약관</a>
