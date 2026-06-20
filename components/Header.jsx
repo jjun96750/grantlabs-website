@@ -70,15 +70,16 @@ const Header = ({ theme, onToggleTheme }) => {
   );
 };
 
-const Logo = ({ theme }) => {
-  const src = theme === "dark" ? "logo-white.svg" : "logo.svg";
-  return (
-    <img
-      src={src}
-      alt="Grant Labs"
-      style={{ height: 36, width: "auto", display: "block" }}
-    />
-  );
-};
-
-Object.assign(window, { Header, Logo });
+const Logo = ({ theme }) => (
+  <span style={{
+    fontFamily: "'Outfit', 'Helvetica Neue', Arial, sans-serif",
+    fontWeight: 800,
+    fontSize: 26,
+    letterSpacing: "-0.03em",
+    color: theme === "dark" ? "#ffffff" : "#0f0f0f",
+    lineHeight: 1,
+    userSelect: "none",
+  }}>
+    Grant Labs
+  </span>
+);
