@@ -71,37 +71,13 @@ const Header = ({ theme, onToggleTheme }) => {
 };
 
 const Logo = ({ theme }) => {
-  const [imgError, setImgError] = React.useState(false);
-
-  if (!imgError && theme !== "dark") {
-    return (
-      <img
-        src="logo.png"
-        alt="Grant Labs"
-        onError={() => setImgError(true)}
-        style={{ height: 48, width: "auto", display: "block", mixBlendMode: "multiply" }}
-      />
-    );
-  }
-
+  const src = theme === "dark" ? "logo-white.svg" : "logo.svg";
   return (
-    <div style={{
-      display: "inline-flex", flexDirection: "column", alignItems: "center",
-      gap: 0, color: "var(--foreground)", lineHeight: 1, userSelect: "none",
-      minWidth: 196,
-    }}>
-      <div style={{ width: "100%", height: "0.75px", background: "currentColor", opacity: 0.28, marginBottom: 5 }} />
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: 7, letterSpacing: "0.24em", color: "var(--muted-foreground)", textTransform: "uppercase" }}>
-        Strategy · Funding · Growth
-      </span>
-      <span style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 22, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", lineHeight: 1.1, marginTop: 3, color: "var(--foreground)" }}>
-        Grant Labs
-      </span>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: 6, letterSpacing: "0.2em", color: "var(--muted-foreground)", textTransform: "uppercase", marginTop: 4 }}>
-        Business Growth &amp; Funding Partner
-      </span>
-      <div style={{ width: "100%", height: "0.75px", background: "currentColor", opacity: 0.28, marginTop: 5 }} />
-    </div>
+    <img
+      src={src}
+      alt="Grant Labs"
+      style={{ height: 36, width: "auto", display: "block" }}
+    />
   );
 };
 
