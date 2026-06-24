@@ -2,17 +2,55 @@
  * GrantLabs — Contact / CTA + Footer
  */
 
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxs0y4YXEDEUcJy8ebrpl9LIc4HiJ3j8Y7Nk3f1fTksQq44t4wC4ED5qwV7l6rkmgP8/exec";
+
+function resolveSource(utmSource, utmMedium) {
+  const s = (utmSource || "").toLowerCase();
+  const m = (utmMedium || "").toLowerCase();
+  if (s === "meta" || s === "facebook") return "Meta 광고";
+  if (s === "instagram" && m === "reels") return "릴스";
+  if (s === "instagram") return "인스타그램";
+  if (s === "naver" && m === "cpc") return "네이버 검색광고";
+  if (s === "naver" && m === "blog") return "네이버 블로그";
+  if (s === "naver") return "네이버";
+  if (s === "tiktok") return "틱톡";
+  if (s === "youtube") return "유튜브";
+  if (s) return utmSource;
+  return "홈페이지 직접";
+}
+
 const Contact = () => {
   const [form, setForm] = React.useState({ company: "", name: "", phone: "", interest: "정책자금", message: "" });
   const [sent, setSent] = React.useState(false);
   const [sending, setSending] = React.useState(false);
   const successRef = React.useRef(null);
+  const utmRef = React.useRef({});
 
   React.useEffect(() => {
     if (sent && successRef.current) {
       successRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [sent]);
+
+  // UTM 파라미터 캡처 (세션 유지)
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const utm = {
+      utm_source:   params.get("utm_source")   || "",
+      utm_medium:   params.get("utm_medium")   || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_content:  params.get("utm_content")  || "",
+    };
+    if (Object.values(utm).some(v => v)) {
+      try { sessionStorage.setItem("gl_utm", JSON.stringify(utm)); } catch(e) {}
+      utmRef.current = utm;
+    } else {
+      try {
+        const stored = sessionStorage.getItem("gl_utm");
+        if (stored) utmRef.current = JSON.parse(stored);
+      } catch(e) {}
+    }
+  }, []);
 
   return (
     <section id="contact" style={{ padding: "var(--section-y) 0", borderTop: "1px solid var(--border)" }}>
@@ -103,6 +141,8 @@ const Contact = () => {
                     return;
                   }
                   setSending(true);
+
+                  // EmailJS 알림 발송
                   try {
                     await emailjs.send(
                       "service_tcj8otx",
@@ -117,8 +157,34 @@ const Contact = () => {
                       { publicKey: "UUfoZdh404On9fZbm" }
                     );
                   } catch (e) {
-                    console.warn("이메일 발송 오류:", e); alert("EmailJS 오류: " + (e?.text || e?.message || JSON.stringify(e))); setSending(false); return;
+                    console.warn("이메일 발송 오류:", e);
+                    alert("EmailJS 오류: " + (e?.text || e?.message || JSON.stringify(e)));
+                    setSending(false);
+                    return;
                   }
+
+                  // Google Sheets CRM 저장 (UTM 포함)
+                  try {
+                    const utm = utmRef.current;
+                    const source = resolveSource(utm.utm_source, utm.utm_medium);
+                    fetch(WEBHOOK_URL, {
+                      method: "POST",
+                      mode: "no-cors",
+                      headers: { "Content-Type": "text/plain" },
+                      body: JSON.stringify({
+                        source,
+                        utm_source:   utm.utm_source,
+                        utm_medium:   utm.utm_medium,
+                        utm_campaign: utm.utm_campaign,
+                        name:     form.name,
+                        company:  form.company,
+                        phone:    form.phone,
+                        interest: form.interest,
+                        message:  form.message,
+                      }),
+                    }).catch(() => {});
+                  } catch(e) {}
+
                   setSending(false);
                   setSent(true);
                 }}>
