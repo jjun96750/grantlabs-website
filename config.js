@@ -1,4 +1,4 @@
-window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycbx9Kl79LSbGX4S9LrDbjzKbn1nKvIMzdnAkbu6CxthrFq6GYZYtVf04w4qGzWrd8iZIjw/exec";
+window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycbxs0y4YXEDEUcJy8ebrpl9LIc4HiJ3j8Y7Nk3f1fTksQq44t4wC4ED5qwV7l6rkmgP8/exec";
 
 (function () {
   const getApiUrl = () => (window.GRANTLABS_CRM_API_URL || "").trim();
