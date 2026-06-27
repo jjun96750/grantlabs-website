@@ -246,7 +246,7 @@ const Footer = () => (
         </span>
         <div style={{ display: "flex", gap: 20 }}>
           <a href="#" style={{ fontSize: 12, color: "var(--muted-foreground)", textDecoration: "none", whiteSpace: "nowrap" }}>이용약관</a>
-          <a href="#" style={{ fontSize: 12, color: "var(--muted-foreground)", textDecoration: "none", whiteSpace: "nowrap" }}>개인정보 처리방침</a>
+          <a href="/privacy" style={{ fontSize: 12, color: "var(--muted-foreground)", textDecoration: "none", whiteSpace: "nowrap" }}>개인정보 처리방침</a>
         </div>
       </div>
     </div>
