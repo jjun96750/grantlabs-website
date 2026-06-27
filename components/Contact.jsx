@@ -186,6 +186,22 @@ const Contact = () => {
                   } catch(e) {}
 
                   setSending(false);
+
+                  // GA4 리드 전환 이벤트
+                  try {
+                    if (typeof gtag !== "undefined") {
+                      const utm = utmRef.current;
+                      gtag("event", "generate_lead", {
+                        method: resolveSource(utm.utm_source, utm.utm_medium),
+                        event_category: "contact_form",
+                        event_label: form.interest,
+                      });
+                    }
+                  } catch(e) {}
+
+                  // 메타 픽셀 리드 이벤트 (픽셀 설치 후 활성화)
+                  // try { if (typeof fbq !== "undefined") fbq("track", "Lead"); } catch(e) {}
+
                   setSent(true);
                 }}>
                   {sending ? "전송 중..." : "1:1 무료상담 신청하기"}

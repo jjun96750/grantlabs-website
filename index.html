@@ -55,7 +55,7 @@
         <li>경영지원 — 세무·회계, 노무·인사</li>
       </ul>
       <p>대표: 전희진 | 연락처: 010-5963-7624 | 이메일: jjun96750@gmail.com</p>
-      <p>주소: 서울특별시 파주시 초롱꽃로 109, 406호 871호</p>
+      <p>주소: 경기도 파주시 초롱꽃로 109, 406호 (동패동, 팜스타워)</p>
     </div>
   </noscript>
   <div id="root"></div>
@@ -1794,6 +1794,16 @@ const Contact = () => {
         return;
       }
       setSending(false);
+      try {
+        if (typeof gtag !== "undefined") {
+          const utm = utmRef.current;
+          gtag("event", "generate_lead", {
+            method: resolveSource(utm.utm_source, utm.utm_medium),
+            event_category: "contact_form",
+            event_label: form.interest
+          });
+        }
+      } catch(e) {}
       setSent(true);
     }
   }, sending ? "전송 중..." : "1:1 무료상담 신청하기"), /*#__PURE__*/React.createElement("p", {
