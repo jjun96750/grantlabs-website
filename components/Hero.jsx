@@ -122,7 +122,7 @@ const HeroSlider = () => {
               onMouseEnter={e => e.currentTarget.style.opacity = "0.9"}
               onMouseLeave={e => e.currentTarget.style.opacity = "1"}
             >
-              1:1 무료상담 신청하기
+              무료 진단 신청하기
             </a>
             <a href="#services" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
@@ -138,6 +138,16 @@ const HeroSlider = () => {
             >
               서비스 살펴보기
             </a>
+          </div>
+          <div style={{ display: "flex", gap: 20, marginTop: 20, flexWrap: "wrap" }}>
+            {["무료 진단", "1~2일 내 회신", "전담 컨설턴트 직접 연락"].map(t => (
+              <span key={t} style={{
+                fontSize: 12, color: "rgba(255,255,255,0.5)",
+                display: "flex", alignItems: "center", gap: 5,
+              }}>
+                <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 10 }}>✓</span> {t}
+              </span>
+            ))}
           </div>
         </div>
 

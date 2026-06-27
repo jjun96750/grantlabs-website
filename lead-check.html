@@ -608,10 +608,29 @@
     const CRM_API_URL = (window.GRANTLABS_CRM_API_URL || "").trim();
 
     function getTrackingParams() {
-      const params = new URLSearchParams(location.search);
+      const p = new URLSearchParams(location.search);
+      // 세션 UTM 유지 (lead-check 직접 접근 시 이전 페이지 UTM 복원)
+      let stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem("gl_utm") || "{}"); } catch(e) {}
+      const get = (key) => p.get(key) || stored[key] || "";
+      const utm = {
+        utm_source:   get("utm_source"),
+        utm_medium:   get("utm_medium"),
+        utm_campaign: get("utm_campaign"),
+        utm_content:  get("utm_content"),
+      };
+      if (Object.values(utm).some(v => v)) {
+        try { sessionStorage.setItem("gl_utm", JSON.stringify(utm)); } catch(e) {}
+      }
       return {
-        source: params.get("utm_source") || "lead-check",
-        campaign: params.get("utm_campaign") || "website_lead_check",
+        source:   utm.utm_source   || "lead-check",
+        medium:   utm.utm_medium   || "",
+        campaign: utm.utm_campaign || "website_lead_check",
+        content:  utm.utm_content  || "",
+        utm_source:   utm.utm_source,
+        utm_medium:   utm.utm_medium,
+        utm_campaign: utm.utm_campaign,
+        utm_content:  utm.utm_content,
       };
     }
 
@@ -625,7 +644,9 @@
         `상담 목적: ${answers.purpose || "-"}`,
         `전화번호: ${answers.phone || "-"}`,
         `유입경로: ${tracking.source}`,
+        `매체: ${tracking.medium || "-"}`,
         `캠페인: ${tracking.campaign}`,
+        `소재: ${tracking.content || "-"}`,
         `페이지: ${location.href}`,
       ].join("\n");
     }
@@ -635,6 +656,10 @@
       return {
         receivedAt: new Date().toISOString().slice(0, 16),
         source: tracking.source,
+        utm_source:   tracking.utm_source,
+        utm_medium:   tracking.utm_medium,
+        utm_campaign: tracking.utm_campaign,
+        utm_content:  tracking.utm_content,
         name: mode === "quick" ? "빠른 진단 신청" : "미입력",
         company: mode === "quick" ? "전화번호 우선 신청" : "정책자금 상담 신청",
         phone: answers.phone || "",
