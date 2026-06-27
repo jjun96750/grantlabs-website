@@ -199,8 +199,8 @@ const Contact = () => {
                     }
                   } catch(e) {}
 
-                  // 메타 픽셀 리드 이벤트 (픽셀 설치 후 활성화)
-                  // try { if (typeof fbq !== "undefined") fbq("track", "Lead"); } catch(e) {}
+                  // 메타 픽셀 리드 이벤트
+                  try { if (typeof fbq !== "undefined") fbq("track", "Lead"); } catch(e) {}
 
                   setSent(true);
                 }}>

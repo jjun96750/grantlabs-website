@@ -29,6 +29,22 @@
     gtag('js', new Date());
     gtag('config', 'G-E71KNFBRMW');
   </script>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','999312982962242');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=999312982962242&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1817,6 +1833,7 @@ const Contact = () => {
           });
         }
       } catch(e) {}
+      try { if (typeof fbq !== "undefined") fbq("track", "Lead"); } catch(e) {}
       setSent(true);
     }
   }, sending ? "전송 중..." : "1:1 무료상담 신청하기"), /*#__PURE__*/React.createElement("p", {
