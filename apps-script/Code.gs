@@ -1,5 +1,7 @@
 const SHEET_NAME = "Leads";
-const SPREADSHEET_ID = "1KCIwResl3vrUdgfIgThNSaPBN0kr_yI_18AsUYgEFHo";
+const PROP_SPREADSHEET_ID = "CRM_SPREADSHEET_ID";
+const PROP_API_TOKEN = "CRM_API_TOKEN";
+const PROP_ALLOW_PUBLIC_CREATE = "CRM_ALLOW_PUBLIC_CREATE";
 
 const HEADERS = [
   "id",
@@ -27,42 +29,62 @@ const HEADERS = [
 ];
 
 function doGet(e) {
-  const action = (e.parameter.action || "list").toLowerCase();
-  if (action === "list") {
-    return jsonResponse({ ok: true, leads: getLeads() });
+  try {
+    const params = (e && e.parameter) || {};
+    const action = (params.action || "list").toLowerCase();
+
+    if (action === "list") {
+      assertAuthorized(params);
+      return jsonResponse({ ok: true, leads: getLeads() });
+    }
+
+    if (["createlead", "submit", "addlead"].indexOf(action) !== -1) {
+      assertCanCreate(params);
+      return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(params)) });
+    }
+
+    if (["deletelead", "delete", "removelead"].indexOf(action) !== -1) {
+      assertAuthorized(params);
+      deleteLead(params.id);
+      return jsonResponse({ ok: true, id: params.id || "" });
+    }
+
+    return jsonResponse({ ok: false, error: "Unknown action" });
+  } catch (error) {
+    return errorResponse(error);
   }
-  if (["createlead", "submit", "addlead"].indexOf(action) !== -1) {
-    return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(e.parameter || {})) });
-  }
-  if (["deletelead", "delete", "removelead"].indexOf(action) !== -1) {
-    deleteLead(e.parameter.id);
-    return jsonResponse({ ok: true, id: e.parameter.id || "" });
-  }
-  return jsonResponse({ ok: false, error: "Unknown action" });
 }
 
 function doPost(e) {
-  const payload = parsePayload(e);
-  const action = (payload.action || "").toLowerCase();
+  try {
+    const payload = parsePayload(e);
+    const action = (payload.action || "").toLowerCase();
 
-  if (action === "createlead") {
-    return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(payload.lead || payload)) });
+    if (action === "createlead") {
+      assertCanCreate(payload);
+      return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(payload.lead || payload)) });
+    }
+
+    if (action === "updatelead") {
+      assertAuthorized(payload);
+      return jsonResponse({ ok: true, lead: updateLead(payload.lead || {}) });
+    }
+
+    if (["deletelead", "delete", "removelead"].indexOf(action) !== -1) {
+      assertAuthorized(payload);
+      deleteLead(payload.id);
+      return jsonResponse({ ok: true, id: payload.id || "" });
+    }
+
+    if (looksLikeLead(payload)) {
+      assertCanCreate(payload);
+      return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(payload.lead || payload)) });
+    }
+
+    return jsonResponse({ ok: false, error: "Unknown action" });
+  } catch (error) {
+    return errorResponse(error);
   }
-
-  if (action === "updatelead") {
-    return jsonResponse({ ok: true, lead: updateLead(payload.lead || {}) });
-  }
-
-  if (["deletelead", "delete", "removelead"].indexOf(action) !== -1) {
-    deleteLead(payload.id);
-    return jsonResponse({ ok: true, id: payload.id || "" });
-  }
-
-  if (looksLikeLead(payload)) {
-    return jsonResponse({ ok: true, lead: createLead(normalizeIncomingLead(payload.lead || payload)) });
-  }
-
-  return jsonResponse({ ok: false, error: "Unknown action" });
 }
 
 function parsePayload(e) {
@@ -82,8 +104,48 @@ function jsonResponse(data) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+function errorResponse(error) {
+  const message = error && error.message ? error.message : "Unknown error";
+  return jsonResponse({ ok: false, error: message });
+}
+
+function getScriptProperties() {
+  return PropertiesService.getScriptProperties();
+}
+
+function getConfigValue(key) {
+  return (getScriptProperties().getProperty(key) || "").trim();
+}
+
+function getSpreadsheetId() {
+  const spreadsheetId = getConfigValue(PROP_SPREADSHEET_ID);
+  if (!spreadsheetId) throw new Error("CRM_SPREADSHEET_ID is not configured");
+  return spreadsheetId;
+}
+
+function publicCreateAllowed() {
+  return getConfigValue(PROP_ALLOW_PUBLIC_CREATE).toLowerCase() === "true";
+}
+
+function requestToken(input) {
+  if (!input) return "";
+  const bearer = String(input.authorization || input.Authorization || "").replace(/^Bearer\s+/i, "").trim();
+  return String(input.token || input.apiToken || input.crmApiToken || bearer || "").trim();
+}
+
+function assertAuthorized(input) {
+  const expected = getConfigValue(PROP_API_TOKEN);
+  if (!expected) throw new Error("CRM_API_TOKEN is not configured");
+  if (requestToken(input) !== expected) throw new Error("Unauthorized");
+}
+
+function assertCanCreate(input) {
+  if (publicCreateAllowed()) return;
+  assertAuthorized(input);
+}
+
 function getSheet() {
-  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const ss = SpreadsheetApp.openById(getSpreadsheetId());
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
 
