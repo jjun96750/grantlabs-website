@@ -105,16 +105,17 @@
 
     .quick-lead {
       margin-top: 28px;
-      padding: 16px;
+      padding: 20px;
       max-width: 520px;
       border: 1px solid rgba(241, 223, 186, .34);
       background: rgba(255,255,255,.1);
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    .quick-lead input {
+    .quick-lead input,
+    .quick-lead select {
       min-width: 0;
       height: 52px;
       border: 1px solid rgba(255,255,255,.24);
@@ -125,9 +126,21 @@
       font-size: 16px;
       font-family: var(--font-sans);
       outline: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .quick-lead select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23687083' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
     }
 
     .quick-lead button {
+      grid-column: 1 / -1;
       height: 52px;
       border: 0;
       border-radius: 6px;
@@ -139,6 +152,11 @@
       font-family: var(--font-sans);
       cursor: pointer;
       white-space: nowrap;
+    }
+
+    .quick-lead button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
     }
 
     .quick-lead small,
@@ -431,7 +449,7 @@
       }
 
       .quick-lead {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
       }
 
       .brand-foot {
@@ -447,6 +465,12 @@
         padding: 28px 22px 24px;
       }
     }
+
+    @media (max-width: 480px) {
+      .quick-lead {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -458,16 +482,34 @@
       </div>
 
       <div class="hero-copy">
-        <div class="eyebrow-lite">30초 간단 확인</div>
+        <div class="eyebrow-lite">무료 진단 신청</div>
         <h1>정책자금 가능 여부를 먼저 확인하세요.</h1>
         <p>
-          업종, 지역, 매출액, 신용점수 구간을 쉬운 2지선다로 선택하고 전화번호만 남겨주세요.
-          남겨주신 조건을 기준으로 상담 안내를 드립니다.
+          이름과 연락처, 업종과 매출구간을 선택하고 신청하시면
+          담당 전문가가 직접 검토 후 맞춤 안내를 드립니다.
         </p>
         <form class="quick-lead" id="quickLeadForm" autocomplete="on">
+          <input id="quickName" name="name" type="text" placeholder="이름" aria-label="이름" />
           <input id="quickPhone" name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" aria-label="전화번호" />
-          <button type="submit" id="quickLeadBtn">무료 진단 받기</button>
-          <small>바쁘면 전화번호만 남겨도 됩니다. 세부 조건은 상담 때 확인합니다.</small>
+          <select id="quickBusiness" name="business" aria-label="업종">
+            <option value="">업종 선택</option>
+            <option>제조업</option>
+            <option>서비스업</option>
+            <option>도소매업</option>
+            <option>IT/소프트웨어</option>
+            <option>건설/부동산</option>
+            <option>기타</option>
+          </select>
+          <select id="quickRevenue" name="revenue" aria-label="연매출구간">
+            <option value="">연매출 구간</option>
+            <option>1억 미만</option>
+            <option>1억~5억</option>
+            <option>5억~10억</option>
+            <option>10억~50억</option>
+            <option>50억 이상</option>
+          </select>
+          <button type="submit" id="quickLeadBtn">무료 진단 신청하기</button>
+          <small>연락처와 응답 내용은 상담 안내 목적으로만 사용됩니다.</small>
           <div class="quick-message" id="quickMessage" aria-live="polite"></div>
         </form>
         <div class="notice">
@@ -609,7 +651,6 @@
 
     function getTrackingParams() {
       const p = new URLSearchParams(location.search);
-      // 세션 UTM 유지 (lead-check 직접 접근 시 이전 페이지 UTM 복원)
       let stored = {};
       try { stored = JSON.parse(sessionStorage.getItem("gl_utm") || "{}"); } catch(e) {}
       const get = (key) => p.get(key) || stored[key] || "";
@@ -623,9 +664,9 @@
         try { sessionStorage.setItem("gl_utm", JSON.stringify(utm)); } catch(e) {}
       }
       return {
-        source:   utm.utm_source   || "lead-check",
+        source:   utm.utm_source   || "랜딩",
         medium:   utm.utm_medium   || "",
-        campaign: utm.utm_campaign || "website_lead_check",
+        campaign: utm.utm_campaign || "무료진단_랜딩",
         content:  utm.utm_content  || "",
         utm_source:   utm.utm_source,
         utm_medium:   utm.utm_medium,
@@ -636,6 +677,7 @@
 
     function buildLeadDetails(answers, tracking) {
       return [
+        `이름: ${answers.name || "-"}`,
         `업종: ${answers.business || "-"}`,
         `지역: ${answers.region || "-"}`,
         `매출액: ${answers.revenue || "-"}`,
@@ -660,8 +702,8 @@
         utm_medium:   tracking.utm_medium,
         utm_campaign: tracking.utm_campaign,
         utm_content:  tracking.utm_content,
-        name: mode === "quick" ? "빠른 진단 신청" : "미입력",
-        company: mode === "quick" ? "전화번호 우선 신청" : "정책자금 상담 신청",
+        name: answers.name || (mode === "quick" ? "빠른 진단 신청" : "미입력"),
+        company: mode === "quick" ? "무료진단 랜딩 신청" : "정책자금 상담 신청",
         phone: answers.phone || "",
         email: answers.email || "",
         business: answers.business || "",
@@ -678,7 +720,9 @@
         fundingTiming: answers.fundingTiming || "",
         purpose: answers.purpose || "",
         message,
-        memo: mode === "quick" ? "전화번호만 먼저 남긴 빠른 진단 신청" : message,
+        memo: mode === "quick"
+          ? `랜딩 퀵폼 신청 — 이름: ${answers.name || "-"} / 업종: ${answers.business || "-"} / 연매출: ${answers.revenue || "-"}`
+          : message,
       };
     }
 
@@ -869,9 +913,13 @@
     $("backBtn").addEventListener("click", goBack);
     $("quickLeadForm").addEventListener("submit", async (event) => {
       event.preventDefault();
+      const name = $("quickName").value.trim();
       const phone = $("quickPhone").value.trim();
+      const business = $("quickBusiness").value;
+      const revenue = $("quickRevenue").value;
       const message = $("quickMessage");
       const button = $("quickLeadBtn");
+
       if (phone.length < 8) {
         message.textContent = "전화번호를 입력해 주세요.";
         $("quickPhone").focus();
@@ -881,8 +929,9 @@
       button.disabled = true;
       button.textContent = "접수 중...";
       message.textContent = "";
+
       const tracking = getTrackingParams();
-      const lead = buildCrmLead({ ...state.answers, phone }, tracking, "quick");
+      const lead = buildCrmLead({ ...state.answers, name, phone, business, revenue }, tracking, "quick");
 
       try {
         await sendLeadToCrm(lead);
@@ -903,13 +952,16 @@
           __crm_saved: "true",
         }).catch((error) => console.warn("빠른 신청 이메일 알림 오류:", error));
         message.textContent = "접수되었습니다. 담당자가 순차적으로 연락드립니다.";
+        $("quickName").value = "";
         $("quickPhone").value = "";
+        $("quickBusiness").value = "";
+        $("quickRevenue").value = "";
       } catch (error) {
         console.warn("빠른 신청 저장 오류:", error);
-        message.textContent = "접수 중 오류가 발생했습니다. 아래 객관식 폼으로 다시 신청해 주세요.";
+        message.textContent = "접수 중 오류가 발생했습니다. 아래 상세 폼으로 다시 신청해 주세요.";
       } finally {
         button.disabled = false;
-        button.textContent = "무료 진단 받기";
+        button.textContent = "무료 진단 신청하기";
       }
     });
     render();
