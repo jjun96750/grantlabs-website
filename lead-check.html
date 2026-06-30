@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>정책자금 가능 여부 간단 확인 | 그랜트 랩스 Grant Labs</title>
-  <meta name="description" content="그랜트 랩스 정책자금 가능 여부 간단 확인. 업종, 지역, 매출액, 신용점수 구간을 2지선다로 선택하고 연락처를 남겨주세요." />
+  <meta name="description" content="그랜트 랩스 무료 진단 신청. 필요한 도움, 연락 가능 시간, 한 줄 상황을 남기면 예비·초기창업자도 상담 방향을 안내받을 수 있습니다." />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://grantlabs.co.kr/lead-check" />
   <link rel="stylesheet" href="styles/tokens.css" />
@@ -12,6 +12,22 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="config.js"></script>
   <script>emailjs.init({ publicKey: "UUfoZdh404On9fZbm" });</script>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','999312982962242');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=999312982962242&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
   <style>
     :root {
       --lead-navy: #07111f;
@@ -39,7 +55,7 @@
     .page {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1fr);
+      grid-template-columns: minmax(0, 1fr);
       align-items: stretch;
     }
 
@@ -49,7 +65,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border-right: 1px solid rgba(255,255,255,.12);
     }
 
     .brandmark {
@@ -105,17 +120,18 @@
 
     .quick-lead {
       margin-top: 28px;
-      padding: 20px;
+      padding: 16px;
       max-width: 520px;
       border: 1px solid rgba(241, 223, 186, .34);
       background: rgba(255,255,255,.1);
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 10px;
     }
 
     .quick-lead input,
-    .quick-lead select {
+    .quick-lead select,
+    .quick-lead textarea {
       min-width: 0;
       height: 52px;
       border: 1px solid rgba(255,255,255,.24);
@@ -126,21 +142,63 @@
       font-size: 16px;
       font-family: var(--font-sans);
       outline: none;
+    }
+
+    .quick-lead select,
+    .quick-lead textarea {
       width: 100%;
       box-sizing: border-box;
     }
 
     .quick-lead select {
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23687083' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: linear-gradient(45deg, transparent 50%, #687083 50%), linear-gradient(135deg, #687083 50%, transparent 50%);
+      background-position: calc(100% - 18px) 22px, calc(100% - 12px) 22px;
+      background-size: 6px 6px, 6px 6px;
       background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-      cursor: pointer;
+    }
+
+    .quick-lead textarea {
+      grid-column: 1 / -1;
+      height: 88px;
+      padding-top: 14px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .quick-lead .field-wide {
+      grid-column: 1 / -1;
+    }
+
+    .help-checks {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .help-checks label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.32);
+      border-radius: 6px;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .help-checks input {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      accent-color: var(--lead-gold);
     }
 
     .quick-lead button {
-      grid-column: 1 / -1;
       height: 52px;
       border: 0;
       border-radius: 6px;
@@ -154,9 +212,8 @@
       white-space: nowrap;
     }
 
-    .quick-lead button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
+    .quick-lead button[type="submit"] {
+      grid-column: 1 / -1;
     }
 
     .quick-lead small,
@@ -449,7 +506,11 @@
       }
 
       .quick-lead {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
+      }
+
+      .help-checks {
+        grid-template-columns: 1fr;
       }
 
       .brand-foot {
@@ -465,12 +526,6 @@
         padding: 28px 22px 24px;
       }
     }
-
-    @media (max-width: 480px) {
-      .quick-lead {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 <body>
@@ -482,34 +537,33 @@
       </div>
 
       <div class="hero-copy">
-        <div class="eyebrow-lite">무료 진단 신청</div>
-        <h1>정책자금 가능 여부를 먼저 확인하세요.</h1>
+        <div class="eyebrow-lite">30초 무료 진단</div>
+        <h1>지금 필요한 도움부터 남겨주세요.</h1>
         <p>
-          이름과 연락처, 업종과 매출구간을 선택하고 신청하시면
-          담당 전문가가 직접 검토 후 맞춤 안내를 드립니다.
+          조건으로 먼저 걸러내지 않습니다.
+          예비·초기창업자도 필요한 도움과 연락 가능 시간을 남기면 상담 방향을 안내드립니다.
         </p>
         <form class="quick-lead" id="quickLeadForm" autocomplete="on">
-          <input id="quickName" name="name" type="text" placeholder="이름" aria-label="이름" />
-          <input id="quickPhone" name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" aria-label="전화번호" />
-          <select id="quickBusiness" name="business" aria-label="업종">
-            <option value="">업종 선택</option>
-            <option>제조업</option>
-            <option>서비스업</option>
-            <option>도소매업</option>
-            <option>IT/소프트웨어</option>
-            <option>건설/부동산</option>
-            <option>기타</option>
+          <input id="quickName" name="name" type="text" autocomplete="name" placeholder="이름" aria-label="이름" />
+          <input id="quickPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="연락처" aria-label="연락처" />
+          <div class="help-checks" aria-label="필요한 도움">
+            <label><input type="checkbox" name="helpType" value="창업자금" />창업자금</label>
+            <label><input type="checkbox" name="helpType" value="운전·시설자금" />운전·시설자금</label>
+            <label><input type="checkbox" name="helpType" value="기업인증" />기업인증</label>
+            <label><input type="checkbox" name="helpType" value="특허" />특허</label>
+            <label><input type="checkbox" name="helpType" value="법인설립" />법인설립</label>
+            <label><input type="checkbox" name="helpType" value="경영자문" />경영자문</label>
+          </div>
+          <select id="quickContactTime" name="contactTime" aria-label="연락 가능 시간">
+            <option value="">연락 가능 시간</option>
+            <option value="오전 9-12시">오전 9-12시</option>
+            <option value="오후 12-3시">오후 12-3시</option>
+            <option value="오후 3-6시">오후 3-6시</option>
+            <option value="저녁 6시 이후">저녁 6시 이후</option>
           </select>
-          <select id="quickRevenue" name="revenue" aria-label="연매출구간">
-            <option value="">연매출 구간</option>
-            <option>1억 미만</option>
-            <option>1억~5억</option>
-            <option>5억~10억</option>
-            <option>10억~50억</option>
-            <option>50억 이상</option>
-          </select>
-          <button type="submit" id="quickLeadBtn">무료 진단 신청하기</button>
-          <small>연락처와 응답 내용은 상담 안내 목적으로만 사용됩니다.</small>
+          <textarea id="quickSituation" class="field-wide" name="situation" maxlength="160" placeholder="현재 상황이나 궁금한 점을 자유롭게 적어주세요. 예: 창업 준비 중, 시설자금 필요, 인증 상담 희망" aria-label="현재 상황"></textarea>
+          <button type="submit" id="quickLeadBtn">무료 진단 받기</button>
+          <small>예비·초기 단계도 신청할 수 있습니다. 세부 조건은 상담 때 확인합니다.</small>
           <div class="quick-message" id="quickMessage" aria-live="polite"></div>
         </form>
         <div class="notice">
@@ -524,12 +578,13 @@
       </div>
     </section>
 
-    <section class="form-panel">
+    <!-- 신청 후 단계로 보존: 단순 위저드(form-panel)는 현재 빠른 신청 폼 운영을 위해 비노출 처리 -->
+    <section class="form-panel" hidden aria-hidden="true">
       <div class="form-card" id="formCard">
         <div class="form-head">
           <div class="progress-row">
-            <span id="progressLabel">1 / 8</span>
-            <span>정책자금 상담 신청</span>
+            <span id="progressLabel">1 / 5</span>
+            <span>무료 진단 신청</span>
           </div>
           <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
         </div>
@@ -537,8 +592,8 @@
         <form id="leadForm" class="step" autocomplete="on">
           <div>
             <div class="question-kicker" id="stepKicker">Question 01</div>
-            <h2 id="stepTitle">업종을 선택해 주세요.</h2>
-            <p class="hint" id="stepHint">현재 사업장의 주된 업종 기준으로 선택해 주세요.</p>
+            <h2 id="stepTitle">필요한 도움을 선택해 주세요.</h2>
+            <p class="hint" id="stepHint">가장 가까운 항목 하나만 선택해도 충분합니다.</p>
             <div id="stepBody" class="options"></div>
           </div>
 
@@ -562,58 +617,34 @@
   <script>
     const steps = [
       {
-        key: "business",
-        title: "업종을 선택해 주세요.",
-        hint: "현재 사업장의 주된 업종 기준으로 선택해 주세요.",
+        key: "helpType",
+        title: "필요한 도움을 선택해 주세요.",
+        hint: "예비·초기창업자도 가장 가까운 항목 하나만 선택하면 됩니다.",
         options: [
-          { label: "제조업", note: "공장, 생산, 가공, 설비 기반" },
-          { label: "제조업 외", note: "서비스, 유통, 도소매 등" },
+          { label: "창업자금", note: "예비·초기창업 준비" },
+          { label: "운전·시설자금", note: "운영비, 설비, 공간 등" },
+          { label: "인증", note: "벤처, 이노비즈, 메인비즈 등" },
+          { label: "특허", note: "출원·권리화 방향 검토" },
+          { label: "법인설립", note: "설립 전후 구조 검토" },
+          { label: "경영자문", note: "사업전략, 운영, 성장 자문" },
         ],
       },
       {
-        key: "region",
-        title: "사업장 지역을 선택해 주세요.",
-        hint: "사업자등록증상 사업장 소재지 기준입니다.",
+        key: "contactTime",
+        title: "연락 가능한 시간을 선택해 주세요.",
+        hint: "담당자가 연락드릴 수 있는 편한 시간대를 선택해 주세요.",
         options: [
-          { label: "수도권", note: "서울, 경기, 인천" },
-          { label: "수도권 외", note: "그 외 지역" },
+          { label: "오전 9-12시", note: "업무 시작 후 통화 가능" },
+          { label: "오후 12-3시", note: "점심 이후 통화 가능" },
+          { label: "오후 3-6시", note: "오후 늦게 통화 가능" },
+          { label: "저녁 6시 이후", note: "업무시간 후 통화 가능" },
         ],
       },
       {
-        key: "revenue",
-        title: "최근 매출액 구간을 선택해 주세요.",
-        hint: "정확한 금액이 아니어도 가까운 구간을 선택해 주세요.",
-        options: [
-          { label: "1억 미만", note: "연 매출 기준" },
-          { label: "1억 이상", note: "연 매출 기준" },
-        ],
-      },
-      {
-        key: "credit",
-        title: "현재 신용점수 구간을 선택해 주세요.",
-        hint: "대표자 또는 사업 관련 신용 상황을 기준으로 선택해 주세요.",
-        options: [
-          { label: "800점 미만", note: "대략적인 구간" },
-          { label: "800점 이상", note: "대략적인 구간" },
-        ],
-      },
-      {
-        key: "fundingTiming",
-        title: "자금이 필요한 시점을 선택해 주세요.",
-        hint: "상담 우선순위와 검토 방향을 정하기 위한 항목입니다.",
-        options: [
-          { label: "지금 필요", note: "바로 검토가 필요함" },
-          { label: "3개월 내 검토", note: "준비 후 검토 예정" },
-        ],
-      },
-      {
-        key: "purpose",
-        title: "상담 목적을 선택해 주세요.",
-        hint: "가장 가까운 자금 목적을 선택해 주세요.",
-        options: [
-          { label: "운전자금", note: "인건비, 운영비, 원재료 등" },
-          { label: "시설/설비자금", note: "장비, 공장, 설비, 인테리어 등" },
-        ],
+        key: "situation",
+        title: "현재 상황을 한 줄로 남겨주세요.",
+        hint: "예: 예비창업자입니다 / 시설자금이 필요합니다 / 인증을 준비 중입니다.",
+        textarea: true,
       },
       {
         key: "phone",
@@ -632,14 +663,16 @@
     const state = {
       step: 0,
       answers: {
-        business: "",
-        region: "",
-        revenue: "",
-        credit: "",
-        fundingTiming: "",
-        purpose: "",
+        helpType: "",
+        contactTime: "",
+        situation: "",
+        fundUse: "",
         email: "",
         phone: "",
+        revenue: "",
+        credit: "",
+        founded: "",
+        fundingTiming: "",
       },
       sending: false,
     };
@@ -651,6 +684,7 @@
 
     function getTrackingParams() {
       const p = new URLSearchParams(location.search);
+      // 세션 UTM 유지 (lead-check 직접 접근 시 이전 페이지 UTM 복원)
       let stored = {};
       try { stored = JSON.parse(sessionStorage.getItem("gl_utm") || "{}"); } catch(e) {}
       const get = (key) => p.get(key) || stored[key] || "";
@@ -664,9 +698,9 @@
         try { sessionStorage.setItem("gl_utm", JSON.stringify(utm)); } catch(e) {}
       }
       return {
-        source:   utm.utm_source   || "랜딩",
+        source:   utm.utm_source   || "lead-check",
         medium:   utm.utm_medium   || "",
-        campaign: utm.utm_campaign || "무료진단_랜딩",
+        campaign: utm.utm_campaign || "website_lead_check",
         content:  utm.utm_content  || "",
         utm_source:   utm.utm_source,
         utm_medium:   utm.utm_medium,
@@ -678,13 +712,10 @@
     function buildLeadDetails(answers, tracking) {
       return [
         `이름: ${answers.name || "-"}`,
-        `업종: ${answers.business || "-"}`,
-        `지역: ${answers.region || "-"}`,
-        `매출액: ${answers.revenue || "-"}`,
-        `신용점수: ${answers.credit || "-"}`,
-        `자금 필요 시점: ${answers.fundingTiming || "-"}`,
-        `상담 목적: ${answers.purpose || "-"}`,
-        `전화번호: ${answers.phone || "-"}`,
+        `필요한 도움: ${answers.helpType || "-"}`,
+        `연락 가능 시간: ${answers.contactTime || "-"}`,
+        `현재 상황: ${answers.situation || "-"}`,
+        `연락처: ${answers.phone || "-"}`,
         `유입경로: ${tracking.source}`,
         `매체: ${tracking.medium || "-"}`,
         `캠페인: ${tracking.campaign}`,
@@ -703,26 +734,26 @@
         utm_campaign: tracking.utm_campaign,
         utm_content:  tracking.utm_content,
         name: answers.name || (mode === "quick" ? "빠른 진단 신청" : "미입력"),
-        company: mode === "quick" ? "무료진단 랜딩 신청" : "정책자금 상담 신청",
+        company: mode === "quick" ? `${answers.name || "미입력"} / 빠른 진단 신청` : "정책자금 상담 신청",
         phone: answers.phone || "",
         email: answers.email || "",
-        business: answers.business || "",
-        industry: answers.business || "",
-        region: answers.region || "",
-        credit: answers.credit || "",
-        revenue: answers.revenue || "",
+        business: answers.helpType || "",
+        industry: "",
+        region: "",
+        credit: "",
+        revenue: "",
         founded: "",
         tax: "확인필요",
         owner: "담당자 선택",
         tmStatus: "대기중",
-        meeting: answers.fundingTiming || "",
-        interest: answers.purpose || "정책자금",
-        fundingTiming: answers.fundingTiming || "",
-        purpose: answers.purpose || "",
+        meeting: answers.contactTime || "",
+        interest: answers.helpType || "무료 진단",
+        fundingTiming: "",
+        purpose: answers.helpType || "",
+        contactTime: answers.contactTime || "",
+        situation: answers.situation || "",
         message,
-        memo: mode === "quick"
-          ? `랜딩 퀵폼 신청 — 이름: ${answers.name || "-"} / 업종: ${answers.business || "-"} / 연매출: ${answers.revenue || "-"}`
-          : message,
+        memo: mode === "quick" ? `빠른 진단 신청 / ${message}` : message,
       };
     }
 
@@ -806,20 +837,39 @@
         return;
       }
 
+      if (step.textarea) {
+        const value = state.answers[step.key] || "";
+        body.className = "";
+        body.innerHTML = `
+          <textarea class="phone-input" id="situationInput" name="${step.key}" maxlength="120" placeholder="예: 예비창업자인데 창업자금 가능성을 알고 싶어요.">${escapeHtml(value)}</textarea>
+        `;
+        const field = $("situationInput");
+        field.focus();
+        field.addEventListener("input", (event) => {
+          state.answers[step.key] = event.target.value;
+        });
+        return;
+      }
+
       if (step.confirm) {
         body.className = "summary";
         body.innerHTML = summaryRows();
       }
     }
 
+    function trackLeadEvent(lead) {
+      if (typeof window.fbq !== "function") return;
+      window.fbq("track", "Lead", {
+        content_name: "lead-check",
+        content_category: lead.interest || "무료 진단",
+      });
+    }
+
     function summaryRows() {
       return [
-        ["업종", state.answers.business],
-        ["지역", state.answers.region],
-        ["매출액", state.answers.revenue],
-        ["신용점수", state.answers.credit],
-        ["자금 필요 시점", state.answers.fundingTiming],
-        ["상담 목적", state.answers.purpose],
+        ["필요한 도움", state.answers.helpType],
+        ["연락 가능 시간", state.answers.contactTime],
+        ["한 줄 상황", state.answers.situation],
         ["전화번호", state.answers.phone],
       ].map(([label, value]) => `
         <div class="summary-row"><strong>${label}</strong><span>${escapeHtml(value || "-")}</span></div>
@@ -836,6 +886,7 @@
         if (step.input === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
         return value.length >= 8;
       }
+      if (step.textarea) return state.answers[step.key].trim().length >= 2;
       return true;
     }
 
@@ -870,6 +921,7 @@
 
       try {
         await sendLeadToCrm(lead);
+        trackLeadEvent(lead);
       } catch (error) {
         console.warn("CRM 저장 오류:", error);
       }
@@ -886,6 +938,8 @@
           revenue: lead.revenue,
           credit: lead.credit,
           credit_score: lead.credit,
+          contact_time: lead.contactTime,
+          situation: lead.situation,
           interest: lead.interest,
           message: lead.message,
           lead_details: lead.message,
@@ -914,27 +968,52 @@
     $("quickLeadForm").addEventListener("submit", async (event) => {
       event.preventDefault();
       const name = $("quickName").value.trim();
+      const helpType = Array.from(document.querySelectorAll('input[name="helpType"]:checked'))
+        .map((input) => input.value.trim())
+        .filter(Boolean)
+        .join(", ");
+      const contactTime = $("quickContactTime").value.trim();
       const phone = $("quickPhone").value.trim();
-      const business = $("quickBusiness").value;
-      const revenue = $("quickRevenue").value;
+      const situation = $("quickSituation").value.trim();
       const message = $("quickMessage");
       const button = $("quickLeadBtn");
-
+      if (!name) {
+        message.textContent = "이름을 입력해 주세요.";
+        $("quickName").focus();
+        return;
+      }
+      if (!helpType) {
+        message.textContent = "필요한 도움을 하나 이상 선택해 주세요.";
+        const firstHelp = document.querySelector('input[name="helpType"]');
+        if (firstHelp) firstHelp.focus();
+        return;
+      }
+      if (!contactTime) {
+        message.textContent = "연락 가능 시간을 선택해 주세요.";
+        $("quickContactTime").focus();
+        return;
+      }
       if (phone.length < 8) {
         message.textContent = "전화번호를 입력해 주세요.";
         $("quickPhone").focus();
         return;
       }
-
       button.disabled = true;
       button.textContent = "접수 중...";
       message.textContent = "";
-
       const tracking = getTrackingParams();
-      const lead = buildCrmLead({ ...state.answers, name, phone, business, revenue }, tracking, "quick");
+      const lead = buildCrmLead({
+        ...state.answers,
+        name,
+        helpType,
+        contactTime,
+        situation,
+        phone,
+      }, tracking, "quick");
 
       try {
         await sendLeadToCrm(lead);
+        trackLeadEvent(lead);
         emailjs.send("service_tcj8otx", "template_8ne6kj3", {
           company: lead.company,
           name: lead.name,
@@ -946,6 +1025,8 @@
           revenue: lead.revenue,
           credit: lead.credit,
           credit_score: lead.credit,
+          contact_time: lead.contactTime,
+          situation: lead.situation,
           interest: lead.interest,
           message: lead.message,
           lead_details: lead.message,
@@ -953,15 +1034,16 @@
         }).catch((error) => console.warn("빠른 신청 이메일 알림 오류:", error));
         message.textContent = "접수되었습니다. 담당자가 순차적으로 연락드립니다.";
         $("quickName").value = "";
+        document.querySelectorAll('input[name="helpType"]:checked').forEach((input) => { input.checked = false; });
+        $("quickContactTime").value = "";
         $("quickPhone").value = "";
-        $("quickBusiness").value = "";
-        $("quickRevenue").value = "";
+        $("quickSituation").value = "";
       } catch (error) {
         console.warn("빠른 신청 저장 오류:", error);
-        message.textContent = "접수 중 오류가 발생했습니다. 아래 상세 폼으로 다시 신청해 주세요.";
+        message.textContent = "접수 중 오류가 발생했습니다. 잠시 후 다시 신청해 주세요.";
       } finally {
         button.disabled = false;
-        button.textContent = "무료 진단 신청하기";
+        button.textContent = "무료 진단 받기";
       }
     });
     render();
