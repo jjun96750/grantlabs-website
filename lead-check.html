@@ -38,556 +38,284 @@
   <!-- End Meta Pixel Code -->
   <style>
     :root {
-      --lead-navy: #07111f;
+      --navy: #15233b;
+      --gold: #c79a4f;
+      --gold-soft: #f1dfba;
+      --white: #ffffff;
+      --ink: #111827;
+      --muted: rgba(255,255,255,0.65);
+      /* wizard compat aliases */
+      --lead-navy: #15233b;
       --lead-ink: #111827;
       --lead-muted: #687083;
       --lead-line: #e5e2da;
-      --lead-cream: #fbfaf7;
-      --lead-gold: #c79a4b;
+      --lead-gold: #c79a4f;
       --lead-gold-soft: #f1dfba;
       --lead-card: #ffffff;
     }
 
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
+      margin: 0;
       min-height: 100vh;
-      margin: 0;
-      background:
-        linear-gradient(135deg, rgba(7, 17, 31, .94), rgba(7, 17, 31, .78)),
-        radial-gradient(circle at 82% 14%, rgba(199, 154, 75, .22), transparent 30%),
-        var(--lead-navy);
-      color: var(--lead-ink);
-      font-family: var(--font-sans);
-      letter-spacing: 0;
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
     }
 
-    .page {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      align-items: stretch;
-    }
-
-    .brand-panel {
-      padding: 54px 56px;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .brandmark {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(30px, 4vw, 48px);
-      letter-spacing: .1em;
-      font-weight: 700;
-    }
-
-    .brand-sub {
-      margin-top: 10px;
-      color: rgba(255,255,255,.68);
-      font-size: 12px;
-      letter-spacing: .22em;
-    }
-
-    .hero-copy {
+    /* ── Page wrapper ────────────────────────────── */
+    .lc-wrap {
       max-width: 520px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
     }
 
-    .eyebrow-lite {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--lead-gold-soft);
-      font-size: 13px;
+    /* Header */
+    .lc-header { margin-bottom: 52px; }
+    .lc-logo { display: block; height: 26px; width: auto; }
+    .lc-brand-sub {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+    }
+
+    /* Badge */
+    .lc-badge {
+      display: inline-block;
+      padding: 5px 13px;
+      border: 1px solid rgba(199,154,79,0.5);
+      border-radius: 3px;
+      color: var(--gold-soft);
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: .1em;
+      letter-spacing: 0.1em;
+      margin-bottom: 22px;
     }
 
-    .eyebrow-lite::before {
-      content: "";
-      width: 30px;
-      height: 1px;
-      background: currentColor;
+    /* Headline */
+    .lc-h1 {
+      margin: 0 0 18px;
+      font-size: clamp(30px, 6vw, 50px);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: var(--white);
     }
 
-    h1 {
-      margin: 22px 0 20px;
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: 1.04;
-      letter-spacing: -0.04em;
-      color: #fff;
-    }
-
-    .hero-copy p {
-      margin: 0;
-      color: rgba(255,255,255,.72);
-      font-size: 17px;
-      line-height: 1.75;
-      max-width: 460px;
-    }
-
-    .quick-lead {
-      margin-top: 28px;
-      padding: 16px;
-      max-width: 520px;
-      border: 1px solid rgba(241, 223, 186, .34);
-      background: rgba(255,255,255,.1);
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 10px;
-    }
-
-    .quick-lead input,
-    .quick-lead select,
-    .quick-lead textarea {
-      min-width: 0;
-      height: 52px;
-      border: 1px solid rgba(255,255,255,.24);
-      background: rgba(255,255,255,.95);
-      color: var(--lead-ink);
-      border-radius: 6px;
-      padding: 0 14px;
-      font-size: 16px;
-      font-family: var(--font-sans);
-      outline: none;
-    }
-
-    .quick-lead select,
-    .quick-lead textarea {
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .quick-lead select {
-      appearance: none;
-      background-image: linear-gradient(45deg, transparent 50%, #687083 50%), linear-gradient(135deg, #687083 50%, transparent 50%);
-      background-position: calc(100% - 18px) 22px, calc(100% - 12px) 22px;
-      background-size: 6px 6px, 6px 6px;
-      background-repeat: no-repeat;
-    }
-
-    .quick-lead textarea {
-      grid-column: 1 / -1;
-      height: 88px;
-      padding-top: 14px;
-      resize: vertical;
-      line-height: 1.5;
-    }
-
-    .quick-lead .field-wide {
-      grid-column: 1 / -1;
-    }
-
-    .help-checks {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .help-checks label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 44px;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,.32);
-      border-radius: 6px;
-      background: rgba(255,255,255,.12);
-      color: #fff;
-      font-size: 14px;
-      line-height: 1.25;
-    }
-
-    .help-checks input {
-      width: 16px;
-      height: 16px;
-      flex: 0 0 auto;
-      accent-color: var(--lead-gold);
-    }
-
-    .quick-lead button {
-      height: 52px;
-      border: 0;
-      border-radius: 6px;
-      padding: 0 18px;
-      background: var(--lead-gold);
-      color: #111827;
+    /* Sub */
+    .lc-sub {
+      margin: 0 0 30px;
+      color: var(--muted);
       font-size: 15px;
-      font-weight: 900;
-      font-family: var(--font-sans);
-      cursor: pointer;
-      white-space: nowrap;
+      line-height: 1.85;
     }
 
-    .quick-lead button[type="submit"] {
-      grid-column: 1 / -1;
-    }
-
-    .quick-lead small,
-    .quick-message {
-      grid-column: 1 / -1;
-    }
-
-    .quick-lead small {
-      color: rgba(255,255,255,.7);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .quick-message {
-      min-height: 18px;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .notice {
-      margin-top: 34px;
-      padding: 18px 20px;
-      max-width: 520px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.7);
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .brand-foot {
+    /* Trust row */
+    .lc-trust {
       display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      color: rgba(255,255,255,.62);
-      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      margin-bottom: 40px;
     }
-
-    .form-panel {
+    .lc-trust span {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 40px;
-      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,247,244,.98));
-    }
-
-    .form-card {
-      width: min(100%, 620px);
-      background: var(--lead-card);
-      border: 1px solid var(--lead-line);
-      box-shadow: 0 24px 70px rgba(7, 17, 31, .12);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .form-head {
-      padding: 26px 28px 22px;
-      border-bottom: 1px solid var(--lead-line);
-    }
-
-    .progress-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 18px;
-      color: var(--lead-muted);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .progress {
-      height: 6px;
-      background: #f0eee9;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .progress span {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: var(--lead-gold);
-      transition: width .24s ease;
-    }
-
-    .step {
-      padding: 34px 28px 30px;
-      min-height: 390px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 32px;
-    }
-
-    .question-kicker {
-      color: var(--lead-gold);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      margin: 10px 0 12px;
-      font-size: clamp(28px, 4vw, 40px);
-      line-height: 1.16;
-      letter-spacing: -0.035em;
-      color: var(--lead-ink);
-    }
-
-    .hint {
-      margin: 0;
-      color: var(--lead-muted);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .options {
-      display: grid;
-      gap: 12px;
-    }
-
-    .option {
-      width: 100%;
-      min-height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 0 18px 0 20px;
-      border: 1px solid var(--lead-line);
-      border-radius: 8px;
-      background: #fff;
-      color: var(--lead-ink);
-      font-family: var(--font-sans);
-      font-size: 17px;
-      font-weight: 800;
-      text-align: left;
-      cursor: pointer;
-      transition: border-color .16s, background .16s, transform .16s;
-    }
-
-    .option:hover,
-    .option.selected {
-      border-color: var(--lead-gold);
-      background: #fffaf0;
-      transform: translateY(-1px);
-    }
-
-    .option small {
-      color: var(--lead-muted);
+      gap: 6px;
+      color: rgba(255,255,255,0.82);
       font-size: 13px;
       font-weight: 600;
     }
+    .lc-ck { color: var(--gold); font-weight: 900; }
 
-    .phone-input {
-      width: 100%;
-      height: 68px;
-      border: 1px solid var(--lead-line);
+    /* Form */
+    .lc-form { display: flex; flex-direction: column; gap: 18px; }
+
+    .lc-field { display: flex; flex-direction: column; gap: 7px; }
+    .lc-field > label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+    }
+    .lc-field input {
+      height: 52px;
+      border: 1px solid rgba(255,255,255,0.22);
       border-radius: 8px;
-      padding: 0 18px;
-      color: var(--lead-ink);
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: .01em;
+      background: rgba(255,255,255,0.94);
+      color: var(--ink);
+      padding: 0 16px;
+      font-size: 16px;
+      font-family: inherit;
       outline: none;
-      font-family: var(--font-sans);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .lc-field input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(199,154,79,0.18);
     }
 
-    .phone-input:focus {
-      border-color: var(--lead-gold);
-      box-shadow: 0 0 0 4px rgba(199,154,75,.12);
+    .lc-check-group { display: flex; flex-direction: column; gap: 10px; }
+    .lc-check-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
     }
-
-    .agree-box {
-      margin-top: 14px;
+    .lc-checks {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .lc-checks label {
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      color: var(--lead-muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .agree-box input {
-      margin-top: 3px;
-      width: 17px;
-      height: 17px;
-      accent-color: var(--lead-gold);
-      flex: 0 0 auto;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 12px;
-    }
-
-    .form-disclaimer {
-      margin: 12px 0 0;
-      color: var(--lead-muted);
-      font-size: 12px;
-      line-height: 1.55;
-      text-align: right;
-    }
-
-    .btn {
-      min-height: 52px;
-      border: 1px solid var(--lead-line);
+      gap: 9px;
+      min-height: 48px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.24);
       border-radius: 8px;
-      padding: 0 20px;
-      background: #fff;
-      color: var(--lead-ink);
-      font-size: 15px;
-      font-weight: 800;
-      font-family: var(--font-sans);
-      cursor: pointer;
-    }
-
-    .btn.primary {
-      min-width: 168px;
-      border-color: var(--lead-navy);
-      background: var(--lead-navy);
-      color: #fff;
-    }
-
-    .btn.primary:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-    }
-
-    .summary {
-      display: grid;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--lead-line);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
       font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.14s, border-color 0.14s;
+    }
+    .lc-checks label:hover { background: rgba(255,255,255,0.13); }
+    .lc-checks label:has(input:checked) {
+      background: rgba(199,154,79,0.16);
+      border-color: var(--gold);
+    }
+    .lc-checks input[type="checkbox"] {
+      width: 16px; height: 16px;
+      flex: 0 0 auto;
+      accent-color: var(--gold);
     }
 
-    .summary-row strong {
-      color: var(--lead-muted);
-    }
-
-    .done {
-      text-align: center;
-      padding: 52px 28px;
-    }
-
-    .done-mark {
-      width: 66px;
-      height: 66px;
-      margin: 0 auto 22px;
-      display: grid;
-      place-items: center;
-      background: #fff7e8;
-      border: 1px solid var(--lead-gold);
-      border-radius: 999px;
-      color: var(--lead-gold);
-      font-size: 32px;
+    #quickLeadBtn {
+      height: 58px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 16px;
       font-weight: 900;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    #quickLeadBtn:hover:not(:disabled) { opacity: 0.92; transform: translateY(-1px); }
+    #quickLeadBtn:disabled { opacity: 0.48; cursor: not-allowed; transform: none; }
+
+    .lc-msg {
+      min-height: 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold-soft);
+      text-align: center;
     }
 
-    .done h2 {
-      margin-top: 0;
+    .lc-footer-copy {
+      margin: 44px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.85;
+      text-align: center;
     }
 
-    .hidden {
-      display: none;
+    @media (max-width: 600px) {
+      .lc-wrap { padding: 32px 20px 56px; }
+      .lc-header { margin-bottom: 40px; }
     }
 
-    @media (max-width: 900px) {
-      .page {
-        grid-template-columns: 1fr;
-      }
-
-      .brand-panel {
-        min-height: auto;
-        padding: 34px 24px;
-        gap: 40px;
-      }
-
-      .quick-lead {
-        grid-template-columns: 1fr;
-      }
-
-      .help-checks {
-        grid-template-columns: 1fr;
-      }
-
-      .brand-foot {
-        display: none;
-      }
-
-      .form-panel {
-        padding: 22px;
-      }
-
-      .step {
-        min-height: 430px;
-        padding: 28px 22px 24px;
-      }
-    }
+    /* ── Wizard shell (hidden, preserved for logic) ── */
+    .wizard-shell { display: none; }
+    .form-panel { display: flex; align-items: center; justify-content: center; padding: 40px; }
+    .form-card { width: min(100%, 620px); background: var(--lead-card); border: 1px solid var(--lead-line); border-radius: 8px; overflow: hidden; }
+    .form-head { padding: 26px 28px 22px; border-bottom: 1px solid var(--lead-line); }
+    .progress-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 18px; color: var(--lead-muted); font-size: 13px; font-weight: 700; }
+    .progress { height: 6px; background: #f0eee9; border-radius: 999px; overflow: hidden; }
+    .progress span { display: block; height: 100%; width: 0%; background: var(--lead-gold); transition: width .24s ease; }
+    .step { padding: 34px 28px 30px; min-height: 390px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
+    .question-kicker { color: var(--lead-gold); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .wizard-shell h2 { margin: 10px 0 12px; font-size: clamp(28px, 4vw, 40px); line-height: 1.16; letter-spacing: -0.035em; color: var(--lead-ink); }
+    .hint { margin: 0; color: var(--lead-muted); font-size: 15px; line-height: 1.7; }
+    .options { display: grid; gap: 12px; }
+    .option { width: 100%; min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 18px 0 20px; border: 1px solid var(--lead-line); border-radius: 8px; background: #fff; color: var(--lead-ink); font-family: inherit; font-size: 17px; font-weight: 800; text-align: left; cursor: pointer; transition: border-color .16s, background .16s, transform .16s; }
+    .option:hover, .option.selected { border-color: var(--lead-gold); background: #fffaf0; transform: translateY(-1px); }
+    .option small { color: var(--lead-muted); font-size: 13px; font-weight: 600; }
+    .phone-input { width: 100%; height: 68px; border: 1px solid var(--lead-line); border-radius: 8px; padding: 0 18px; color: var(--lead-ink); font-size: 24px; font-weight: 800; outline: none; font-family: inherit; }
+    .phone-input:focus { border-color: var(--lead-gold); box-shadow: 0 0 0 4px rgba(199,154,75,.12); }
+    .agree-box { margin-top: 14px; display: flex; align-items: flex-start; gap: 10px; color: var(--lead-muted); font-size: 13px; line-height: 1.55; }
+    .agree-box input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--lead-gold); flex: 0 0 auto; }
+    .actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .form-disclaimer { margin: 12px 0 0; color: var(--lead-muted); font-size: 12px; line-height: 1.55; text-align: right; }
+    .btn { min-height: 52px; border: 1px solid var(--lead-line); border-radius: 8px; padding: 0 20px; background: #fff; color: var(--lead-ink); font-size: 15px; font-weight: 800; font-family: inherit; cursor: pointer; }
+    .btn.primary { min-width: 168px; border-color: var(--lead-navy); background: var(--lead-navy); color: #fff; }
+    .btn.primary:disabled { opacity: .45; cursor: not-allowed; }
+    .summary { display: grid; gap: 10px; margin-top: 20px; }
+    .summary-row { display: flex; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--lead-line); font-size: 14px; }
+    .summary-row strong { color: var(--lead-muted); }
+    .done { text-align: center; padding: 52px 28px; }
+    .done-mark { width: 66px; height: 66px; margin: 0 auto 22px; display: grid; place-items: center; background: #fff7e8; border: 1px solid var(--lead-gold); border-radius: 999px; color: var(--lead-gold); font-size: 32px; font-weight: 900; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
-  <main class="page">
-    <section class="brand-panel" aria-label="그랜트 랩스 소개">
-      <div>
-        <div class="brandmark">GRANT LABS</div>
-        <div class="brand-sub">STRATEGY · FUNDING · GROWTH</div>
+
+  <!-- ── Hero + Quick Form ──────────────────────────────── -->
+  <div class="lc-wrap">
+    <header class="lc-header">
+      <img class="lc-logo" src="assets/grant_labs_logo_white.svg" alt="Grant Labs" />
+      <p class="lc-brand-sub">STRATEGY · FUNDING · GROWTH</p>
+    </header>
+
+    <main>
+      <div class="lc-badge">1분 무료 진단</div>
+      <h1 class="lc-h1">우리 회사도<br>정책자금 받을 수 있을까요?</h1>
+      <p class="lc-sub">혼자 고민하지 마세요.<br>현재 상황만 남기면 방향부터 안내드립니다.</p>
+
+      <div class="lc-trust">
+        <span><span class="lc-ck">✓</span> 비용 없음</span>
+        <span><span class="lc-ck">✓</span> 상담 의무 없음</span>
+        <span><span class="lc-ck">✓</span> 영업 강요 없음</span>
       </div>
 
-      <div class="hero-copy">
-        <div class="eyebrow-lite">30초 무료 진단</div>
-        <h1>지금 필요한 도움부터 남겨주세요.</h1>
-        <p>
-          조건으로 먼저 걸러내지 않습니다.
-          예비·초기창업자도 필요한 도움과 연락 가능 시간을 남기면 상담 방향을 안내드립니다.
-        </p>
-        <form class="quick-lead" id="quickLeadForm" autocomplete="on">
-          <input id="quickName" name="name" type="text" autocomplete="name" placeholder="이름" aria-label="이름" />
-          <input id="quickPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="연락처" aria-label="연락처" />
-          <div class="help-checks" aria-label="필요한 도움">
-            <label><input type="checkbox" name="helpType" value="창업자금" />창업자금</label>
-            <label><input type="checkbox" name="helpType" value="운전·시설자금" />운전·시설자금</label>
+      <form class="lc-form" id="quickLeadForm" autocomplete="on">
+        <div class="lc-field">
+          <label for="quickName">이름</label>
+          <input id="quickName" name="name" type="text" autocomplete="name" placeholder="홍길동" aria-label="이름" />
+        </div>
+        <div class="lc-field">
+          <label for="quickPhone">연락처</label>
+          <input id="quickPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" aria-label="연락처" />
+        </div>
+        <div class="lc-check-group">
+          <span class="lc-check-label">필요한 도움 (택1 이상)</span>
+          <div class="lc-checks" aria-label="필요한 도움">
+            <label><input type="checkbox" name="helpType" value="정책자금" />정책자금</label>
             <label><input type="checkbox" name="helpType" value="기업인증" />기업인증</label>
             <label><input type="checkbox" name="helpType" value="특허" />특허</label>
+            <label><input type="checkbox" name="helpType" value="연구소" />연구소</label>
             <label><input type="checkbox" name="helpType" value="법인설립" />법인설립</label>
             <label><input type="checkbox" name="helpType" value="경영자문" />경영자문</label>
           </div>
-          <select id="quickContactTime" name="contactTime" aria-label="연락 가능 시간">
-            <option value="">연락 가능 시간</option>
-            <option value="오전 9-12시">오전 9-12시</option>
-            <option value="오후 12-3시">오후 12-3시</option>
-            <option value="오후 3-6시">오후 3-6시</option>
-            <option value="저녁 6시 이후">저녁 6시 이후</option>
-          </select>
-          <textarea id="quickSituation" class="field-wide" name="situation" maxlength="160" placeholder="현재 상황이나 궁금한 점을 자유롭게 적어주세요. 예: 창업 준비 중, 시설자금 필요, 인증 상담 희망" aria-label="현재 상황"></textarea>
-          <button type="submit" id="quickLeadBtn">무료 진단 받기</button>
-          <small>예비·초기 단계도 신청할 수 있습니다. 세부 조건은 상담 때 확인합니다.</small>
-          <div class="quick-message" id="quickMessage" aria-live="polite"></div>
-        </form>
-        <div class="notice">
-          그랜트 랩스는 정책자금을 직접 지급하거나 승인하는 기관이 아닙니다.
-          상담 내용은 참고 안내이며, 최종 승인 및 조건은 각 심사 기관 기준에 따라 달라질 수 있습니다.
         </div>
-      </div>
+        <button type="submit" id="quickLeadBtn">무료 진단 시작하기</button>
+        <div class="lc-msg" id="quickMessage" aria-live="polite"></div>
+      </form>
 
-      <div class="brand-foot">
-        <span>Grant Labs</span>
-        <span>grantlabs.co.kr</span>
-      </div>
-    </section>
+      <p class="lc-footer-copy">예비창업자도, 초기창업자도<br>편하게 신청하세요.</p>
+    </main>
+  </div>
 
-    <!-- 신청 후 단계로 보존: 단순 위저드(form-panel)는 현재 빠른 신청 폼 운영을 위해 비노출 처리 -->
-    <section class="form-panel" hidden aria-hidden="true">
+  <!-- ── Wizard (hidden, DOM preserved for JS) ──────────── -->
+  <div class="wizard-shell" aria-hidden="true">
+    <section class="form-panel">
       <div class="form-card" id="formCard">
         <div class="form-head">
           <div class="progress-row">
@@ -596,7 +324,6 @@
           </div>
           <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
         </div>
-
         <form id="leadForm" class="step" autocomplete="on">
           <div>
             <div class="question-kicker" id="stepKicker">Question 01</div>
@@ -604,14 +331,12 @@
             <p class="hint" id="stepHint">가장 가까운 항목 하나만 선택해도 충분합니다.</p>
             <div id="stepBody" class="options"></div>
           </div>
-
           <div class="actions">
             <button type="button" class="btn" id="backBtn">이전</button>
             <button type="button" class="btn primary" id="nextBtn">다음</button>
           </div>
           <p class="form-disclaimer">본 상담은 참고 안내이며, 최종 승인 및 조건은 심사 기관 기준에 따라 달라질 수 있습니다.</p>
         </form>
-
         <div id="doneView" class="done hidden">
           <div class="done-mark">✓</div>
           <h2>상담 신청이 접수되었습니다.</h2>
@@ -620,7 +345,7 @@
         </div>
       </div>
     </section>
-  </main>
+  </div>
 
   <script>
     const steps = [
@@ -692,7 +417,6 @@
 
     function getTrackingParams() {
       const p = new URLSearchParams(location.search);
-      // 세션 UTM 유지 (lead-check 직접 접근 시 이전 페이지 UTM 복원)
       let stored = {};
       try { stored = JSON.parse(sessionStorage.getItem("gl_utm") || "{}"); } catch(e) {}
       const get = (key) => p.get(key) || stored[key] || "";
@@ -917,12 +641,10 @@
         alert("현재 항목을 입력 또는 선택해 주세요.");
         return;
       }
-
       if (steps[state.step].confirm) {
         await submitLead();
         return;
       }
-
       state.step = Math.min(state.step + 1, steps.length - 1);
       render();
     }
@@ -987,6 +709,7 @@
 
     $("nextBtn").addEventListener("click", goNext);
     $("backBtn").addEventListener("click", goBack);
+
     $("quickLeadForm").addEventListener("submit", async (event) => {
       event.preventDefault();
       const name = $("quickName").value.trim();
@@ -994,11 +717,10 @@
         .map((input) => input.value.trim())
         .filter(Boolean)
         .join(", ");
-      const contactTime = $("quickContactTime").value.trim();
       const phone = $("quickPhone").value.trim();
-      const situation = $("quickSituation").value.trim();
       const message = $("quickMessage");
       const button = $("quickLeadBtn");
+
       if (!name) {
         message.textContent = "이름을 입력해 주세요.";
         $("quickName").focus();
@@ -1010,26 +732,21 @@
         if (firstHelp) firstHelp.focus();
         return;
       }
-      if (!contactTime) {
-        message.textContent = "연락 가능 시간을 선택해 주세요.";
-        $("quickContactTime").focus();
-        return;
-      }
       if (phone.length < 8) {
         message.textContent = "전화번호를 입력해 주세요.";
         $("quickPhone").focus();
         return;
       }
+
       button.disabled = true;
       button.textContent = "접수 중...";
       message.textContent = "";
+
       const tracking = getTrackingParams();
       const lead = buildCrmLead({
         ...state.answers,
         name,
         helpType,
-        contactTime,
-        situation,
         phone,
       }, tracking, "quick");
 
@@ -1057,17 +774,16 @@
         message.textContent = "접수되었습니다. 담당자가 순차적으로 연락드립니다.";
         $("quickName").value = "";
         document.querySelectorAll('input[name="helpType"]:checked').forEach((input) => { input.checked = false; });
-        $("quickContactTime").value = "";
         $("quickPhone").value = "";
-        $("quickSituation").value = "";
       } catch (error) {
         console.warn("빠른 신청 저장 오류:", error);
         message.textContent = "접수 중 오류가 발생했습니다. 잠시 후 다시 신청해 주세요.";
       } finally {
         button.disabled = false;
-        button.textContent = "무료 진단 받기";
+        button.textContent = "무료 진단 시작하기";
       }
     });
+
     render();
   </script>
 </body>
