@@ -12,6 +12,14 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="config.js"></script>
   <script>emailjs.init({ publicKey: "UUfoZdh404On9fZbm" });</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E71KNFBRMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E71KNFBRMW');
+  </script>
   <!-- Meta Pixel Code -->
   <script>
     !function(f,b,e,v,n,t,s)
@@ -858,6 +866,20 @@
     }
 
     function trackLeadEvent(lead) {
+      // GA4 전환 이벤트
+      try {
+        if (typeof gtag === "function") {
+          gtag("event", "generate_lead", {
+            method: lead.utm_source || lead.source || "lead-check",
+            event_category: "contact_form",
+            event_label: lead.interest || lead.needType || "무료 진단",
+            utm_source:   lead.utm_source   || "",
+            utm_medium:   lead.utm_medium   || "",
+            utm_campaign: lead.utm_campaign || "",
+          });
+        }
+      } catch(e) {}
+      // 메타 픽셀 Lead (기존 유지)
       if (typeof window.fbq !== "function") return;
       window.fbq("track", "Lead", {
         content_name: "lead-check",
