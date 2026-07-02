@@ -724,8 +724,9 @@
         if (firstHelp) firstHelp.focus();
         return;
       }
-      if (phone.length < 8) {
-        message.textContent = "전화번호를 입력해 주세요.";
+      const phoneDigits = phone.replace(/[^0-9]/g, "");
+      if (!/^0\d{8,10}$/.test(phoneDigits) && !/^82\d{8,10}$/.test(phoneDigits)) {
+        message.textContent = "올바른 연락처를 입력해 주세요. (예: 010-1234-5678)";
         $("quickPhone").focus();
         return;
       }
