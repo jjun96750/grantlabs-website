@@ -285,6 +285,7 @@
     <form id="quickLeadForm" autocomplete="on" style="background:#1e2d45;border-radius:14px;padding:16px;margin-top:18px;">
       <input id="quickName" name="name" type="text" autocomplete="name" placeholder="이름" aria-label="이름" style="width:100%;box-sizing:border-box;height:44px;border:none;border-radius:9px;padding:0 14px;font-size:14px;margin-bottom:10px;background:#fff;color:#15233b;" />
       <input id="quickPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="연락처" aria-label="연락처" style="width:100%;box-sizing:border-box;height:44px;border:none;border-radius:9px;padding:0 14px;font-size:14px;background:#fff;color:#15233b;" />
+      <input type="text" name="website" id="quickHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;" />
       <div style="font-size:12px;color:#8c9bb5;margin:16px 0 8px;">필요한 도움 <span style="color:#c79a4f;">(택1 이상)</span></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
         <label style="display:flex;align-items:center;gap:7px;background:#26385a;border-radius:8px;padding:11px 12px;font-size:13px;color:#dbe3ef;cursor:pointer;"><input type="checkbox" name="helpType" value="정책자금" style="accent-color:#c79a4f;" />정책자금</label>
@@ -699,6 +700,10 @@
 
     $("quickLeadForm").addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (($("quickHp") && $("quickHp").value) || /[<>]/.test($("quickName").value + $("quickPhone").value)) {
+        $("quickMessage").textContent = "접수되었습니다. 감사합니다.";
+        return;
+      }
       const name = $("quickName").value.trim();
       const helpType = Array.from(document.querySelectorAll('input[name="helpType"]:checked'))
         .map((input) => input.value.trim())
