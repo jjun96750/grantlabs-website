@@ -50,6 +50,138 @@
       box-shadow: 0 1px 2px rgb(16 24 40 / 4%);
     }
 
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1.05fr 1.2fr 1fr 0.95fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .dash-block {
+      min-height: 220px;
+      padding: 14px;
+      border: 1px solid #e4e0d8;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 1px 2px rgb(16 24 40 / 4%);
+    }
+
+    .dash-block h2 {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin: 0 0 12px;
+      color: #111827;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .dash-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .dash-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 34px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee9df;
+    }
+
+    .dash-row:last-child {
+      border-bottom: 0;
+    }
+
+    .dash-row span {
+      color: #667085;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .dash-row strong {
+      color: #111827;
+      font-size: 16px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .dash-row.danger strong,
+    .dash-row.danger span {
+      color: #c22828;
+    }
+
+    .channel-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .channel-table th,
+    .channel-table td {
+      height: 30px;
+      padding: 0 6px;
+      border-bottom: 1px solid #eee9df;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .channel-table th:first-child,
+    .channel-table td:first-child {
+      text-align: left;
+    }
+
+    .channel-table th {
+      background: #fff;
+      color: #667085;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .channel-table td {
+      color: #344054;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pipeline-bars {
+      display: grid;
+      gap: 9px;
+    }
+
+    .pipeline-item {
+      display: grid;
+      grid-template-columns: 58px 1fr 52px;
+      align-items: center;
+      gap: 8px;
+      color: #667085;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .bar-track {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #eee9df;
+    }
+
+    .bar-fill {
+      height: 100%;
+      min-width: 2px;
+      border-radius: inherit;
+      background: #111827;
+    }
+
+    .dash-note {
+      margin-top: 10px;
+      color: #8a93a7;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
     .card-head {
       height: 72px;
       display: flex;
@@ -81,6 +213,136 @@
       justify-content: space-between;
       border-bottom: 1px solid var(--crm-line);
       background: #fff;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border-bottom: 1px solid var(--crm-line);
+      background: #fcfbf9;
+    }
+
+    .kpi-item {
+      min-height: 72px;
+      padding: 12px;
+      border: 1px solid #e2ded5;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .kpi-item span {
+      display: block;
+      color: #717b8e;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .kpi-item strong {
+      display: block;
+      margin-top: 8px;
+      color: #101828;
+      font-size: 22px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .alert-strip {
+      display: none;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0dfb8;
+      background: #fff8e6;
+      color: #8a5b00;
+      font-weight: 800;
+    }
+
+    .alert-strip.open {
+      display: flex;
+    }
+
+    .grade-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .grade-badge.grade-A { background: #eaf7ee; color: #1a7f3c; }
+    .grade-badge.grade-B { background: #eef2ff; color: #3346c9; }
+    .grade-badge.grade-C { background: #f3f4f6; color: #4b5563; }
+    .grade-badge.grade-HOLD { background: #fdecec; color: #c22828; }
+
+    .lead-summary {
+      padding: 14px;
+      border: 1px solid #e4e0d8;
+      border-radius: 8px;
+      background: #fcfbf9;
+    }
+
+    .lead-summary.hidden {
+      display: none;
+    }
+
+    .summary-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .summary-head .count {
+      margin-left: auto;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .summary-item span {
+      display: block;
+      color: #8a93a7;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-top: 2px;
+      color: #101828;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 6px;
+      border-top: 1px dashed #e4e0d8;
+      padding-top: 10px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 12px;
+      color: #344054;
+    }
+
+    .timeline-item span {
+      min-width: 78px;
+      color: #8a93a7;
+      font-weight: 800;
     }
 
     .searchbox {
@@ -218,6 +480,8 @@
     .short { width: 80px; }
     .owner { width: 145px; }
     .status { width: 95px; }
+    .lead-status { width: 118px; }
+    .next-action { width: 112px; }
     .meeting { width: 72px; }
 
     .source-pill,
@@ -283,6 +547,18 @@
       background: #fff;
       color: #8790a3;
       padding: 0 8px;
+      font-size: 12px;
+    }
+
+    .inline-select,
+    .inline-date {
+      width: 100%;
+      height: 28px;
+      border: 1px solid #d9dde6;
+      border-radius: 5px;
+      background: #fff;
+      color: #344054;
+      padding: 0 7px;
       font-size: 12px;
     }
 
@@ -421,15 +697,55 @@
       .toolbar { align-items: stretch; flex-direction: column; }
       .toolbar-left, .toolbar-right { width: 100%; }
       .searchbox { width: 100%; }
+      .dashboard { grid-template-columns: 1fr; }
       .filter-panel { grid-template-columns: 1fr 1fr; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
       .table-wrap { max-height: none; }
-      table { min-width: 1320px; }
+      table { min-width: 1620px; }
     }
   </style>
 </head>
 <body>
   <main class="app">
     <h1 class="page-title">LEAD</h1>
+
+    <section class="dashboard" aria-label="CRM 대시보드">
+      <div class="dash-block">
+        <h2><i data-lucide="list-checks" class="icon"></i>오늘 할 일</h2>
+        <div class="dash-list">
+          <div class="dash-row"><span>미응대 신규</span><strong id="dashNewUncontacted">0</strong></div>
+          <div class="dash-row danger"><span>5분 SLA 초과</span><strong id="dashSlaOverdue">0</strong></div>
+          <div class="dash-row"><span>오늘 콜백</span><strong id="dashTodayCallback">0</strong></div>
+          <div class="dash-row"><span>오늘 미팅</span><strong id="dashTodayMeeting">0</strong></div>
+        </div>
+      </div>
+
+      <div class="dash-block">
+        <h2><i data-lucide="radar" class="icon"></i>채널별 유입</h2>
+        <table class="channel-table">
+          <thead>
+            <tr><th>source</th><th>리드</th><th>양질</th><th>미팅</th><th>계약</th></tr>
+          </thead>
+          <tbody id="dashChannelRows"></tbody>
+        </table>
+        <div class="dash-note" id="dashChannelNote">방문수·CPL은 측정연동후 표시.</div>
+      </div>
+
+      <div class="dash-block">
+        <h2><i data-lucide="git-branch" class="icon"></i>파이프라인</h2>
+        <div class="pipeline-bars" id="dashPipelineRows"></div>
+      </div>
+
+      <div class="dash-block">
+        <h2><i data-lucide="chart-no-axes-combined" class="icon"></i>이번주 KPI</h2>
+        <div class="dash-list">
+          <div class="dash-row"><span>신규</span><strong id="dashWeekNew">0</strong></div>
+          <div class="dash-row"><span>양질비율</span><strong id="dashWeekQuality">0%</strong></div>
+          <div class="dash-row"><span>미팅</span><strong id="dashWeekMeeting">0</strong></div>
+          <div class="dash-row"><span>계약</span><strong id="dashWeekContract">측정연동후</strong></div>
+        </div>
+      </div>
+    </section>
 
     <section class="lead-card">
       <div class="card-head">
@@ -454,12 +770,27 @@
         </div>
       </div>
 
+      <div class="kpi-grid" id="kpiGrid">
+        <div class="kpi-item"><span>MQL</span><strong id="kpiMql">0</strong></div>
+        <div class="kpi-item"><span>상담예약률</span><strong id="kpiBooked">0%</strong></div>
+        <div class="kpi-item"><span>상담완료율</span><strong id="kpiCompleted">0%</strong></div>
+        <div class="kpi-item"><span>계약률</span><strong id="kpiContract">0%</strong></div>
+        <div class="kpi-item"><span>Follow-up</span><strong id="kpiFollowup">0</strong></div>
+      </div>
+
+      <div class="alert-strip" id="followupAlert">
+        <i data-lucide="bell-ring" class="icon"></i>
+        <span id="followupAlertText">Follow-up 필요 리드가 없습니다.</span>
+      </div>
+
       <div class="filter-panel" id="filterPanel">
         <div class="field"><label>소스</label><select id="filterSource"><option value="">전체</option><option>Meta 광고</option><option>TikTok</option><option>Reels</option><option>Shorts</option><option>홈페이지</option></select></div>
         <div class="field"><label>사업분야</label><select id="filterBusiness"><option value="">전체</option><option>제조업</option><option>제조업 외</option><option>콘텐츠업</option><option>광고대행업</option><option>디자인</option></select></div>
         <div class="field"><label>신용</label><select id="filterCredit"><option value="">전체</option><option>≥800</option><option>&lt;800</option><option>&lt;700</option></select></div>
         <div class="field"><label>매출</label><select id="filterRevenue"><option value="">전체</option><option>&lt;1억</option><option>1억~4억</option><option>4억 이상</option></select></div>
         <div class="field"><label>담당자</label><select id="filterOwner"><option value="">전체</option><option>전희진</option><option>담당자 선택</option></select></div>
+        <div class="field"><label>등급</label><select id="filterGrade"><option value="">전체</option><option>A</option><option>B</option><option>C</option><option>HOLD</option></select></div>
+        <div class="field"><label>리드상태</label><select id="filterLeadStatus"><option value="">전체</option><option>신규신청</option><option>MQL</option><option>상담예약</option><option>상담완료</option><option>계약진행</option><option>계약완료</option><option>보류</option><option>저품질</option></select></div>
         <div class="field"><label>TM 상태</label><select id="filterTm"><option value="">전체</option><option>대기중</option><option>재통화예정</option><option>통화완료</option><option>부재중</option></select></div>
       </div>
 
@@ -479,7 +810,10 @@
               <th class="short">매출</th>
               <th class="short">설립</th>
               <th class="short">세금</th>
+              <th class="short">등급</th>
               <th class="owner">담당자</th>
+              <th class="lead-status">리드상태</th>
+              <th class="next-action">다음액션</th>
               <th class="status">TM 상태</th>
               <th class="meeting">미팅</th>
             </tr>
@@ -498,6 +832,22 @@
       <button class="btn ghost" id="closeDrawer"><i data-lucide="x" class="icon"></i></button>
     </div>
     <div class="drawer-body">
+      <div class="lead-summary hidden" id="leadSummary">
+        <div class="summary-head">
+          <span class="grade-badge" id="summaryGrade">C</span>
+          <span class="source-pill" id="summarySource">홈페이지</span>
+          <span class="count" id="summaryReceived"></span>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-item"><span>지역</span><strong id="summaryRegion">—</strong></div>
+          <div class="summary-item"><span>업종</span><strong id="summaryBusiness">—</strong></div>
+          <div class="summary-item"><span>업력</span><strong id="summaryFounded">—</strong></div>
+          <div class="summary-item"><span>매출</span><strong id="summaryRevenue">—</strong></div>
+          <div class="summary-item"><span>신용</span><strong id="summaryCredit">—</strong></div>
+          <div class="summary-item"><span>체납</span><strong id="summaryTax">—</strong></div>
+        </div>
+        <div class="timeline" id="summaryTimeline"></div>
+      </div>
       <div class="form-grid">
         <div class="field"><label>접수일시</label><input id="receivedAt" type="datetime-local" /></div>
         <div class="field"><label>소스</label><select id="source"><option>Meta 광고</option><option>TikTok</option><option>Reels</option><option>Shorts</option><option>홈페이지</option></select></div>
@@ -511,7 +861,10 @@
         <div class="field"><label>설립</label><select id="founded"><option>&lt;3년</option><option>≥3년</option></select></div>
         <div class="field"><label>세금</label><select id="tax"><option>정상</option><option>연체</option><option>확인필요</option></select></div>
         <div class="field"><label>담당자</label><select id="owner"><option>담당자 선택</option><option>전희진</option></select></div>
+        <div class="field"><label>리드상태</label><select id="leadStatus"><option>신규신청</option><option>MQL</option><option>상담예약</option><option>상담완료</option><option>계약진행</option><option>계약완료</option><option>보류</option><option>저품질</option></select></div>
+        <div class="field"><label>다음액션 날짜</label><input id="nextActionDate" type="date" /></div>
         <div class="field"><label>TM 상태</label><select id="tmStatus"><option>대기중</option><option>재통화예정</option><option>통화완료</option><option>부재중</option></select></div>
+        <div class="field"><label>최근접촉일</label><input id="lastContactAt" type="date" /></div>
         <div class="field"><label>미팅</label><select id="meeting"><option>—</option><option>예정</option><option>완료</option><option>취소</option></select></div>
       </div>
       <div class="field"><label>메모</label><textarea id="memo" placeholder="상담 내용, 다음 액션, 필요 서류"></textarea></div>
@@ -532,17 +885,23 @@
 
   <script>
     const START_NO = 1192;
-    const fields = ["receivedAt", "source", "name", "company", "phone", "email", "business", "credit", "revenue", "founded", "tax", "owner", "tmStatus", "meeting", "memo"];
+    const fields = ["receivedAt", "source", "name", "company", "phone", "email", "business", "credit", "revenue", "founded", "tax", "owner", "leadStatus", "nextActionDate", "tmStatus", "lastContactAt", "meeting", "memo"];
+    const leadStatusOptions = ["신규신청", "MQL", "상담예약", "상담완료", "계약진행", "계약완료", "보류", "저품질"];
+    const ownerOptions = ["담당자 선택", "전희진"];
+    const NO_CONTACT_DAYS = 3;
     const $ = (id) => document.getElementById(id);
     const CRM_API_URL = (window.GRANTLABS_CRM_API_URL || "").trim();
     let leads = [];
+    let contracts = [];
+    let contractsLinked = false;
     let selectedId = null;
     let remoteEnabled = Boolean(CRM_API_URL);
 
     async function crmRequest(action, payload = {}) {
       if (!remoteEnabled) return null;
-      const method = action === "list" ? "GET" : "POST";
-      const url = action === "list" ? `${CRM_API_URL}?action=list` : CRM_API_URL;
+      const getActions = ["list", "listcontracts"];
+      const method = getActions.includes(String(action).toLowerCase()) ? "GET" : "POST";
+      const url = method === "GET" ? `${CRM_API_URL}?action=${encodeURIComponent(action)}` : CRM_API_URL;
       const response = await fetch(url, {
         method,
         body: method === "POST" ? JSON.stringify({ action, ...payload }) : undefined,
@@ -574,6 +933,26 @@
       render();
     }
 
+    async function loadRemoteContracts() {
+      if (!remoteEnabled) {
+        contracts = [];
+        contractsLinked = false;
+        render();
+        return;
+      }
+
+      try {
+        const result = await crmRequest("listcontracts");
+        contracts = Array.isArray(result.contracts) ? result.contracts : [];
+        contractsLinked = true;
+      } catch (error) {
+        console.warn("Contracts 동기화 보류:", error);
+        contracts = [];
+        contractsLinked = false;
+      }
+      render();
+    }
+
     function nowLocal() {
       const d = new Date();
       d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
@@ -593,6 +972,8 @@
         credit: $("filterCredit").value,
         revenue: $("filterRevenue").value,
         owner: $("filterOwner").value,
+        grade: $("filterGrade").value,
+        leadStatus: $("filterLeadStatus").value,
         tmStatus: $("filterTm").value,
       };
       return leads
@@ -602,20 +983,217 @@
         .filter((lead) => !filters.credit || lead.credit === filters.credit)
         .filter((lead) => !filters.revenue || lead.revenue === filters.revenue)
         .filter((lead) => !filters.owner || lead.owner === filters.owner)
+        .filter((lead) => !filters.grade || computeLeadGrade(lead).grade === filters.grade)
+        .filter((lead) => !filters.leadStatus || effectiveLeadStatus(lead) === filters.leadStatus)
         .filter((lead) => !filters.tmStatus || lead.tmStatus === filters.tmStatus)
         .sort((a, b) => String(b.receivedAt || "").localeCompare(String(a.receivedAt || "")));
     }
 
+    function computeLeadGrade(lead) {
+      const industryRisk = /도박|사행|유흥|불법|허위/.test(String(lead.business || ""));
+      const taxDelinquent = lead.tax === "연체";
+      const taxUnknown = lead.tax === "확인필요";
+      let score = 0;
+      score += lead.credit === "≥800" ? 20 : lead.credit === "<800" ? 12 : lead.credit === "<700" ? 4 : 10;
+      score += lead.revenue === "4억 이상" ? 20 : lead.revenue === "1억~4억" ? 12 : lead.revenue === "<1억" ? 8 : 10;
+      score += lead.founded === "≥3년" ? 20 : lead.founded === "<3년" ? 8 : 10;
+      score += taxDelinquent ? 0 : taxUnknown ? 6 : 15;
+      score += industryRisk ? 0 : 15;
+      const risk = [];
+      if (taxDelinquent) risk.push("체납");
+      if (taxUnknown) risk.push("세금확인필요");
+      if (industryRisk) risk.push("업종검토");
+      if (lead.credit === "<700") risk.push("저신용");
+      const grade = (taxDelinquent || industryRisk) ? "HOLD" : score >= 80 ? "A" : score >= 60 ? "B" : "C";
+      return { grade, score, risk };
+    }
+
+    function extractRegionFromMemo(memo) {
+      const match = String(memo || "").match(/지역\s*[:：]\s*([^\n\r]+)/);
+      return match ? match[1].trim() : "";
+    }
+
+    function effectiveLeadStatus(lead) {
+      if (lead.leadStatus) return lead.leadStatus;
+      if (lead.meeting === "완료") return "상담완료";
+      if (lead.meeting === "예정") return "상담예약";
+      if (lead.tmStatus === "통화완료") return "MQL";
+      return "신규신청";
+    }
+
+    function parseLeadDate(value) {
+      if (!value) return null;
+      const normalized = String(value).includes("T") ? String(value) : `${value}T00:00:00`;
+      const date = new Date(normalized);
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function daysSince(value) {
+      const date = parseLeadDate(value);
+      if (!date) return null;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      date.setHours(0, 0, 0, 0);
+      return Math.floor((today - date) / 86400000);
+    }
+
+    function needsFollowup(lead) {
+      const nextAction = parseLeadDate(lead.nextActionDate);
+      const today = new Date();
+      today.setHours(23, 59, 59, 999);
+      const recallDue = lead.tmStatus === "재통화예정" && nextAction && nextAction <= today;
+      const contactBase = lead.lastContactAt || lead.createdAt || lead.receivedAt;
+      const noContactDays = daysSince(contactBase);
+      const status = effectiveLeadStatus(lead);
+      const noContact = ["신규신청", "MQL"].includes(status) && (lead.tmStatus === "대기중" || !lead.lastContactAt) && noContactDays != null && noContactDays >= NO_CONTACT_DAYS;
+      return Boolean(recallDue || noContact);
+    }
+
+    function sameDay(value, base = new Date()) {
+      const date = parseLeadDate(value);
+      if (!date) return false;
+      return date.getFullYear() === base.getFullYear()
+        && date.getMonth() === base.getMonth()
+        && date.getDate() === base.getDate();
+    }
+
+    function startOfWeek(date = new Date()) {
+      const result = new Date(date);
+      const day = result.getDay() || 7;
+      result.setHours(0, 0, 0, 0);
+      result.setDate(result.getDate() - day + 1);
+      return result;
+    }
+
+    function isThisWeek(value) {
+      const date = parseLeadDate(value);
+      if (!date) return false;
+      return date >= startOfWeek();
+    }
+
+    function isQualityLead(lead) {
+      return ["MQL", "상담예약", "상담완료", "계약진행", "계약완료"].includes(effectiveLeadStatus(lead));
+    }
+
+    function isMeetingLead(lead) {
+      return ["상담예약", "상담완료", "계약진행", "계약완료"].includes(effectiveLeadStatus(lead)) || lead.meeting === "예정" || lead.meeting === "완료";
+    }
+
+    function isContractLead(lead) {
+      return ["계약진행", "계약완료"].includes(effectiveLeadStatus(lead));
+    }
+
+    function sourceForContract(contract) {
+      const linkedLead = leads.find((lead) => lead.id && (lead.id === contract.customerId || lead.id === contract.leadId));
+      return contract.source || linkedLead?.source || "측정연동후";
+    }
+
+    function renderDashboard() {
+      const now = new Date();
+      const fiveMinutesAgo = now.getTime() - 5 * 60 * 1000;
+      const activeLeads = leads.filter((lead) => effectiveLeadStatus(lead) !== "저품질");
+      const newUncontacted = activeLeads.filter((lead) => effectiveLeadStatus(lead) === "신규신청" && (lead.tmStatus === "대기중" || !lead.tmStatus));
+      const slaOverdue = newUncontacted.filter((lead) => {
+        const received = parseLeadDate(lead.receivedAt || lead.createdAt);
+        return received && received.getTime() <= fiveMinutesAgo;
+      });
+      const todayCallback = activeLeads.filter((lead) => lead.tmStatus === "재통화예정" && sameDay(lead.nextActionDate));
+      const todayMeeting = activeLeads.filter((lead) => lead.meeting === "예정" && (sameDay(lead.nextActionDate) || sameDay(lead.meetingDate)));
+
+      $("dashNewUncontacted").textContent = newUncontacted.length;
+      $("dashSlaOverdue").textContent = slaOverdue.length;
+      $("dashTodayCallback").textContent = todayCallback.length;
+      $("dashTodayMeeting").textContent = todayMeeting.length;
+
+      renderChannelDashboard(activeLeads);
+      renderPipelineDashboard(activeLeads);
+      renderWeeklyDashboard(activeLeads);
+    }
+
+    function renderChannelDashboard(activeLeads) {
+      const sources = [...new Set(activeLeads.map((lead) => lead.source || "홈페이지"))];
+      if (!sources.length) sources.push("측정연동후");
+      const contractSources = contractsLinked ? contracts.map(sourceForContract) : [];
+      $("dashChannelRows").innerHTML = sources.slice(0, 6).map((source) => {
+        const sourceLeads = activeLeads.filter((lead) => (lead.source || "홈페이지") === source);
+        const quality = sourceLeads.filter(isQualityLead).length;
+        const meetings = sourceLeads.filter(isMeetingLead).length;
+        const contractCount = contractsLinked
+          ? contractSources.filter((contractSource) => contractSource === source).length
+          : "측정연동후";
+        const qualityRate = sourceLeads.length ? `${Math.round((quality / sourceLeads.length) * 100)}%` : "0%";
+        return `<tr><td>${escapeHtml(source)}</td><td>${sourceLeads.length}</td><td>${qualityRate}</td><td>${meetings}</td><td>${contractCount}</td></tr>`;
+      }).join("");
+      $("dashChannelNote").textContent = contractsLinked
+        ? "방문수·CPL은 측정연동후 표시."
+        : "Contracts API 미연동: 계약·방문수·CPL은 측정연동후 표시.";
+    }
+
+    function renderPipelineDashboard(activeLeads) {
+      const stages = [
+        ["신규", activeLeads.filter((lead) => effectiveLeadStatus(lead) === "신규신청").length],
+        ["통화", activeLeads.filter((lead) => ["MQL", "상담예약", "상담완료", "계약진행", "계약완료"].includes(effectiveLeadStatus(lead)) || lead.tmStatus === "통화완료").length],
+        ["상담", activeLeads.filter((lead) => ["상담예약", "상담완료", "계약진행", "계약완료"].includes(effectiveLeadStatus(lead))).length],
+        ["미팅", activeLeads.filter(isMeetingLead).length],
+        ["계약", contractsLinked ? contracts.length : activeLeads.filter(isContractLead).length],
+      ];
+      const max = Math.max(stages[0][1], 1);
+      $("dashPipelineRows").innerHTML = stages.map(([label, count], index) => {
+        const previous = index === 0 ? count : stages[index - 1][1];
+        const conversion = index === 0 ? "100%" : `${Math.round((count / Math.max(previous, 1)) * 100)}%`;
+        const width = Math.max(4, Math.round((count / max) * 100));
+        return `<div class="pipeline-item"><span>${label}</span><div class="bar-track"><div class="bar-fill" style="width:${width}%"></div></div><strong>${count} · ${conversion}</strong></div>`;
+      }).join("");
+    }
+
+    function renderWeeklyDashboard(activeLeads) {
+      const weekLeads = activeLeads.filter((lead) => isThisWeek(lead.receivedAt || lead.createdAt));
+      const weekQuality = weekLeads.filter(isQualityLead).length;
+      const weekMeetings = weekLeads.filter(isMeetingLead).length;
+      const weekContracts = contractsLinked
+        ? contracts.filter((contract) => isThisWeek(contract.contractDate || contract.createdAt)).length
+        : null;
+      $("dashWeekNew").textContent = weekLeads.length;
+      $("dashWeekQuality").textContent = weekLeads.length ? `${Math.round((weekQuality / weekLeads.length) * 100)}%` : "0%";
+      $("dashWeekMeeting").textContent = weekMeetings;
+      $("dashWeekContract").textContent = contractsLinked ? weekContracts : "측정연동후";
+    }
+
+    function updateKpis() {
+      const base = leads.filter((lead) => effectiveLeadStatus(lead) !== "저품질");
+      const mql = base.filter((lead) => ["MQL", "상담예약", "상담완료", "계약진행", "계약완료"].includes(effectiveLeadStatus(lead)));
+      const booked = base.filter((lead) => ["상담예약", "상담완료", "계약진행", "계약완료"].includes(effectiveLeadStatus(lead)) || lead.meeting === "예정" || lead.meeting === "완료");
+      const completed = base.filter((lead) => ["상담완료", "계약진행", "계약완료"].includes(effectiveLeadStatus(lead)) || lead.meeting === "완료");
+      const contracted = base.filter((lead) => ["계약진행", "계약완료"].includes(effectiveLeadStatus(lead)));
+      const denominator = Math.max(mql.length, 1);
+      const percent = (value) => `${Math.round((value / denominator) * 100)}%`;
+      const followups = leads.filter(needsFollowup);
+
+      $("kpiMql").textContent = mql.length;
+      $("kpiBooked").textContent = percent(booked.length);
+      $("kpiCompleted").textContent = percent(completed.length);
+      $("kpiContract").textContent = percent(contracted.length);
+      $("kpiFollowup").textContent = followups.length;
+      $("followupAlert").classList.toggle("open", followups.length > 0);
+      $("followupAlertText").textContent = followups.length
+        ? `재통화 도래 또는 ${NO_CONTACT_DAYS}일 이상 미접촉 리드 ${followups.length}건`
+        : "Follow-up 필요 리드가 없습니다.";
+    }
+
     function render() {
+      renderDashboard();
+      updateKpis();
       const data = filteredLeads();
       $("leadCount").textContent = `${data.length}건`;
       $("emptyState").style.display = data.length ? "none" : "block";
       $("rows").innerHTML = data.map((lead, index) => {
         const no = START_NO - index;
-        const ownerCell = lead.owner === "담당자 선택"
-          ? `<select class="owner-select" data-owner="${lead.id}"><option>담당자 선택</option><option>전희진</option></select>`
-          : `<span class="owner-dot"></span><strong style="color:#111">${escapeHtml(lead.owner || "전희진")}</strong>`;
+        const ownerCell = `<select class="owner-select" data-owner="${lead.id}">${ownerOptions.map((option) => `<option ${option === (lead.owner || "담당자 선택") ? "selected" : ""}>${escapeHtml(option)}</option>`).join("")}</select>`;
+        const leadStatus = effectiveLeadStatus(lead);
+        const statusCell = `<select class="inline-select" data-lead-status="${lead.id}">${leadStatusOptions.map((option) => `<option ${option === leadStatus ? "selected" : ""}>${escapeHtml(option)}</option>`).join("")}</select>`;
+        const nextActionCell = `<input class="inline-date" type="date" data-next-action="${lead.id}" value="${escapeHtml(lead.nextActionDate || "")}" />`;
         const tmClass = statusClass(lead.tmStatus);
+        const grade = computeLeadGrade(lead).grade;
         return `
           <tr data-id="${lead.id}" class="${lead.id === selectedId ? "selected" : ""}">
             <td class="no">${no}</td>
@@ -630,7 +1208,10 @@
             <td class="short">${escapeHtml(lead.revenue || "—")}</td>
             <td class="short">${escapeHtml(lead.founded || "—")}</td>
             <td class="short">${escapeHtml(lead.tax || "정상")}</td>
+            <td class="short"><span class="grade-badge grade-${grade}">${grade}</span></td>
             <td class="owner">${ownerCell}</td>
+            <td class="lead-status">${statusCell}</td>
+            <td class="next-action">${nextActionCell}</td>
             <td class="status"><span class="status-pill ${tmClass}">${escapeHtml(lead.tmStatus || "대기중")}</span></td>
             <td class="meeting">${escapeHtml(lead.meeting || "—")}</td>
           </tr>`;
@@ -638,21 +1219,40 @@
 
       document.querySelectorAll("tr[data-id]").forEach((row) => {
         row.addEventListener("click", (event) => {
-          if (event.target.matches("select")) return;
+          if (event.target.matches("select, input")) return;
           openDrawer(row.dataset.id);
         });
       });
       document.querySelectorAll("select[data-owner]").forEach((select) => {
         select.addEventListener("change", (event) => {
           const id = event.target.dataset.owner;
-          const lead = leads.find((item) => item.id === id);
-          if (!lead) return;
-          lead.owner = event.target.value;
-          if (remoteEnabled) crmRequest("updateLead", { lead }).catch((error) => console.warn("담당자 저장 오류:", error));
-          render();
+          patchLead(id, { owner: event.target.value }, "담당자 저장 오류");
+        });
+      });
+      document.querySelectorAll("select[data-lead-status]").forEach((select) => {
+        select.addEventListener("change", (event) => {
+          const id = event.target.dataset.leadStatus;
+          patchLead(id, { leadStatus: event.target.value }, "리드상태 저장 오류");
+        });
+      });
+      document.querySelectorAll("input[data-next-action]").forEach((input) => {
+        input.addEventListener("change", (event) => {
+          const id = event.target.dataset.nextAction;
+          patchLead(id, { nextActionDate: event.target.value }, "다음액션 저장 오류");
         });
       });
       lucide.createIcons();
+    }
+
+    function patchLead(id, updates, errorLabel) {
+      const lead = leads.find((item) => item.id === id);
+      if (!lead) return;
+      const next = { ...lead, ...updates, updatedAt: new Date().toISOString() };
+      leads = leads.map((item) => item.id === id ? next : item);
+      if (remoteEnabled) {
+        crmRequest("updateLead", { lead: next }).catch((error) => console.warn(`${errorLabel}:`, error));
+      }
+      render();
     }
 
     function statusClass(status) {
@@ -670,9 +1270,36 @@
         $(field).value = lead?.[field] || defaultValue(field);
       });
       $("pasteBox").value = "";
+      renderLeadSummary(lead);
       $("drawer").classList.add("open");
       $("backdrop").classList.add("open");
       render();
+    }
+
+    function renderLeadSummary(lead) {
+      $("leadSummary").classList.toggle("hidden", !lead);
+      if (!lead) return;
+      const { grade } = computeLeadGrade(lead);
+      $("summaryGrade").textContent = grade;
+      $("summaryGrade").className = `grade-badge grade-${grade}`;
+      $("summarySource").textContent = lead.source || "홈페이지";
+      $("summaryReceived").textContent = lead.receivedAt ? `접수 ${formatDate(lead.receivedAt)}` : "";
+      $("summaryRegion").textContent = extractRegionFromMemo(lead.memo) || "—";
+      $("summaryBusiness").textContent = lead.business || "—";
+      $("summaryFounded").textContent = lead.founded || "—";
+      $("summaryRevenue").textContent = lead.revenue || "—";
+      $("summaryCredit").textContent = lead.credit || "—";
+      $("summaryTax").textContent = lead.tax || "정상";
+
+      const timelineSteps = [
+        ["접수", lead.receivedAt],
+        ["최근접촉", lead.lastContactAt],
+        ["다음액션 예정", lead.nextActionDate],
+      ].filter(([, value]) => value);
+      timelineSteps.push(["현재상태", effectiveLeadStatus(lead)]);
+      $("summaryTimeline").innerHTML = timelineSteps
+        .map(([label, value]) => `<div class="timeline-item"><span>${escapeHtml(label)}</span><strong>${escapeHtml(formatDate(String(value)))}</strong></div>`)
+        .join("");
     }
 
     function closeDrawer() {
@@ -689,7 +1316,10 @@
         founded: "≥3년",
         tax: "정상",
         owner: "담당자 선택",
+        leadStatus: "신규신청",
+        nextActionDate: "",
         tmStatus: "대기중",
+        lastContactAt: "",
         meeting: "—",
       };
       return defaults[field] || "";
@@ -758,10 +1388,10 @@
     }
 
     function exportCsv() {
-      const headers = ["NO", "접수일시", "소스", "이름", "회사", "연락처", "이메일", "사업분야", "신용", "매출", "설립", "세금", "담당자", "TM 상태", "미팅", "메모"];
+      const headers = ["NO", "접수일시", "소스", "이름", "회사", "연락처", "이메일", "사업분야", "신용", "매출", "설립", "세금", "등급", "담당자", "TM 상태", "미팅", "메모"];
       const data = filteredLeads().map((lead, index) => [
         START_NO - index, formatDate(lead.receivedAt), lead.source, lead.name, lead.company, lead.phone, lead.email,
-        lead.business, lead.credit, lead.revenue, lead.founded, lead.tax, lead.owner, lead.tmStatus, lead.meeting, lead.memo
+        lead.business, lead.credit, lead.revenue, lead.founded, lead.tax, computeLeadGrade(lead).grade, lead.owner, lead.tmStatus, lead.meeting, lead.memo
       ]);
       const csv = [headers, ...data].map((row) => row.map((value) => `"${String(value || "").replaceAll('"', '""')}"`).join(",")).join("\n");
       const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
@@ -790,12 +1420,12 @@
     $("deleteBtn").addEventListener("click", deleteLead);
     $("parseBtn").addEventListener("click", parsePaste);
     $("exportBtn").addEventListener("click", exportCsv);
-    ["searchInput", "filterSource", "filterBusiness", "filterCredit", "filterRevenue", "filterOwner", "filterTm"].forEach((id) => {
+    ["searchInput", "filterSource", "filterBusiness", "filterCredit", "filterRevenue", "filterOwner", "filterGrade", "filterLeadStatus", "filterTm"].forEach((id) => {
       $(id).addEventListener("input", render);
       $(id).addEventListener("change", render);
     });
 
-    loadRemoteLeads();
+    loadRemoteLeads().then(loadRemoteContracts);
   </script>
 </body>
 </html>
