@@ -71,7 +71,7 @@ const Contact = () => {
   }, {
     i: "map-pin",
     l: "오피스",
-    v: "서울특별시 강남구 역삼로 512, 5층 871호 (대치동, 인테크빌딩)"
+    v: "서울특별시 강남구 역삼로 512, 5층 3호 (대치동, 인테크빌딩)"
   }, {
     i: "clock",
     l: "운영 시간",
@@ -335,7 +335,7 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
   items: ["철학", "스토리", "프로세스"]
 }, {
   t: "문의",
-  items: ["jjun96750@gmail.com", "강남구 역삼로 512, 5층"]
+  items: ["jjun96750@gmail.com", "강남구 역삼로 512, 5층 3호"]
 }].map(col => /*#__PURE__*/React.createElement("div", {
   key: col.t
 }, /*#__PURE__*/React.createElement("div", {

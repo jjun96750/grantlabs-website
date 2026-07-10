@@ -26,6 +26,9 @@ const HEADERS = [
   "memo",
   "createdAt",
   "updatedAt",
+  "leadStatus",
+  "nextActionDate",
+  "lastContactAt",
 ];
 
 function doGet(e) {
@@ -272,6 +275,9 @@ function normalizeIncomingLead(input) {
     tax: pick(input, ["tax", "세금"]) || "확인필요",
     owner: pick(input, ["owner", "담당자"]) || "담당자 선택",
     tmStatus: pick(input, ["tmStatus", "TM 상태", "상태"]) || "대기중",
+    leadStatus: pick(input, ["leadStatus", "리드상태"]) || "신규신청",
+    nextActionDate: pick(input, ["nextActionDate", "다음액션일", "다음액션 날짜"]),
+    lastContactAt: pick(input, ["lastContactAt", "최근접촉일", "마지막접촉일"]),
     meeting: pick(input, ["meeting", "미팅"]) || "—",
     interest: pick(input, ["interest", "관심 서비스", "관심서비스"]) || "정책자금",
     message,

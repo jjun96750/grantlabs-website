@@ -70,7 +70,7 @@ const Contact = () => {
               {[
                 { i: "phone", l: "대표 전화", v: "010-5963-7624" },
                 { i: "mail", l: "이메일", v: "jjun96750@gmail.com" },
-                { i: "map-pin", l: "오피스", v: "경기도 파주시 초롱꽃로 109, 406호 (동패동, 팜스타워)" },
+                { i: "map-pin", l: "오피스", v: "서울특별시 강남구 신사동 566-14 5F" },
                 { i: "clock", l: "운영 시간", v: "평일 09:00 – 18:00" },
               ].map((c) => (
                 <div key={c.l} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
@@ -243,7 +243,7 @@ const Footer = () => (
         {[
           { t: "서비스", items: ["정책자금", "기업인증", "특허/연구소", "법인설립", "경영지원"] },
           { t: "회사", items: ["철학", "스토리", "프로세스"] },
-          { t: "문의", items: ["jjun96750@gmail.com", "파주시 초롱꽃로 109, 406호"] },
+          { t: "문의", items: ["jjun96750@gmail.com", "강남구 신사동 566-14 5F"] },
         ].map((col) => (
           <div key={col.t}>
             <div style={{ fontSize: 12, fontWeight: 600, fontFamily: "var(--font-mono)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 16 }}>{col.t}</div>
