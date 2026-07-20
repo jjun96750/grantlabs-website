@@ -19,7 +19,7 @@ const Story = () => {
   ];
 
   const credentials = [
-    { label: "학력", value: "고려대학교 정경대학 통계학과 졸업 (2004)" },
+    { label: "학력", value: "고려대학교 정경대학 통계학과 졸업" },
     { label: "자격", value: "투자자산운용사 · 펀드투자권유대행인" },
   ];
 
