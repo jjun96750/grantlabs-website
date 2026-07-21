@@ -9,24 +9,14 @@ const SERVICES = [
     items: ["운전자금·시설자금 컨설팅", "신용보증기금·기술보증기금 연계", "중소벤처기업진흥공단 정책융자", "지자체 특화 자금 매칭"],
   },
   {
-    n: "02", icon: "badge-check", title: "기업인증", en: "Corporate Certification",
-    desc: "벤처·이노비즈·메인비즈 인증으로 기업 가치를 입증하고 세제·금융·판로 혜택을 확보합니다.",
-    items: ["벤처기업 확인 (혁신성장 유형)", "이노비즈 (기술혁신형 중소기업)", "메인비즈 (경영혁신형 중소기업)", "사후관리 및 갱신 컨설팅"],
+    n: "02", icon: "badge-check", title: "기업인증·특허/연구소", en: "Certification & R&D",
+    desc: "벤처·이노비즈·메인비즈 인증부터 특허출원, 기업부설연구소·전담부서 설립까지 기업의 기술력과 가치를 입증합니다.",
+    items: ["벤처기업 확인·이노비즈·메인비즈 인증", "특허 출원 및 관리", "기업부설연구소·연구개발전담부서 설립", "R&D 세액공제 적용 지원"],
   },
   {
-    n: "03", icon: "flask-conical", title: "특허/연구소", en: "Patent & R&D Center",
-    desc: "특허 출원과 기업부설연구소·전담부서 설립으로 R&D 세액공제와 정부지원사업 자격을 확보합니다.",
-    items: ["특허 출원 및 관리", "기업부설연구소 신고", "연구개발전담부서 설립", "R&D 세액공제 적용 지원"],
-  },
-  {
-    n: "04", icon: "building-2", title: "법인설립", en: "Corporation Setup",
-    desc: "법인 설립 등기부터 사업자 개설까지, 창업 초기의 복잡한 절차를 빠르고 정확하게 처리합니다.",
-    items: ["법인 설립 등기 대행", "사업자 등록 및 인허가 연계", "사업계획서 작성 지원", "창업 초기 세무·노무 연계"],
-  },
-  {
-    n: "05", icon: "briefcase", title: "경영지원", en: "Business Management",
-    desc: "투자 유치부터 정부지원사업 신청까지, 기업 운영 전반에 걸친 맞춤형 경영 전략을 함께 설계합니다.",
-    items: ["사업계획서·IR 자료 작성", "정부지원사업 신청 대행", "투자 유치 전략 수립", "세무·노무·법무 전문가 연계"],
+    n: "03", icon: "building-2", title: "법인설립·경영지원", en: "Corporate Setup & Management",
+    desc: "법인 설립부터 마케팅, 세무·노무까지 기업 운영에 필요한 실무를 연결해 지원합니다.",
+    items: ["법인설립등기·정관변경·청산등기", "홈페이지 제작·마케팅/홍보", "세무·회계 및 인사·노무 연계", "기타 요청 업무 수행"],
   },
 ];
 
@@ -47,31 +37,18 @@ const Services = () => {
 
         <div className="services-grid-top" style={{
           display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 0, border: "1px solid var(--border)", borderRadius: "14px 14px 0 0",
+          gap: 0, border: "1px solid var(--border)", borderRadius: "14px",
           overflow: "hidden", background: "var(--card)",
         }}>
-          {SERVICES.slice(0, 3).map((s, i) => (
-            <ServiceCell key={s.n} svc={s} total={5} borderLeft={i > 0} />
-          ))}
-        </div>
-
-        <div className="services-grid-bottom" style={{
-          display: "grid", gridTemplateColumns: "repeat(2, 1fr)",
-          gap: 0, border: "1px solid var(--border)", borderTop: "none",
-          borderRadius: "0 0 14px 14px",
-          overflow: "hidden", background: "var(--card)",
-        }}>
-          {SERVICES.slice(3).map((s, i) => (
-            <ServiceCell key={s.n} svc={s} total={5} borderLeft={i > 0} />
+          {SERVICES.map((s, i) => (
+            <ServiceCell key={s.n} svc={s} total={3} borderLeft={i > 0} />
           ))}
         </div>
       </div>
 
       <style>{`
         @media (max-width: 880px) {
-          .services-grid-top, .services-grid-bottom { grid-template-columns: 1fr !important; }
-          .services-grid-top { border-radius: 14px 14px 0 0 !important; }
-          .services-grid-bottom { border-radius: 0 0 14px 14px !important; }
+          .services-grid-top { grid-template-columns: 1fr !important; border-radius: 14px !important; }
           .svc-cell { border-left: none !important; border-top: 1px solid var(--border) !important; }
           .svc-cell:first-child { border-top: none !important; }
         }
