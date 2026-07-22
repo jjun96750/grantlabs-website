@@ -1587,7 +1587,7 @@ const Contact = () => {
   }, {
     i: "mail",
     l: "이메일",
-    v: "jjun96750@gmail.com"
+    v: "jhj@grantlabs.co.kr"
   }, {
     i: "map-pin",
     l: "오피스",
@@ -1853,7 +1853,7 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
   items: ["철학", "스토리", "프로세스"]
 }, {
   t: "문의",
-  items: ["jjun96750@gmail.com", "강남구 역삼로 512, 5층 3호"]
+  items: ["jhj@grantlabs.co.kr", "강남구 역삼로 512, 5층 3호"]
 }].map(col => /*#__PURE__*/React.createElement("div", {
   key: col.t
 }, /*#__PURE__*/React.createElement("div", {
