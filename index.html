@@ -1875,13 +1875,26 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
   }
 }, "\uAE30\uC5C5\uC758 \uC131\uC7A5\uC5D0 \uADF8\uB79C\uD2B8 \uB7A9\uC2A4\uAC00 \uD568\uAED8\uD569\uB2C8\uB2E4.")), [{
   t: "서비스",
-  items: ["정책자금", "기업인증", "특허/연구소", "법인설립", "경영지원"]
+  items: [
+    { label: "정책자금", href: "#services" },
+    { label: "기업인증", href: "#services" },
+    { label: "특허/연구소", href: "#services" },
+    { label: "법인설립", href: "#services" },
+    { label: "경영지원", href: "#services" }
+  ]
 }, {
   t: "회사",
-  items: ["철학", "스토리", "프로세스"]
+  items: [
+    { label: "철학", href: "#about" },
+    { label: "스토리", href: "#story" },
+    { label: "프로세스", href: "#process" }
+  ]
 }, {
   t: "문의",
-  items: ["jhj@grantlabs.co.kr", "강남구 역삼로 512, 5층 3호"]
+  items: [
+    { label: "jhj@grantlabs.co.kr", href: "mailto:jhj@grantlabs.co.kr" },
+    { label: "강남구 역삼로 512, 5층 3호", href: null }
+  ]
 }].map(col => /*#__PURE__*/React.createElement("div", {
   key: col.t
 }, /*#__PURE__*/React.createElement("div", {
@@ -1903,15 +1916,20 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
     gap: 10
   }
 }, col.items.map(it => /*#__PURE__*/React.createElement("li", {
-  key: it
-}, /*#__PURE__*/React.createElement("a", {
-  href: "#",
+  key: it.label
+}, it.href ? /*#__PURE__*/React.createElement("a", {
+  href: it.href,
   style: {
     fontSize: 13.5,
     color: "var(--muted-foreground)",
     textDecoration: "none"
   }
-}, it))))))), /*#__PURE__*/React.createElement("div", {
+}, it.label) : /*#__PURE__*/React.createElement("span", {
+  style: {
+    fontSize: 13.5,
+    color: "var(--muted-foreground)"
+  }
+}, it.label))))))), /*#__PURE__*/React.createElement("div", {
   style: {
     marginTop: 64,
     paddingTop: 24,
@@ -1932,16 +1950,14 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
     display: "flex",
     gap: 20
   }
-}, /*#__PURE__*/React.createElement("a", {
-  href: "#",
+}, /*#__PURE__*/React.createElement("span", {
   style: {
     fontSize: 12,
     color: "var(--muted-foreground)",
-    textDecoration: "none",
     whiteSpace: "nowrap"
   }
 }, "\uC774\uC6A9\uC57D\uAD00"), /*#__PURE__*/React.createElement("a", {
-  href: "#",
+  href: "privacy.html",
   style: {
     fontSize: 12,
     color: "var(--muted-foreground)",
