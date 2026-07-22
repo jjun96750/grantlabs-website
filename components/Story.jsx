@@ -13,7 +13,7 @@ const Story = () => {
 
   const career = [
     { period: "2026 — 현재", role: "그랜트 랩스 (Grant Labs)", title: "대표" },
-    { period: "2025 — 2026", role: "더베어앤컴퍼니", title: "기업경영 부문장" },
+    { period: "2025 — 2026", role: "기업경영 컨설팅사", title: "정책자금·기업인증 부문장" },
     { period: "2021 — 2024", role: "부동산 투자사 및 디벨로퍼", title: "본부장" },
     { period: "2004 — 2020", role: "대형그룹사", title: "재무 전략 담당" },
   ];
