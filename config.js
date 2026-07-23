@@ -29,7 +29,7 @@ window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycbwvZUrD6
     credit: params.credit || params.credit_score || "",
     revenue: params.revenue || "",
     founded: "",
-    tax: "확인필요",
+    tax: params.tax || "확인필요",
     owner: "담당자 선택",
     tmStatus: "대기중",
     meeting: "—",

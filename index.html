@@ -466,9 +466,9 @@ const Header = ({
     size: 15
   })), /*#__PURE__*/React.createElement(Button, {
     size: "sm",
-    href: "#contact",
+    href: "lead-check.html",
     iconRight: "arrow-right"
-  }, "\uBB34\uB8CC\uC0C1\uB2F4 \uC2E0\uCCAD"))), /*#__PURE__*/React.createElement("style", null, `
+  }, "\uBB34\uB8CC \uC9C4\uB2E8 \uC2E0\uCCAD"))), /*#__PURE__*/React.createElement("style", null, `
         @media (max-width: 880px) { .desktop-nav { display: none !important; } }
       `));
 };
@@ -614,7 +614,7 @@ const HeroSlider = () => {
       flexWrap: "wrap"
     }
   }, /*#__PURE__*/React.createElement("a", {
-    href: "#contact",
+    href: "lead-check.html",
     style: {
       display: "inline-flex",
       alignItems: "center",
@@ -806,11 +806,71 @@ const Services = () => {
     svc: s,
     total: 3,
     borderLeft: i > 0
-  })))), /*#__PURE__*/React.createElement("style", null, `
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "trust-grid",
+    style: {
+      marginTop: 24,
+      display: "grid",
+      gridTemplateColumns: "repeat(4, 1fr)",
+      border: "1px solid var(--border)",
+      borderRadius: 14,
+      overflow: "hidden",
+      background: "var(--card)"
+    }
+  }, [{
+    t: "영업일 1일 이내 회신",
+    d: "문의 주시면 영업일 1일 이내 연락드리는 것을 원칙으로 합니다."
+  }, {
+    t: "진단 후 7일 전략보고서",
+    d: "진단을 바탕으로 7일 내 맞춤 전략보고서를 드립니다."
+  }, {
+    t: "대표 직접 상담",
+    d: "첫 상담부터 대표가 직접 진행합니다."
+  }, {
+    t: "재무전략 20년",
+    d: "대형그룹사 재무전략 20년 경력을 바탕으로 합니다."
+  }].map((item, i) => /*#__PURE__*/React.createElement("div", {
+    key: item.t,
+    className: "trust-cell",
+    style: {
+      padding: "28px 24px",
+      borderLeft: i > 0 ? "1px solid var(--border)" : "none"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "var(--font-mono)",
+      fontSize: 11,
+      color: "var(--muted-foreground)",
+      letterSpacing: "0.06em",
+      marginBottom: 12
+    }
+  }, String(i + 1).padStart(2, "0")), /*#__PURE__*/React.createElement("h4", {
+    style: {
+      margin: "0 0 8px",
+      fontSize: 16,
+      fontWeight: 600,
+      letterSpacing: "-0.02em"
+    }
+  }, item.t), /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0,
+      fontSize: 13,
+      color: "var(--muted-foreground)",
+      lineHeight: 1.6
+    }
+  }, item.d))))), /*#__PURE__*/React.createElement("style", null, `
         @media (max-width: 880px) {
           .services-grid-top { grid-template-columns: 1fr !important; border-radius: 14px !important; }
           .svc-cell { border-left: none !important; border-top: 1px solid var(--border) !important; }
           .svc-cell:first-child { border-top: none !important; }
+          .trust-grid { grid-template-columns: 1fr 1fr !important; }
+          .trust-cell:nth-child(odd) { border-left: none !important; }
+          .trust-cell:nth-child(n+3) { border-top: 1px solid var(--border) !important; }
+        }
+        @media (max-width: 480px) {
+          .trust-grid { grid-template-columns: 1fr !important; }
+          .trust-cell { border-left: none !important; border-top: 1px solid var(--border) !important; }
+          .trust-cell:first-child { border-top: none !important; }
         }
       `));
 };
@@ -1539,6 +1599,9 @@ const Contact = () => {
     name: "",
     phone: "",
     interest: "정책자금",
+    revenue: "",
+    tax: "",
+    timing: "",
     message: ""
   });
   const [sent, setSent] = React.useState(false);
@@ -1560,7 +1623,61 @@ const Contact = () => {
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "container"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "lead-check.html",
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 16,
+      flexWrap: "wrap",
+      padding: "22px 28px",
+      marginBottom: 56,
+      borderRadius: 14,
+      border: "1px solid var(--border)",
+      background: "var(--surface)",
+      textDecoration: "none",
+      color: "var(--foreground)",
+      transition: "border-color .2s"
+    },
+    onMouseEnter: e => {
+      e.currentTarget.style.borderColor = "var(--foreground)";
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.borderColor = "var(--border)";
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      fontFamily: "var(--font-mono)",
+      letterSpacing: "0.06em",
+      textTransform: "uppercase",
+      color: "var(--muted-foreground)",
+      marginBottom: 6
+    }
+  }, "1\uBD84 \uBB34\uB8CC\uC9C4\uB2E8"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 19,
+      fontWeight: 600,
+      letterSpacing: "-0.02em"
+    }
+  }, "\uC6B0\uB9AC \uD68C\uC0AC\uB3C4 \uAC80\uD1A0 \uB300\uC0C1\uC778\uC9C0 1\uBD84 \uD655\uC778")), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 8,
+      padding: "12px 22px",
+      background: "var(--primary)",
+      color: "var(--primary-foreground)",
+      borderRadius: 8,
+      fontSize: 14,
+      fontWeight: 500,
+      whiteSpace: "nowrap"
+    }
+  }, "\uC9C4\uB2E8 \uC2DC\uC791\uD558\uAE30", /*#__PURE__*/React.createElement(Icon, {
+    name: "arrow-right",
+    size: 15
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "contact-grid",
     style: {
       display: "grid",
@@ -1764,6 +1881,87 @@ const Contact = () => {
       transition: "all .15s"
     }
   }, opt)))), /*#__PURE__*/React.createElement(Field, {
+    label: "\uC5F0\uB9E4\uCD9C \uAD6C\uAC04"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 8
+    }
+  }, ["\uB9E4\uCD9C \uBC1C\uC0DD \uC804", "1\uC5B5 \uBBF8\uB9CC", "1\uC5B5~5\uC5B5", "5\uC5B5~30\uC5B5", "30\uC5B5 \uC774\uC0C1"].map(opt => /*#__PURE__*/React.createElement("button", {
+    key: opt,
+    type: "button",
+    onClick: () => setForm({
+      ...form,
+      revenue: opt
+    }),
+    style: {
+      padding: "8px 14px",
+      borderRadius: 8,
+      border: "1px solid var(--border)",
+      background: form.revenue === opt ? "var(--primary)" : "var(--background)",
+      color: form.revenue === opt ? "var(--primary-foreground)" : "var(--foreground)",
+      fontSize: 13,
+      fontWeight: 500,
+      cursor: "pointer",
+      fontFamily: "var(--font-sans)",
+      transition: "all .15s"
+    }
+  }, opt)))), /*#__PURE__*/React.createElement(Field, {
+    label: "\uC138\uAE08 \uCCB4\uB0A9 \uC5EC\uBD80"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 8
+    }
+  }, ["\uC5C6\uC74C", "\uC815\uB9AC \uC608\uC815", "\uBD84\uB0A9 \uC911", "\uBAA8\uB984"].map(opt => /*#__PURE__*/React.createElement("button", {
+    key: opt,
+    type: "button",
+    onClick: () => setForm({
+      ...form,
+      tax: opt
+    }),
+    style: {
+      padding: "8px 14px",
+      borderRadius: 8,
+      border: "1px solid var(--border)",
+      background: form.tax === opt ? "var(--primary)" : "var(--background)",
+      color: form.tax === opt ? "var(--primary-foreground)" : "var(--foreground)",
+      fontSize: 13,
+      fontWeight: 500,
+      cursor: "pointer",
+      fontFamily: "var(--font-sans)",
+      transition: "all .15s"
+    }
+  }, opt)))), /*#__PURE__*/React.createElement(Field, {
+    label: "\uD544\uC694 \uC2DC\uAE30"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 8
+    }
+  }, ["1\uAC1C\uC6D4 \uB0B4", "3\uAC1C\uC6D4 \uB0B4", "6\uAC1C\uC6D4 \uB0B4", "\uC2DC\uAE30 \uBBF8\uC815"].map(opt => /*#__PURE__*/React.createElement("button", {
+    key: opt,
+    type: "button",
+    onClick: () => setForm({
+      ...form,
+      timing: opt
+    }),
+    style: {
+      padding: "8px 14px",
+      borderRadius: 8,
+      border: "1px solid var(--border)",
+      background: form.timing === opt ? "var(--primary)" : "var(--background)",
+      color: form.timing === opt ? "var(--primary-foreground)" : "var(--foreground)",
+      fontSize: 13,
+      fontWeight: 500,
+      cursor: "pointer",
+      fontFamily: "var(--font-sans)",
+      transition: "all .15s"
+    }
+  }, opt)))), /*#__PURE__*/React.createElement(Field, {
     label: "\uBB38\uC758 \uB0B4\uC6A9 (\uC120\uD0DD)"
   }, /*#__PURE__*/React.createElement(Textarea, {
     placeholder: "\uD68C\uC0AC \uD604\uD669 \uB610\uB294 \uAD81\uAE08\uD55C \uC810\uC744 \uC790\uC720\uB86D\uAC8C \uC801\uC5B4\uC8FC\uC138\uC694.",
@@ -1789,13 +1987,23 @@ const Contact = () => {
         return;
       }
       setSending(true);
+      const filterSummary = [
+        form.revenue ? `연매출: ${form.revenue}` : "",
+        form.tax ? `세금 체납: ${form.tax}` : "",
+        form.timing ? `필요 시기: ${form.timing}` : ""
+      ].filter(Boolean).join(" / ");
+      const composedMessage = [form.message, filterSummary].filter(Boolean).join("\n\n");
       try {
         await emailjs.send("service_tcj8otx", "template_8ne6kj3", {
           company: form.company,
           name: form.name,
           phone: form.phone,
           interest: form.interest,
-          message: form.message
+          revenue: form.revenue,
+          tax: form.tax,
+          timing: form.timing,
+          message: composedMessage,
+          lead_details: composedMessage
         }, {
           publicKey: "UUfoZdh404On9fZbm"
         });
@@ -1808,9 +2016,15 @@ const Contact = () => {
       setSending(false);
       try {
         if (typeof gtag !== "undefined") {
-          const utm = utmRef.current;
+          gtag("event", "contact_submit", {
+            event_category: "contact_form",
+            event_label: form.interest,
+            revenue: form.revenue,
+            tax: form.tax,
+            timing: form.timing
+          });
           gtag("event", "generate_lead", {
-            method: resolveSource(utm.utm_source, utm.utm_medium),
+            method: "contact_form",
             event_category: "contact_form",
             event_label: form.interest
           });
@@ -1950,10 +2164,12 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
     display: "flex",
     gap: 20
   }
-}, /*#__PURE__*/React.createElement("span", {
+}, /*#__PURE__*/React.createElement("a", {
+  href: "terms.html",
   style: {
     fontSize: 12,
     color: "var(--muted-foreground)",
+    textDecoration: "none",
     whiteSpace: "nowrap"
   }
 }, "\uC774\uC6A9\uC57D\uAD00"), /*#__PURE__*/React.createElement("a", {
@@ -1967,10 +2183,82 @@ const Footer = () => /*#__PURE__*/React.createElement("footer", {
 }, "\uAC1C\uC778\uC815\uBCF4 \uCC98\uB9AC\uBC29\uCE68")))), /*#__PURE__*/React.createElement("style", null, `
       @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; } }
     `));
+const FAQ = () => /*#__PURE__*/React.createElement("section", {
+  id: "faq",
+  style: {
+    padding: "var(--section-y) 0",
+    borderTop: "1px solid var(--border)"
+  }
+}, /*#__PURE__*/React.createElement("div", {
+  className: "container"
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    maxWidth: 760,
+    marginBottom: 56
+  }
+}, /*#__PURE__*/React.createElement(Eyebrow, null, "자주 묻는 질문"), /*#__PURE__*/React.createElement("h2", {
+  style: {
+    margin: "16px 0 0",
+    fontSize: "clamp(32px, 4.2vw, 48px)",
+    fontWeight: 600,
+    letterSpacing: "-0.03em",
+    lineHeight: 1.15
+  }
+}, "궁금한 점을 먼저 정리했습니다")), /*#__PURE__*/React.createElement("div", {
+  style: {
+    border: "1px solid var(--border)",
+    borderRadius: 14,
+    overflow: "hidden",
+    background: "var(--card)"
+  }
+}, [{
+  q: "상담은 정말 무료인가요?",
+  a: "네. 홈페이지를 통한 상담·진단 신청은 무료입니다. 상담 이후 정식 자문이 제안될 수 있으며, 진행 여부는 자유롭게 결정하실 수 있습니다."
+}, {
+  q: "정식 자문 비용은 어떻게 되나요?",
+  a: "정식 자문 착수 시 계약금 100만원(VAT 별도)이며, 성과수수료 등 세부 조건은 계약서에서 안내드립니다."
+}, {
+  q: "정책자금은 지원금(보조금)인가요?",
+  a: "정책자금은 대부분 융자·보증 중심으로 상환 의무가 있는 자금입니다. 기업 상황에 맞는 자금 유형을 함께 검토해 드립니다."
+}, {
+  q: "어떤 기업이 상담 대상인가요?",
+  a: "예비·초기창업자부터 성장기 기업까지 폭넓게 상담 가능합니다. 조건으로 먼저 거르지 않으며, 진단을 통해 가능성을 함께 확인합니다."
+}].map((item, i) => /*#__PURE__*/React.createElement("div", {
+  key: item.q,
+  style: {
+    padding: "28px 32px",
+    borderTop: i > 0 ? "1px solid var(--border)" : "none"
+  }
+}, /*#__PURE__*/React.createElement("h3", {
+  style: {
+    margin: "0 0 10px",
+    fontSize: 17,
+    fontWeight: 600,
+    letterSpacing: "-0.02em",
+    display: "flex",
+    gap: 10,
+    alignItems: "flex-start"
+  }
+}, /*#__PURE__*/React.createElement("span", {
+  style: {
+    color: "var(--muted-foreground)",
+    fontFamily: "var(--font-mono)",
+    fontSize: 15
+  }
+}, "Q"), item.q), /*#__PURE__*/React.createElement("p", {
+  style: {
+    margin: 0,
+    fontSize: 14.5,
+    color: "var(--muted-foreground)",
+    lineHeight: 1.7,
+    paddingLeft: 24
+  }
+}, item.a))))));
 Object.assign(window, {
   Contact,
   Footer,
-  Field
+  Field,
+  FAQ
 });
 
 </script>
@@ -1987,6 +2275,7 @@ Object.assign(window, {
           React.createElement(About, null),
           React.createElement(Story, null),
           React.createElement(Process, null),
+          React.createElement(FAQ, null),
           React.createElement(Contact, null)
         ),
         React.createElement(Footer, null)

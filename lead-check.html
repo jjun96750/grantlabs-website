@@ -581,6 +581,13 @@
       // GA4 전환 이벤트
       try {
         if (typeof gtag === "function") {
+          gtag("event", "lead_check_submit", {
+            event_category: "lead_check",
+            event_label: lead.interest || lead.needType || "무료 진단",
+            utm_source:   lead.utm_source   || "",
+            utm_medium:   lead.utm_medium   || "",
+            utm_campaign: lead.utm_campaign || "",
+          });
           gtag("event", "generate_lead", {
             method: lead.utm_source || lead.source || "lead-check",
             event_category: "contact_form",
@@ -694,6 +701,15 @@
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
     }
+
+    try {
+      if (typeof gtag === "function") {
+        gtag("event", "lead_check_open", {
+          event_category: "lead_check",
+          event_label: "page_load",
+        });
+      }
+    } catch (e) {}
 
     $("nextBtn").addEventListener("click", goNext);
     $("backBtn").addEventListener("click", goBack);
