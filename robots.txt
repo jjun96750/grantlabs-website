@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /GrantLabs.html
+Disallow: /GrantLabs2.html
 
 Sitemap: https://grantlabs.co.kr/sitemap.xml

@@ -2,37 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://grantlabs.co.kr/</loc>
-    <lastmod>2026-06-27</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://grantlabs.co.kr/policy-fund</loc>
+    <loc>https://grantlabs.co.kr/policy-fund/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://grantlabs.co.kr/corporate-certification</loc>
+    <loc>https://grantlabs.co.kr/corporate-certification/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://grantlabs.co.kr/company-registration</loc>
+    <loc>https://grantlabs.co.kr/company-registration/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://grantlabs.co.kr/lead-check</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://grantlabs.co.kr/privacy</loc>
-    <lastmod>2026-06-27</lastmod>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://grantlabs.co.kr/terms</loc>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
