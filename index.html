@@ -83,6 +83,69 @@
   "url": "https://grantlabs.co.kr/"
 }
 </script>
+
+<!-- ★2026-08-01 추가 — LocalBusiness(ProfessionalService) 스키마
+     근거: 검색노출 실측(마케팅/검색노출_진단_실행팩_260801.md) —
+       ⛔기존 JSON-LD는 Organization·WebSite 둘뿐이라 ★지역업체로 인식되지 않았다.
+       "정책자금 컨설팅" 검색에 ★0건, 경쟁사 7곳만 노출.
+     ★ProfessionalService = LocalBusiness 하위 타입. 지역+업종 검색에 직접 쓰인다.
+     ★telephone 정본 = 010-5963-7624 (★업무폰). 대표 확정 2026-08-01: "업무폰으로만 노출하자".
+       실측: index.html 내 전화 표기 ★5곳 전부 이 번호로 ★일치한다.
+       ⛔불일치는 ★네이버 플레이스에만 있었다 — 0507-1340-7624 는 ★네이버 스마트콜이
+         대표 ★개인폰(010-36xx-7624)에 걸어둔 번호였다. ★둘 다 대표 번호이며 제3자 아님.
+       → 조치: 플레이스 ★스마트콜 해지 후 이 번호로 단일화(대외 노출 = ★업무폰 하나). -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://grantlabs.co.kr/#localbusiness",
+  "name": "그랜트 랩스",
+  "alternateName": ["Grant Labs", "그랜트랩스"],
+  "url": "https://grantlabs.co.kr",
+  "image": "https://grantlabs.co.kr/grant-labs-logo.png",
+  "logo": "https://grantlabs.co.kr/grant-labs-logo.png",
+  "description": "정책자금·기업인증(벤처·이노비즈·메인비즈)·특허출원·기업부설연구소 설립·법인설립을 지원하는 강남 소재 경영컨설팅 회사입니다. 대표가 직접 상담부터 사후관리까지 담당합니다.",
+  "priceRange": "₩₩",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "KR",
+    "addressRegion": "서울특별시",
+    "addressLocality": "강남구",
+    "streetAddress": "역삼로 512, 5층 3호 (대치동, 인테크빌딩)",
+    "postalCode": "06147"
+  },
+  "telephone": "010-5963-7624",
+  "email": "jhj@grantlabs.co.kr",
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "10:00",
+    "closes": "19:00"
+  }],
+  "areaServed": [
+    {"@type": "AdministrativeArea", "name": "서울특별시"},
+    {"@type": "AdministrativeArea", "name": "경기도"},
+    {"@type": "Country", "name": "대한민국"}
+  ],
+  "knowsAbout": [
+    "정책자금", "중소기업 정책자금", "저금리 융자", "보증", "기술보증기금", "신용보증기금",
+    "중소벤처기업진흥공단", "기업인증", "벤처기업확인", "이노비즈", "메인비즈",
+    "특허출원", "기업부설연구소", "연구개발전담부서", "법인설립", "경영컨설팅"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "그랜트 랩스 서비스",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "정책자금 컨설팅", "description": "업력·매출·신용 요건을 진단해 융자·보증 검토 경로를 안내합니다. 승인과 한도는 기관 심사로 결정됩니다."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "기업인증 컨설팅", "description": "벤처기업확인·이노비즈·메인비즈 요건 판정 및 신청 서류 작성 지원"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "특허출원 지원", "description": "발명 도출·명세서 작성 지원 및 출원 절차 안내"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "기업부설연구소·연구개발전담부서 설립", "description": "KOITA 신고 요건 진단, 조직도·도면·서류 준비 지원"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "법인설립", "description": "정관·의사록 등 설립 서류 작성 및 절차 안내"}}
+    ]
+  }
+}
+</script>
 </head>
 <body>
     <noscript>
