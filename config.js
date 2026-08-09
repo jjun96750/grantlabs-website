@@ -1,8 +1,14 @@
-window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycbxs0y4YXEDEUcJy8ebrpl9LIc4HiJ3j8Y7Nk3f1fTksQq44t4wC4ED5qwV7l6rkmgP8/exec";
-// ★2026-07-27 Brain 실측 교정: 구 URL(AKfycbwv...)은 이 Apps Script 프로젝트의 활성 배포 목록에 없는
-// 죽은/orphan 배포로, 접속 시 구글 OAuth 권한요청 화면만 뜨고 데이터를 반환하지 않았다(실측 확인).
-// components/Contact.jsx가 실제로 쓰던 배포(AKfycbxs0y4Y..., "Meta 리드폼 웹훅 추가" 활성배포, action=list 실측 정상)로 통일.
-// 이 불일치 때문에 CRM 대시보드(crm.html)·lead-check.html·이메일js미러가 리드를 못 읽었거나 저장을 놓쳤을 가능성이 높음.
+window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycby1_BWxU9lLZvSCWuhPQ32BHpMrFN5PZwdtmzFcaPXL6awL-KaLcO9-Go7Nwg6tys8Tmw/exec";
+// ★2026-08-09 Brain 실측 교정: 구 URL(AKfycbxs0y4Y...)은 "Grant Labs CRM + GA4 Sync" 프로젝트의
+// 배포 관리 목록 어디에도 없는 배포였다(활성5·보관3 전수 대조, 매치 없음). 실측 결과 action=list는
+// 응답했지만(구버전 Code.gs, 인증 게이트 없음) action=createLead는 "Unknown action"을 반환 —
+// 즉 lead-check.html이 보내는 신규 리드가 전부 유실되고 있었다(마지막 진짜 실시간 리드: 2026-07-02,
+// 이후는 전부 meta_backfill 수동입력). 원인: Code.gs 소스는 갱신됐지만 배포가 그 갱신을 반영하지 않음.
+// 조치: 같은 프로젝트에서 현재 Code.gs로 새 웹앱 배포(AKfycby1_B...) 생성 후 이 URL로 교체.
+// 실측 검증: action=createLead 테스트 리드 정상 기록 확인(source="테스트", id=a2712644-...).
+// 참고: 새 배포는 action=list에 CRM_API_TOKEN 인증을 요구한다(구배포는 미요구였음) — list 호출부(crm 대시보드 등)가
+// 토큰 없이 401을 받으면 이 배포의 인증 게이트가 원인이니 CRM_API_TOKEN 전달 또는 게이트 완화 여부를 별도 검토할 것.
+// action=createLead는 CRM_ALLOW_PUBLIC_CREATE=true로 토큰 없이 정상 동작(실측 확인) — lead-check.html은 영향 없음.
 
 (function () {
   const getApiUrl = () => (window.GRANTLABS_CRM_API_URL || "").trim();

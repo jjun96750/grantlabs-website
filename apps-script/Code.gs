@@ -2,6 +2,11 @@ const SHEET_NAME = "Leads";
 const PROP_SPREADSHEET_ID = "CRM_SPREADSHEET_ID";
 const PROP_API_TOKEN = "CRM_API_TOKEN";
 const PROP_ALLOW_PUBLIC_CREATE = "CRM_ALLOW_PUBLIC_CREATE";
+const PROP_ALLOW_PUBLIC_LIST = "CRM_ALLOW_PUBLIC_LIST";
+// ★2026-08-09: crm.html 대시보드가 action=list를 토큰 없이 호출하는 기존 구조와의 호환을 위해 추가.
+// 스크립트 속성 CRM_ALLOW_PUBLIC_LIST=true로 설정하면 list 조회에 CRM_API_TOKEN을 요구하지 않는다.
+// (createlead와 동일한 패턴) — 리드 목록(이름/연락처 포함)이 URL만 알면 누구나 조회 가능해지는 트레이드오프이므로,
+// 값을 켤지 여부는 이 URL을 외부에 공개하지 않는다는 전제하에 대표 판단으로 결정함(2026-08-09).
 
 const HEADERS = [
   "id",
@@ -37,7 +42,7 @@ function doGet(e) {
     const action = (params.action || "list").toLowerCase();
 
     if (action === "list") {
-      assertAuthorized(params);
+      assertCanList(params);
       return jsonResponse({ ok: true, leads: getLeads() });
     }
 
@@ -144,6 +149,15 @@ function assertAuthorized(input) {
 
 function assertCanCreate(input) {
   if (publicCreateAllowed()) return;
+  assertAuthorized(input);
+}
+
+function publicListAllowed() {
+  return getConfigValue(PROP_ALLOW_PUBLIC_LIST).toLowerCase() === "true";
+}
+
+function assertCanList(input) {
+  if (publicListAllowed()) return;
   assertAuthorized(input);
 }
 
