@@ -148,8 +148,40 @@ function assertAuthorized(input) {
 }
 
 function assertCanCreate(input) {
-  if (publicCreateAllowed()) return;
+  if (publicCreateAllowed()) {
+    assertNotSpam(input);
+    return;
+  }
   assertAuthorized(input);
+}
+
+// 2026-08-22: 홈페이지 리드폼 봇/XSS 제출 차단(백로그 "LANE A 큐 · 긴급 · 2026-07-09").
+// 클라이언트(JS) 검증은 API를 직접 호출하는 봇에게는 아무 의미가 없어, 실제 방어는 여기서 해야 한다.
+// 근거 실증: 랜덤 8자리 영숫자 이름 + 미국식 번호(795-971-2599 등) + XSS payload 제출 다수,
+// 무고한 실제고객(고희석 7/2·안원성 7/9)에게 오연락 발생.
+function assertNotSpam(input) {
+  const lead = (input && (input.lead || input)) || {};
+
+  // 허니팟: 숨김 필드(website/hp/url)가 채워져 있으면 봇으로 간주.
+  const honeypot = pick(lead, ["website", "hp", "hp_field", "company_url"]);
+  if (honeypot) throw new Error("Spam detected");
+
+  const name = String(pick(lead, ["name", "담당자명", "이름", "성함"]) || "").trim();
+  const phone = String(pick(lead, ["phone", "tel", "mobile", "연락처", "전화번호"]) || "").trim();
+  const message = String(pick(lead, ["message", "situation", "문의내용", "memo"]) || "").trim();
+
+  // 주입/이스케이프 시도 패턴 — 실제 이름·연락처엔 나올 이유가 없는 문자.
+  const dangerPattern = /[<>]|%3c|%3e|%22|%27|javascript:/i;
+  if (dangerPattern.test(name) || dangerPattern.test(phone) || dangerPattern.test(message)) {
+    throw new Error("Invalid characters in submission");
+  }
+
+  // 전화번호가 있으면 한국 번호 형식이어야 한다(클라이언트 검증과 동일 규칙, 서버에서도 강제).
+  if (phone) {
+    const digits = phone.replace(/[^0-9]/g, "");
+    const validKr = /^0\d{8,10}$/.test(digits) || /^82\d{8,10}$/.test(digits);
+    if (!validKr) throw new Error("Invalid phone format");
+  }
 }
 
 function publicListAllowed() {

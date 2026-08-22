@@ -361,6 +361,7 @@
           <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
         </div>
         <form id="leadForm" class="step" autocomplete="on">
+          <input type="text" name="website" id="wizardHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;" />
           <div>
             <div class="question-kicker" id="stepKicker">Question 01</div>
             <h2 id="stepTitle">필요한 도움을 선택해 주세요.</h2>
@@ -496,6 +497,7 @@
       const message = buildLeadDetails(answers, tracking);
       return {
         receivedAt: new Date().toISOString().slice(0, 16),
+        website: answers.website || "",
         source: tracking.source,
         utm_source:   tracking.utm_source,
         utm_medium:   tracking.utm_medium,
@@ -700,11 +702,18 @@
 
     async function submitLead() {
       if (state.sending) return;
+      if ($("wizardHp") && $("wizardHp").value) {
+        // 허니팟 필드가 채워짐 = 자동화 봇. 조용히 성공 처리(공격자에게 신호 안 줌).
+        leadForm.classList.add("hidden");
+        $("doneView").classList.remove("hidden");
+        $("doneSummary").innerHTML = summaryRows();
+        return;
+      }
       state.sending = true;
       render();
 
       const tracking = getTrackingParams();
-      const lead = buildCrmLead(state.answers, tracking, "full");
+      const lead = buildCrmLead({ ...state.answers, website: $("wizardHp") ? $("wizardHp").value : "" }, tracking, "full");
 
       try {
         await sendLeadToCrm(lead);
@@ -805,6 +814,7 @@
         name,
         helpType,
         phone,
+        website: $("quickHp") ? $("quickHp").value : "",
       }, tracking, "quick");
 
       try {
