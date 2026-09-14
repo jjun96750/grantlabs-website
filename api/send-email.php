@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // ===== 설정 =====
-$TO_EMAIL   = 'jjun96750@gmail.com';   // 받을 이메일 주소
+$TO_EMAIL   = 'jhj@grantlabs.co.kr';   // 받을 이메일 주소
 $FROM_EMAIL = 'noreply@grantlabs.co.kr'; // 발신 주소 (호스팅 도메인)
 $FROM_NAME  = 'Grant Labs 홈페이지';
 // ================
