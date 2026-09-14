@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>이용약관 — 그랜트랩스</title>
-<meta name="description" content="그랜트랩스 홈페이지 및 상담·컨설팅 서비스 이용약관. 시행일 2026년 7월 23일.">
-<link rel="canonical" href="https://grantlabs.co.kr/terms.html">
+<title>상담 신청 — 그랜트랩스</title>
+<meta name="description" content="연락처만 남겨주시면 됩니다. 2문항 자가진단으로 먼저 볼 경로가 나오고, 그대로 상담 신청으로 이어집니다. 상담과 진단은 무료입니다.">
+<link rel="canonical" href="https://grantlabs.co.kr/contact.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F4F1EA'/%3E%3Crect x='12' y='16' width='30' height='5' fill='%231A1A17'/%3E%3Crect x='12' y='16' width='5' height='32' fill='%231A1A17'/%3E%3Crect x='12' y='43' width='40' height='5' fill='%231A1A17'/%3E%3Crect x='30' y='29' width='22' height='4' fill='%2344573F'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="그랜트랩스">
-<meta property="og:title" content="이용약관 — 그랜트랩스">
-<meta property="og:description" content="그랜트랩스 홈페이지 및 상담·컨설팅 서비스 이용약관. 시행일 2026년 7월 23일.">
-<meta property="og:url" content="https://grantlabs.co.kr/terms.html">
+<meta property="og:title" content="상담 신청 — 그랜트랩스">
+<meta property="og:description" content="연락처만 남겨주시면 됩니다. 2문항 자가진단으로 먼저 볼 경로가 나오고, 그대로 상담 신청으로 이어집니다. 상담과 진단은 무료입니다.">
+<meta property="og:url" content="https://grantlabs.co.kr/contact.html">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://grantlabs.co.kr/og.png">
 <meta property="og:image:width" content="1200">
@@ -588,6 +588,9 @@ footer{border-top:1px solid var(--rule);padding-block:50px 66px;font-size:13px;c
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-E71KNFBRMW');</script>
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','999312982962242');fbq('track','PageView');</script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=999312982962242&ev=PageView&noscript=1"></noscript>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="site-config.js"></script>
+<script src="config.js"></script>
 
 </head>
 <body>
@@ -599,98 +602,182 @@ footer{border-top:1px solid var(--rule);padding-block:50px 66px;font-size:13px;c
       <a href="about.html">회사소개</a>
       <a href="services.html">사업영역</a>
       <a href="proof.html">판단 근거</a>
-      <a href="contact.html">상담 신청</a>
+      <a href="contact.html" aria-current="page" class="active">상담 신청</a>
     </nav>
     <a class="tel" href="tel:01059637624" aria-label="전화 010-5963-7624">010 5963 7624</a>
   </div>
 </div>
 <main id="main">
+
 <div class="wrap">
-  <section class="legal">
-    <p class="eyebrow">Terms of Service</p>
-    <h1 class="h2">이용약관</h1>
-    <p class="sub" style="margin-bottom:40px">그랜트랩스 · 시행일 2026년 7월 23일</p>
+  <p class="crumb"><a href="index.html">홈</a> &nbsp;/&nbsp; 상담 신청</p>
+  <div class="phero">
+    <p class="eyebrow">Contact</p>
+    <h1>먼저 <b class="u">되는지부터</b> 확인하겠습니다.</h1>
+    <p>연락처만 남기시면 됩니다. 나머지는 통화에서 여쭙습니다.
+      진단은 무료이고, 이후 진행 여부는 그때 정하시면 됩니다.</p>
+  </div>
+</div>
 
-    <p>본 약관은 그랜트랩스(이하 "회사")가 운영하는 홈페이지 및 회사가 제공하는 상담·컨설팅 서비스(이하 "서비스")의 이용과 관련하여 회사와 이용자 간의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+<div class="wrap">
+  <section>
+    <div class="formwrap">
 
-    <h2>제1조 (목적)</h2>
-    <p>본 약관은 이용자가 회사 홈페이지를 통해 상담·진단을 신청하거나 회사의 컨설팅 서비스를 이용함에 있어 필요한 제반 사항을 정합니다.</p>
+      <div>
+        <p class="eyebrow">Quick Check</p>
+        <div class="dx" id="dx">
+          <div>
+            <div class="q">1 &nbsp;·&nbsp; 지금 가장 급한 것은 무엇입니까</div>
+            <div class="dx-row" data-g="need">
+              <button type="button" class="dx-opt" data-v="자금">운전·시설 자금</button>
+              <button type="button" class="dx-opt" data-v="인증">기업인증</button>
+              <button type="button" class="dx-opt" data-v="연구소">연구소 · 특허</button>
+              <button type="button" class="dx-opt" data-v="설립">법인설립 · 전환</button>
+            </div>
+          </div>
+          <div>
+            <div class="q">2 &nbsp;·&nbsp; 업력은 어느 정도입니까</div>
+            <div class="dx-row" data-g="age">
+              <button type="button" class="dx-opt" data-v="예비">예비 · 1년 미만</button>
+              <button type="button" class="dx-opt" data-v="3년">1 – 3년</button>
+              <button type="button" class="dx-opt" data-v="7년">3 – 7년</button>
+              <button type="button" class="dx-opt" data-v="장기">7년 이상</button>
+            </div>
+          </div>
+          <div class="dx-out" id="dxout">두 항목을 고르시면 어떤 경로부터 보는지 알려드립니다.</div>
+        </div>
 
-    <h2>제2조 (정의)</h2>
-    <ol>
-      <li>"이용자"란 회사 홈페이지에 접속하여 본 약관에 따라 회사가 제공하는 서비스를 이용하는 개인 또는 사업자를 말합니다.</li>
-      <li>"상담 신청"이란 이용자가 홈페이지의 신청 양식을 통해 연락처 등 정보를 제출하고 무료 상담·진단을 요청하는 행위를 말합니다.</li>
-      <li>"컨설팅 서비스"란 정책자금, 정부지원사업, 기업인증, 특허·기업부설연구소, 법인설립, 전략·재무, 마케팅·홈페이지 등 회사가 제공하는 경영자문 업무를 말합니다.</li>
-    </ol>
+        <p class="eyebrow" style="margin:44px 0 20px">Request</p>
+        <form class="frm" id="frm" novalidate>
+          <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+            <label for="f-web">웹사이트</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="frm-row">
+            <div class="fld">
+              <label for="f-name">성함<b>*</b></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+              <span class="msg" role="alert"></span>
+            </div>
+            <div class="fld">
+              <label for="f-tel">연락처<b>*</b></label>
+              <input id="f-tel" name="tel" type="tel" inputmode="numeric" autocomplete="tel"
+                     placeholder="010-0000-0000" required>
+              <span class="msg" role="alert"></span>
+            </div>
+          </div>
+          <div class="frm-row">
+            <div class="fld">
+              <label for="f-co">회사명<b>*</b></label>
+              <input id="f-co" name="company" type="text" autocomplete="organization" required>
+              <span class="msg" role="alert"></span>
+            </div>
+            <div class="fld">
+              <label for="f-topic">상담 희망 분야<b>*</b></label>
+              <select id="f-topic" name="topic" required>
+                <option value="">선택해 주세요</option>
+                <option>정책자금 · 정부지원사업</option>
+                <option>기업인증 (벤처 · 이노비즈 · 메인비즈)</option>
+                <option>기업부설연구소 · 특허</option>
+                <option>법인설립 · 법인전환</option>
+                <option>경영자문 · 그 밖의 문의</option>
+              </select>
+              <span class="msg" role="alert"></span>
+            </div>
+          </div>
+          <div class="fld">
+            <label for="f-mail">이메일</label>
+            <input id="f-mail" name="email" type="email" autocomplete="email">
+              <span class="msg" role="alert"></span>
+            <span class="hint">회신 자료를 받으실 주소입니다. 남기지 않으셔도 상담은 진행됩니다.</span>
+          </div>
 
-    <h2>제3조 (약관의 효력 및 변경)</h2>
-    <ol>
-      <li>본 약관은 홈페이지에 게시함으로써 효력이 발생합니다.</li>
-      <li>회사는 관련 법령을 위반하지 않는 범위에서 본 약관을 변경할 수 있으며, 변경 시 시행일 및 변경 사유를 명시하여 시행 최소 7일 전부터 홈페이지에 공지합니다.</li>
-    </ol>
+          <div class="step2">
+            <span class="sl lat">Optional — 미리 알려주시면 통화가 짧아집니다</span>
+            <div class="frm-row">
+              <div class="fld">
+                <label for="f-ind">업종</label>
+                <input id="f-ind" name="industry" type="text" placeholder="제조 · 도소매 · 서비스 등">
+              <span class="msg" role="alert"></span>
+              </div>
+              <div class="fld">
+                <label for="f-age">설립 연월</label>
+                <input id="f-age" name="founded" type="text" inputmode="numeric" placeholder="2022-03">
+              <span class="msg" role="alert"></span>
+              </div>
+              <div class="fld">
+                <label for="f-rev">최근 연매출</label>
+                <select id="f-rev" name="revenue">
+                  <option value="">선택 안 함</option>
+                  <option>매출 발생 전</option>
+                  <option>3억 원 미만</option>
+                  <option>3 – 10억 원</option>
+                  <option>10 – 30억 원</option>
+                  <option>30 – 100억 원</option>
+                  <option>100억 원 이상</option>
+                </select>
+              <span class="msg" role="alert"></span>
+              </div>
+            </div>
+            <div class="fld" style="margin-top:18px">
+              <label for="f-msg">문의 내용</label>
+              <textarea id="f-msg" name="message" placeholder="현재 상황이나 궁금한 점을 적어주십시오."></textarea>
+              <span class="msg" role="alert"></span>
+            </div>
+          </div>
 
-    <h2>제4조 (서비스의 내용)</h2>
-    <ol>
-      <li>회사는 다음의 컨설팅 서비스를 제공합니다.
-        <ul>
-          <li>정책자금(운전·시설자금 등) 및 선정형 정부지원사업 관련 자문</li>
-          <li>기업인증(벤처·이노비즈·메인비즈 등) 및 특허·기업부설연구소 설립 자문</li>
-          <li>법인설립, 경영전략·사업기획, 재무·세무 연계, 마케팅·홈페이지 제작 등 기타 회사가 정하는 업무</li>
-        </ul>
-      </li>
-      <li>회사가 제공하는 상담 및 진단 안내는 참고를 위한 것이며, 각 사업·인증·자금의 최종 승인 및 조건은 관계 기관의 심사 기준과 결정에 따릅니다. 회사는 특정 결과(선정·승인·수혜 금액 등)를 보장하지 아니합니다.</li>
-    </ol>
+          <div class="consent">
+            <b style="color:var(--ink);font-weight:600">[필수] 개인정보 수집 · 이용 동의</b>
+            <ul>
+              <li>수집 항목 — 성함, 연락처, 회사명, 상담 희망 분야 (선택 입력 시 이메일·업종·설립연월·매출 구간·문의 내용)</li>
+              <li>수집 목적 — 상담 신청 접수, 상담 일정 안내, 상담 진행을 위한 사전 확인</li>
+              <li>보유 · 이용 기간 — 수집일로부터 3년, 또는 삭제 요청 시 지체 없이 파기 (<a href="privacy.html" style="color:inherit">개인정보처리방침</a>)</li>
+              <li>동의를 거부하실 수 있으며, 거부하시는 경우 상담 신청이 제한됩니다</li>
+            </ul>
+            <label><input type="checkbox" id="f-ok" required><span>위 내용에 동의합니다.</span></label>
+          </div>
 
-    <h2>제5조 (이용계약의 성립)</h2>
-    <ol>
-      <li>홈페이지를 통한 상담·진단 신청은 무료이며, 이는 서비스 안내를 위한 접수 행위로서 정식 컨설팅 계약의 체결을 의미하지 않습니다.</li>
-      <li>정식 컨설팅 서비스의 이용은 회사와 이용자 간 별도의 서면 계약(전자 계약 포함)을 체결함으로써 성립하며, 구체적인 업무 범위·기간·대가 등은 해당 계약서에 따릅니다.</li>
-    </ol>
+          <button type="submit">1분 무료진단 신청</button>
+          <p class="note" id="frm-msg" style="margin:0">
+            접수 후 대표가 직접 확인하고 연락드립니다. 진단과 상담은 무료입니다.
+          </p>
+        </form>
+      </div>
 
-    <h2>제6조 (이용자의 의무)</h2>
-    <ol>
-      <li>이용자는 상담 신청 및 서비스 이용 시 정확하고 진실한 정보를 제공하여야 하며, 허위 정보 제공으로 발생하는 불이익에 대한 책임은 이용자에게 있습니다.</li>
-      <li>이용자는 서비스 수행을 위해 필요한 자료를 성실히 제공하고, 회사의 정당한 업무 수행에 협조하여야 합니다.</li>
-    </ol>
+      <aside class="side">
+        <div>
+          <h4>전화</h4>
+          <span class="big">010-5963-7624</span>
+          평일 09:00 – 18:00
+        </div>
+        <div>
+          <h4>이메일</h4>
+          <a href="mailto:jhj@grantlabs.co.kr">jhj@grantlabs.co.kr</a>
+        </div>
+        <div>
+          <h4>블로그</h4>
+          <a href="https://blog.naver.com/grantlabs" target="_blank" rel="noopener">blog.naver.com/grantlabs</a>
+        </div>
+        <div>
+          <h4>찾아오시는 길</h4>
+          서울특별시 강남구 역삼로 512, 5층 3호<br>(대치동, 인테크빌딩)
+        </div>
+        <div>
+          <h4>상담 전 준비하시면 좋은 것</h4>
+          사업자등록증 · 최근 재무제표 또는 부가세 신고서 · 현재 차입 현황.
+          없으셔도 상담은 진행되며, 통화에서 함께 정리합니다.
+        </div>
+      </aside>
 
-    <h2>제7조 (회사의 의무)</h2>
-    <ol>
-      <li>회사는 관련 법령과 본 약관이 정하는 바에 따라 성실하게 서비스를 제공합니다.</li>
-      <li>회사는 이용자의 개인정보를 「개인정보처리방침」에 따라 보호하며, 본래의 목적 외로 이용하거나 제3자에게 제공하지 않습니다.</li>
-    </ol>
+    </div>
 
-    <h2>제8조 (수수료 및 대가)</h2>
-    <p>정식 컨설팅 서비스의 착수금, 수수료 등 대가와 지급 방법·시기는 회사와 이용자 간 체결하는 개별 계약서에서 정하는 바에 따릅니다. 홈페이지에 안내된 금액은 참고용이며, 최종 조건은 계약서를 기준으로 합니다.</p>
-
-    <h2>제9조 (면책)</h2>
-    <ol>
-      <li>회사는 관계 기관의 심사 결과, 정책·제도의 변경, 이용자가 제공한 자료의 부정확 등 회사의 귀책사유가 아닌 사유로 인한 결과에 대하여 책임을 지지 않습니다.</li>
-      <li>회사가 제공하는 정보 및 안내는 특정 시점의 기준에 근거한 것으로, 관계 법령·기관 지침의 변경에 따라 달라질 수 있습니다.</li>
-    </ol>
-
-    <h2>제10조 (지식재산권)</h2>
-    <p>회사가 서비스 과정에서 제공하는 자료·보고서·산출물에 대한 지식재산권은 회사에 귀속되며, 이용자는 회사의 사전 동의 없이 이를 제3자에게 제공하거나 목적 외로 사용할 수 없습니다. 다만 개별 계약에서 달리 정한 경우 그에 따릅니다.</p>
-
-    <h2>제11조 (개인정보의 보호)</h2>
-    <p>회사는 이용자의 개인정보를 관계 법령 및 회사의 「개인정보처리방침」에 따라 보호합니다. 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>을 참고하시기 바랍니다.</p>
-
-    <h2>제12조 (분쟁의 해결 및 관할)</h2>
-    <ol>
-      <li>본 약관 및 서비스와 관련하여 회사와 이용자 간 분쟁이 발생한 경우, 양 당사자는 상호 신의에 따라 원만한 해결을 위하여 노력합니다.</li>
-      <li>협의로 해결되지 않는 분쟁에 대하여는 대한민국 법령을 준거법으로 하며, 관할 법원은 「민사소송법」에 따라 정합니다.</li>
-    </ol>
-
-    <h2>사업자 정보</h2>
-    <dl class="defs">
-      <div class="def"><dt>상호</dt><dd>그랜트랩스 &nbsp;·&nbsp; GrantLabs</dd></div>
-      <div class="def"><dt>대표</dt><dd>전희진</dd></div>
-      <div class="def"><dt>사업자등록번호</dt><dd>132-29-15723</dd></div>
-      <div class="def"><dt>주소</dt><dd>서울특별시 강남구 역삼로 512, 5층 3호<span class="m">대치동, 인테크빌딩</span></dd></div>
-      <div class="def"><dt>연락처</dt><dd>010-5963-7624 &nbsp;·&nbsp; jhj@grantlabs.co.kr</dd></div>
-    </dl>
-    <p class="note" style="margin-top:18px">공고일: 2026년 7월 23일 · 시행일: 2026년 7월 23일</p>
+    <p class="compliance">
+      정책자금·보증의 승인 여부와 한도·금리는 각 기관의 심사로 결정되며, 그랜트랩스는 이를 확약하지 않습니다.
+      신청·접수 및 기관 면담은 대표자 본인이 직접 수행하며, 당사는 기관에 대한 알선·청탁을 하지 않습니다.
+      정책자금은 대부분 상환 의무가 있는 융자·보증 자금으로, 무상 지원금과는 다릅니다.
+    </p>
   </section>
 </div>
+
 
 </main>
 <footer>
@@ -764,6 +851,133 @@ footer{border-top:1px solid var(--rule);padding-block:50px 66px;font-size:13px;c
   }
 })();
 </script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://grantlabs.co.kr/"}, {"@type": "ListItem", "position": 2, "name": "이용약관", "item": "https://grantlabs.co.kr/terms.html"}]}</script>
+
+<script>
+(function(){
+  var pick={}, out=document.getElementById('dxout'), topic=document.getElementById('f-topic');
+  var MAP={'자금':'정책자금 · 보증 경로','인증':'벤처 · 이노비즈 · 메인비즈 요건 진단',
+           '연구소':'기업부설연구소 설립 — 인증 가점의 출발점','설립':'법인설립 · 법인전환 절차'};
+  var AGE={'예비':'업력이 짧으면 요건을 채우지 못하는 제도가 많아, 먼저 되는 것과 안 되는 것을 갈라 드립니다.',
+           '3년':'창업 초기 구간은 전용 제도가 따로 있어 일반 제도와 경로가 갈립니다.',
+           '7년':'제도 선택지가 가장 넓은 구간이라 순서 설계가 결과를 크게 바꿉니다.',
+           '장기':'업력 요건보다 재무 요건이 관건이 되는 구간입니다. 부채비율부터 봅니다.'};
+  var TOPIC={'자금':1,'인증':2,'연구소':3,'설립':4};
+  document.querySelectorAll('#dx .dx-row').forEach(function(row){
+    var opts=row.querySelectorAll('.dx-opt');
+    opts.forEach(function(b){
+      b.addEventListener('click',function(){
+        opts.forEach(function(x){x.setAttribute('aria-pressed','false')});
+        b.setAttribute('aria-pressed','true');
+        pick[row.dataset.g]=b.dataset.v;
+        if(pick.need&&topic&&TOPIC[pick.need]) topic.selectedIndex=TOPIC[pick.need];
+        render();
+      });
+    });
+  });
+  function render(){
+    if(!pick.need||!pick.age) return;
+    out.innerHTML='먼저 보는 경로 &nbsp;<b>'+MAP[pick.need]+'</b><br>'+AGE[pick.age]+
+      '<br><span style="color:var(--ink-3);font-size:12.5px">승인 여부·한도·금리는 기관 심사로 결정되며 이 안내는 확약이 아닙니다.</span>';
+  }
+
+  var f=document.getElementById('frm'); if(!f) return;
+  function fld(el){ return el.closest('.fld'); }
+  function setErr(el,m){
+    var w=fld(el); if(!w) return;
+    w.classList.add('err'); el.setAttribute('aria-invalid','true');
+    var s=w.querySelector('.msg'); if(s) s.textContent=m;
+  }
+  function clearErr(el){
+    var w=fld(el); if(!w) return;
+    w.classList.remove('err'); el.removeAttribute('aria-invalid');
+  }
+  var telRe=/^0\d{1,2}-?\d{3,4}-?\d{4}$/;
+  var mailRe=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function check(el){
+    var v=(el.value||'').trim();
+    if(el.hasAttribute('required') && !v){ setErr(el,'필수 항목입니다.'); return false; }
+    if(el.id==='f-tel' && v && !telRe.test(v.replace(/\s/g,''))){ setErr(el,'연락처 형식을 확인해 주십시오. 예) 010-1234-5678'); return false; }
+    if(el.id==='f-mail' && v && !mailRe.test(v)){ setErr(el,'이메일 형식을 확인해 주십시오.'); return false; }
+    clearErr(el); return true;
+  }
+  var fields=[].slice.call(f.querySelectorAll('input:not([type=checkbox]),select,textarea'));
+  fields.forEach(function(el){
+    el.addEventListener('blur',function(){ check(el); });
+    el.addEventListener('input',function(){ if(fld(el)&&fld(el).classList.contains('err')) check(el); });
+  });
+  var tel=document.getElementById('f-tel');
+  if(tel) tel.addEventListener('input',function(){
+    var d=tel.value.replace(/\D/g,'').slice(0,11);
+    tel.value = d.length<4?d : d.length<8? d.slice(0,3)+'-'+d.slice(3)
+              : d.slice(0,3)+'-'+d.slice(3,d.length-4)+'-'+d.slice(-4);
+  });
+
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var hp=document.getElementById('f-web'); if(hp && hp.value){ return; }   // 봇 제출은 조용히 무시
+    var ok=true, first=null;
+    fields.forEach(function(el){ if(!check(el)){ ok=false; if(!first) first=el; } });
+    var cb=document.getElementById('f-ok'), box=cb&&cb.closest('.consent');
+    if(cb&&!cb.checked){ ok=false; if(box) box.classList.add('err'); if(!first) first=cb; }
+    else if(box){ box.classList.remove('err'); }
+    var msg=document.getElementById('frm-msg');
+    if(!ok){
+      msg.innerHTML='입력하지 않았거나 형식이 맞지 않는 항목이 있습니다. 표시된 곳을 확인해 주십시오.';
+      msg.style.color='var(--flag)';
+      if(first){ first.focus(); first.scrollIntoView({block:'center',behavior:'smooth'}); }
+      return;
+    }
+    var btn=f.querySelector('button[type=submit]');
+    btn.setAttribute('aria-busy','true'); btn.textContent='접수 중…';
+    function val(id){ var el=document.getElementById(id); return el?(el.value||'').trim():''; }
+    var topicEl=document.getElementById('f-topic');
+    var interest = topicEl && topicEl.selectedIndex>0 ? topicEl.options[topicEl.selectedIndex].text : '';
+    var params={
+      company: val('f-co'), name: val('f-name'), phone: val('f-tel'), email: val('f-mail'),
+      interest: interest, industry: val('f-ind'), founded: val('f-age'), revenue: val('f-rev'),
+      region:'', credit:'', tax:'', timing:'', message: val('f-msg'),
+      source:'홈페이지 상담폼(개편본)',
+      lead_details: ['회사 '+val('f-co'),'담당 '+val('f-name'),'연락처 '+val('f-tel'),
+        interest?'분야 '+interest:'', val('f-ind')?'업종 '+val('f-ind'):'', val('f-age')?'설립 '+val('f-age'):'',
+        val('f-rev')?'매출 '+val('f-rev'):'', val('f-mail')?'이메일 '+val('f-mail'):''].filter(Boolean).join(' / ')
+    };
+    function done(ok){
+      var d=document.createElement('div'); d.className='done'; d.setAttribute('role','status'); d.tabIndex=-1;
+      if(ok){
+        d.innerHTML='<b>접수되었습니다.</b>대표가 직접 확인한 뒤 남겨주신 연락처로 연락드립니다. '+
+          '진단과 상담은 무료이며, 정식 자문은 별도 서면 계약으로만 진행됩니다.'+
+          '<br><span style="color:var(--ink-3);font-size:12.5px">승인 여부·한도·금리는 기관 심사로 결정되며 확약하지 않습니다.</span>';
+      }else{
+        d.innerHTML='<b>전송이 완료되지 않았습니다.</b>네트워크 상태를 확인하신 뒤 다시 시도하시거나, '+
+          '전화 <a href="tel:01059637624" style="color:inherit">010-5963-7624</a> 또는 '+
+          '<a href="mailto:jhj@grantlabs.co.kr" style="color:inherit">jhj@grantlabs.co.kr</a>로 연락 주십시오.';
+      }
+      f.replaceWith(d); d.focus();
+    }
+    var cfg=window.GL_SITE||{};
+    var live = cfg.emailjsPublicKey && cfg.emailjsService && cfg.emailjsTemplate && window.emailjs;
+    if(!live){
+      // 시안 모드 — 전송 없이 흐름만 확인
+      setTimeout(function(){
+        var d=document.createElement('div'); d.className='done'; d.setAttribute('role','status');
+        d.innerHTML='<b>이 시안에서는 전송되지 않습니다.</b>운영본에서는 이 자리에 접수 완료 안내가 표시되고, '+
+          'EmailJS 알림과 CRM 기록이 동시에 남습니다.';
+        f.replaceWith(d);
+      },600);
+      return;
+    }
+    emailjs.send(cfg.emailjsService, cfg.emailjsTemplate, params, {publicKey: cfg.emailjsPublicKey})
+      .then(function(){
+        try{ window.gtag && gtag('event','generate_lead',{event_category:'form',event_label:'contact_form'}); }catch(e){}
+        try{ window.fbq && fbq('track','Lead'); }catch(e){}
+        done(true);
+      },function(){
+        btn.removeAttribute('aria-busy'); btn.textContent='1분 무료진단 신청';
+        done(false);
+      });
+  });
+})();
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://grantlabs.co.kr/"}, {"@type": "ListItem", "position": 2, "name": "상담 신청", "item": "https://grantlabs.co.kr/contact.html"}]}</script>
 </body>
 </html>
