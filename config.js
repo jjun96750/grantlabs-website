@@ -1,4 +1,4 @@
-window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycby1_BWxU9lLZvSCWuhPQ32BHpMrFN5PZwdtmzFcaPXL6awL-KaLcO9-Go7Nwg6tys8Tmw/exec";
+window.GRANTLABS_CRM_API_URL = "https://script.google.com/macros/s/AKfycbxuxNNk-pEFQ-eo6MHvx78v17rKTJoKl7VVrO1TMAzt3dkT-emMGSJ3cprpARSIsjg/exec";
 // ★2026-08-09 Brain 실측 교정: 구 URL(AKfycbxs0y4Y...)은 "Grant Labs CRM + GA4 Sync" 프로젝트의
 // 배포 관리 목록 어디에도 없는 배포였다(활성5·보관3 전수 대조, 매치 없음). 실측 결과 action=list는
 // 응답했지만(구버전 Code.gs, 인증 게이트 없음) action=createLead는 "Unknown action"을 반환 —
